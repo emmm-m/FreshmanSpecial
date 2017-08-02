@@ -11,22 +11,20 @@ import android.util.Log;
 
 import java.util.List;
 
-/**
- * Created by zia on 2017/8/1.
- */
-
 public class CircleChart extends android.support.v7.widget.AppCompatTextView {
 
     private boolean isLog = false;
     private Paint paint;//画笔
-    private int paintWidth = 80;//线宽
+    private int paintWidth = 70;//线宽
+    private int textSize = 40;//字体大小
     private int speed = 1;//移动速度
     private int rotate = 0;//转动角度
     private boolean isRun = false;
     private List<ChartData> list;//数据
-    private int space = 100;//设置为自动计算间距，此项废弃
+    private int space = paintWidth+20;//设置为自动计算间距，此项废弃
     private float centerX = 0,centerY = 0;
-    static int defaultColor = Color.RED,defaultTextColor = Color.BLACK;
+    static int defaultColor = Color.RED , defaultStrokeColor = Color.BLACK , defaultTextColor = Color.BLACK,
+            defultBackgroundColor = Color.LTGRAY , defultBackgroundStrokeColor = Color.DKGRAY;
 
 
     public CircleChart(Context context) {
@@ -53,16 +51,17 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
         if(list.size() == 0) return;
         if(isRun) {
             int count = 0;
-            int space = (getWidth()/2-10)/list.size();
+//            int space = (getWidth()/2-10)/list.size();
             for(ChartData data : list){
                 if(data.getRadius() == 0){
-                    data.setRadius(getWidth()/2-20-space*count);
+                    data.setRadius(getWidth()/2-space*count);
                     count++;
                 }
                 if(data.getPercentage() == 0) return;//防bug
                 //drawArc(canvas, data.getPercentage(), data.getColor()+200, data.getRadius()+3,data.getSpeed());
-                drawArc(canvas, data.getPercentage(), data.getColor(), data.getRadius(),data.getSpeed());
-                drawText(canvas,data.getText(),paint.measureText(data.getText()),paintWidth,data.getTextColor(),data.getRadius());
+                drawBackground(canvas,data.getBackgroundColor(),data.getBackgroundStrokeColor(),data.getRadius());
+                drawArc(canvas, data.getPercentage(), data.getColor(),data.getStrokeColor(), data.getRadius(),data.getSpeed());
+                drawText(canvas,data.getText(),paint.measureText(data.getText()),textSize,data.getTextColor(),data.getRadius());
             }
         }else{
             invalidate();
@@ -70,15 +69,39 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
     }
 
     /**
+     * 背景圆画法封装
+     * @param canvas 画布
+     * @param backgroundColor 背景颜色
+     * @param backgroundStrokeColor 背景描边颜色
+     * @param radius 半径
+     */
+    private void drawBackground(Canvas canvas, int backgroundColor, int backgroundStrokeColor,float radius){
+        RectF oval = new RectF( centerX-radius+paintWidth+10, centerY-radius+paintWidth+10,
+                centerX+radius-paintWidth-10, centerY+radius-paintWidth-10);//用一个正方形包裹圆形
+
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(paintWidth+10);//描边宽度
+        paint.setAntiAlias(true);//抗锯齿
+        paint.setDither(true);//防抖动
+        paint.setColor(backgroundStrokeColor);
+        canvas.drawArc(oval,-90,360,false,paint);
+        paint.setStrokeWidth(paintWidth);//描边宽度
+        paint.setColor(backgroundColor);
+        canvas.drawArc(oval,-90,360,false,paint);
+    }
+
+    /**
      * 画圆方法封装
      * @param canvas 画布
      * @param percentage 百分比
      * @param color 圆圈颜色
+     * @param strokeColor 圆圈描边颜色
      * @param radius 半径
      * @param s 速度
      */
-    private void drawArc(Canvas canvas, float percentage, int color, float radius, int s){
-        RectF oval = new RectF( centerX-radius+paintWidth, centerY-radius+paintWidth, centerX+radius-paintWidth, centerY+radius-paintWidth);//用一个正方形包裹圆形
+    private void drawArc(Canvas canvas, float percentage, int color,int strokeColor, float radius, int s){
+        RectF oval = new RectF( centerX-radius+paintWidth+10, centerY-radius+paintWidth+10,
+                centerX+radius-paintWidth-10, centerY+radius-paintWidth-10);//用一个正方形包裹圆形
 
         //黑色底层 用于描边
         paint.setStrokeCap(Paint.Cap.ROUND);
@@ -86,7 +109,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
         paint.setStrokeWidth(paintWidth+10);//描边宽度
         paint.setAntiAlias(true);//抗锯齿
         paint.setDither(true);//防抖动
-        paint.setColor(Color.BLACK);
+        paint.setColor(strokeColor);
         if((float)rotate/360*100 < percentage){//还没到达终点
             rotate = rotate + s;
             canvas.drawArc(oval,-90,rotate,false,paint);
@@ -117,7 +140,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
         paint.setColor(color);
         paint.setStyle(Paint.Style.FILL);
         paint.setTextSize(textSize);
-        canvas.drawText(text,centerX-textWidth-15,centerY-radius+paintWidth+10,paint);
+        canvas.drawText(text,centerX-textWidth-50,centerY-radius+paintWidth+20,paint);
     }
 
     public void setData(List<ChartData> list){
@@ -172,9 +195,13 @@ class ChartData{
     private int percentage = 0;
     private int color = CircleChart.defaultColor;
     private int textColor = CircleChart.defaultTextColor;
+    private int backgroundColor = CircleChart.defultBackgroundColor;
+    private int strokeColor = CircleChart.defaultStrokeColor;
+    private int backgroundStrokeColor = CircleChart.defultBackgroundStrokeColor;
     private int speed = 2;
     private String text = "data";
     private float radius = 0;
+
 
     public int getTextColor() {
         return textColor;
@@ -182,6 +209,30 @@ class ChartData{
 
     public void setTextColor(int textColor) {
         this.textColor = textColor;
+    }
+
+    public int getStrokeColor() {
+        return strokeColor;
+    }
+
+    public void setStrokeColor(int stockColor) {
+        this.strokeColor = stockColor;
+    }
+
+    public int getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(int backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public int getBackgroundStrokeColor() {
+        return backgroundStrokeColor;
+    }
+
+    public void setBackgroundStrokeColor(int backgroundStrokeColor) {
+        this.backgroundStrokeColor = backgroundStrokeColor;
     }
 
     public float getRadius() {
@@ -224,4 +275,3 @@ class ChartData{
         this.text = text;
     }
 }
-
