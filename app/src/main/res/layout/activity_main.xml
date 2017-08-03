@@ -29,6 +29,7 @@
 
 
     <android.support.v7.widget.CardView
+        android:id="@+id/main_gonglve"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
@@ -36,15 +37,18 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         app:cardCornerRadius="4dp"
+        app:cardElevation="8dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_weight="1" >
         <ImageView
-            android:id="@+id/main_gonglve"
             android:src="@mipmap/special_2017_youzigonglve"
             android:scaleType="fitXY"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
+        android:id="@+id/main_fengcai"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -52,15 +56,18 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         app:cardCornerRadius="4dp"
+        app:cardElevation="8dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_weight="1" >
         <ImageView
-            android:id="@+id/main_fengcai"
             android:src="@mipmap/special_2017_chongyoufengcai"
             android:scaleType="fitXY"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
+        android:id="@+id/main_shuju"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -68,15 +75,18 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         app:cardCornerRadius="4dp"
+        app:cardElevation="8dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_weight="1" >
         <ImageView
-            android:id="@+id/main_shuju"
             android:src="@mipmap/special_2017_chongyoushuju"
             android:scaleType="fitXY"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
+        android:id="@+id/main_junxun"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -84,9 +94,11 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         app:cardCornerRadius="4dp"
+        app:cardElevation="8dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_weight="1" >
         <ImageView
-            android:id="@+id/main_junxun"
             android:src="@mipmap/special_2017_junxunteji"
             android:scaleType="fitXY"
             android:layout_width="match_parent"
