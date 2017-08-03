@@ -3,8 +3,9 @@ package com.mredrock.freshmanspecial.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
+
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.BaseActivity;
 import com.mredrock.freshmanspecial.presenter.IMainPresenter;
@@ -15,12 +16,12 @@ public class MainActivity extends BaseActivity{
     //使用cardView按钮，有点击波纹效果
     private CardView junxun,shuju,fengcai,gonglve;
     private IMainPresenter presenter;
+    private TextView title;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new MainPresenter(this);
-        setToolbar();
         setClick();
     }
 
@@ -28,25 +29,25 @@ public class MainActivity extends BaseActivity{
         junxun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.gotojunxunActivity();
+                presenter.gotoJunxunActivity();
             }
         });
         shuju.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.gotoshujuActivity();
+                presenter.gotoDataActivity();
             }
         });
         fengcai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //风采点击事件
+                presenter.gotoMienActivity();
             }
         });
         gonglve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //攻略点击事件
+                presenter.gotoStrategyActivity();
             }
         });
     }
@@ -57,17 +58,13 @@ public class MainActivity extends BaseActivity{
         shuju = $(R.id.main_shuju);
         fengcai = $(R.id.main_fengcai);
         gonglve = $(R.id.main_gonglve);
+        title = $(R.id.title_text);
+        title.setText("2017迎新网");
     }
 
-    private void setToolbar(){
-        Toolbar toolbar = (Toolbar)findViewById(R.id.main_toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
 
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_main;
+        return R.layout.special_2017_activity_main;
     }
 }

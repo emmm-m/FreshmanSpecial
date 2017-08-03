@@ -5,6 +5,8 @@ package com.mredrock.freshmanspecial.presenter;
  */
 
 public interface IMainPresenter {
-    void gotojunxunActivity();
-    void gotoshujuActivity();
+    void gotoJunxunActivity();
+    void gotoDataActivity();
+    void gotoMienActivity();
+    void gotoStrategyActivity();
 }

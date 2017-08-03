@@ -10,6 +10,6 @@ public class JunxunActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_junxun);
+        setContentView(R.layout.special_2017_activity_junxun);
     }
 }
