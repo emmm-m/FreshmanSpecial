@@ -35,10 +35,10 @@ public abstract class BaseActivity extends AppCompatActivity implements com.mred
     }
 
     public void initState() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
+        }*/
     }
 
     //用于做数据或其他初始化的方法
