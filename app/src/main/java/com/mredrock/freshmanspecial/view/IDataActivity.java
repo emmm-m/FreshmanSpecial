@@ -2,7 +2,7 @@ package com.mredrock.freshmanspecial.view;
 
 import android.support.design.widget.TabLayout;
 
-import com.mredrock.freshmanspecial.Units.IBaseActivity;
+import com.mredrock.freshmanspecial.Units.base.IBaseActivity;
 
 /**
  * Created by zia on 17-8-4.

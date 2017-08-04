@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.R;
-import com.mredrock.freshmanspecial.Units.BaseActivity;
+import com.mredrock.freshmanspecial.Units.base.BaseActivity;
 import com.mredrock.freshmanspecial.Units.ViewPagerAdapter;
 import com.mredrock.freshmanspecial.presenter.DataPresenter;
 import com.mredrock.freshmanspecial.presenter.IDataPresenter;

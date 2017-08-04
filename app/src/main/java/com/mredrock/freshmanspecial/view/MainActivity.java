@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.R;
-import com.mredrock.freshmanspecial.Units.BaseActivity;
+import com.mredrock.freshmanspecial.Units.base.BaseActivity;
 import com.mredrock.freshmanspecial.presenter.IMainPresenter;
 import com.mredrock.freshmanspecial.presenter.MainPresenter;
 

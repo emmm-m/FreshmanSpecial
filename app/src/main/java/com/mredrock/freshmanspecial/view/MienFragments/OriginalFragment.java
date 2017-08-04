@@ -1,7 +1,7 @@
 package com.mredrock.freshmanspecial.view.MienFragments;
 
 import com.mredrock.freshmanspecial.R;
-import com.mredrock.freshmanspecial.Units.BaseFragment;
+import com.mredrock.freshmanspecial.Units.base.BaseFragment;
 
 /**
  * Created by zxzhu on 2017/8/4.

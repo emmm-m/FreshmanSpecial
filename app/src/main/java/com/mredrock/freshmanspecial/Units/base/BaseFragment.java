@@ -1,4 +1,4 @@
-package com.mredrock.freshmanspecial.Units;
+package com.mredrock.freshmanspecial.Units.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

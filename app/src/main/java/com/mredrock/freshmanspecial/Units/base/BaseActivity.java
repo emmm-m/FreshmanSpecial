@@ -1,4 +1,4 @@
-package com.mredrock.freshmanspecial.Units;
+package com.mredrock.freshmanspecial.Units.base;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -17,7 +17,7 @@ import android.widget.Toast;
  * Created by zxzhu on 2017/8/2.
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements com.mredrock.freshmanspecial.Units.IBaseActivity {
+public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
