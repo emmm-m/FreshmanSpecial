@@ -3,6 +3,8 @@ package com.mredrock.freshmanspecial.view;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.R;
@@ -20,6 +22,7 @@ public class DataActivity extends BaseActivity implements IDataActivity {
     private TabLayout tabLayout;
     private IDataPresenter presenter;
     private TextView title;
+    private ImageView back;
 
 
     private void setTitle(String title) {
@@ -44,10 +47,12 @@ public class DataActivity extends BaseActivity implements IDataActivity {
         viewPager = $(R.id.data_viewPager);
         tabLayout = $(R.id.data_tabLayout);
         title = $(R.id.title_text);
+        back = $(R.id.back);
         presenter = new DataPresenter(this);
         initPager();
         setPager();
         setTitle("重邮数据");
+        setBack();
     }
 
     @Override
@@ -58,5 +63,15 @@ public class DataActivity extends BaseActivity implements IDataActivity {
     @Override
     public TabLayout getTabLayout() {
         return tabLayout;
+    }
+
+    @Override
+    public void setBack() {
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 }

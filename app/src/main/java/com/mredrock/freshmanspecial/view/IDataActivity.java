@@ -10,4 +10,5 @@ import com.mredrock.freshmanspecial.Units.base.IBaseActivity;
 
 public interface IDataActivity extends IBaseActivity {
     TabLayout getTabLayout();
+    void setBack();
 }
