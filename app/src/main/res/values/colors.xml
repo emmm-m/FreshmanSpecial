@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFF5F5F5</color>
     <color name="colorDeepGray">#FF383535</color>
+    <color name="tabTextColor">#949494</color>
+    <color name="tabSelectedTextColor">#65B2FF</color>
 </resources>
