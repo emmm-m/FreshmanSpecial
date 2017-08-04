@@ -1,7 +1,5 @@
 package com.mredrock.freshmanspecial.view.dataFragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +15,6 @@ public class SexRateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sex_rate, container, false);
+        return inflater.inflate(R.layout.special_2017_fragment_sex_rate, container, false);
     }
 }

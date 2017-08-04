@@ -1,19 +1,17 @@
 package com.mredrock.freshmanspecial.presenter;
 
 import com.mredrock.freshmanspecial.model.TabModel;
-import com.mredrock.freshmanspecial.view.DataActivity;
-import com.mredrock.freshmanspecial.view.IDataActivity;
+import com.mredrock.freshmanspecial.view.MienActivity;
 
 /**
- * Created by zia on 17-8-4.
+ * Created by zxzhu on 2017/8/4.
  */
 
-public class DataPresenter implements IDataPresenter {
-
-    private IDataActivity activity;
+public class MienPresenter implements IMienPresenter {
     private TabModel model;
+    private MienActivity activity;
 
-    public DataPresenter(DataActivity activity) {
+    public MienPresenter(MienActivity activity) {
         this.activity = activity;
         model = new TabModel();
     }
@@ -31,6 +29,4 @@ public class DataPresenter implements IDataPresenter {
             }
         });
     }
-
-
 }

@@ -3,8 +3,6 @@ package com.mredrock.freshmanspecial.view;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.R;
@@ -23,15 +21,6 @@ public class DataActivity extends BaseActivity implements IDataActivity {
     private IDataPresenter presenter;
     private TextView title;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.special_2017_activity_data);
-        initData();
-        initPager();
-        setPager();
-        setTitle("重邮数据");
-    }
 
     private void setTitle(String title) {
         this.title.setText(title);
@@ -56,6 +45,9 @@ public class DataActivity extends BaseActivity implements IDataActivity {
         tabLayout = $(R.id.data_tabLayout);
         title = $(R.id.title_text);
         presenter = new DataPresenter(this);
+        initPager();
+        setPager();
+        setTitle("重邮数据");
     }
 
     @Override

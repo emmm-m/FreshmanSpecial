@@ -13,9 +13,9 @@ import java.lang.reflect.Field;
  * Created by zia on 17-8-4.
  */
 
-public class DataModel {
+public class TabModel {
 
-    public DataModel(){
+    public TabModel(){
 
     }
 

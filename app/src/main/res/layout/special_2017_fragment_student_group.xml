@@ -1,113 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_student_groups"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:tabMinWidth="80dp"
+        app:tabMode="scrollable"
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabTextColor="#949494">
+
+    </android.support.design.widget.TabLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_student_groups"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_below="@id/tab_student_groups">
 
-        <TextView
-            android:id="@+id/league_committee"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="团委直属部门"
-            android:padding="10dp"
-            android:textSize="17sp"
-            android:gravity="center"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#cfcfcf"/>
-        <TextView
-            android:id="@+id/red_rock"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="红岩网校工作站"
-            android:padding="10dp"
-            android:textSize="17sp"
-            android:gravity="center"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#cfcfcf"/>
-
-        <TextView
-            android:id="@+id/technology_union"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="科技联合会"
-            android:textSize="17sp"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#cfcfcf"/>
-
-        <TextView
-            android:id="@+id/volunteer_union"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="青年志愿者协会"
-            android:padding="10dp"
-            android:textSize="17sp"
-            android:gravity="center"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#cfcfcf"/>
-        <TextView
-            android:id="@+id/student_union"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="校学生会"
-            android:padding="10dp"
-            android:textSize="17sp"
-            android:gravity="center"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#cfcfcf"/>
-        <TextView
-            android:id="@+id/art_union"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="大学生艺术团"
-            android:padding="10dp"
-            android:textSize="17sp"
-            android:gravity="center"/>
-
-    </LinearLayout>
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="#cfcfcf"/>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:orientation="vertical"
-        >
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/organization_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
-
-        </android.support.v7.widget.RecyclerView>
-
-    </LinearLayout>
-
-</LinearLayout>
+    </android.support.v4.view.ViewPager>
+</RelativeLayout>
