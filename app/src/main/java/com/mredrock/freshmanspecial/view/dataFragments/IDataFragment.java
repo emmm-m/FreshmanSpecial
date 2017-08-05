@@ -13,5 +13,6 @@ import java.util.List;
 public interface IDataFragment {
     List<String> getCollegeList();
     List<ChartData> getDataList();
+    List<String> getMajorList();
     Activity getActivity();
 }

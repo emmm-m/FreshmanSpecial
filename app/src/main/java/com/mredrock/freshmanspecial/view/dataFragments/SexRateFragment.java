@@ -38,8 +38,8 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
                         button.setText(data);
                         presenter.setSexRateDataList(data);
                         circleChart.setData(dataList);
-                        circleChart.setSpace(110);
-                        circleChart.setSpeed(3);
+                        circleChart.setSpace(90);
+                        circleChart.setSpeed(2);
                         circleChart.openLog();
                         circleChart.run();
                     }
@@ -61,5 +61,10 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
     @Override
     public List<ChartData> getDataList() {
         return dataList;
+    }
+
+    @Override
+    public List<String> getMajorList() {
+        return null;
     }
 }

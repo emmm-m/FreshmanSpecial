@@ -4,10 +4,27 @@
     android:layout_height="match_parent"
     tools:context="com.mredrock.freshmanspecial.view.dataFragments.JobRateFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button
+        android:id="@+id/jobRate_button"
+        android:text="请选择学院"
+        android:layout_margin="20dp"
+        android:background="@drawable/special_2017_button_background"
+        android:textColor="#959C9F"
+        android:gravity="center_vertical"
+        android:padding="18dp"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content" />
+
+    <com.mredrock.freshmanspecial.Units.CircleChart
+        android:id="@+id/jobRate_chart"
+        android:layout_margin="40dp"
+        android:layout_gravity="center"
+        android:layout_width="220dp"
+        android:layout_height="220dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
 
 </FrameLayout>

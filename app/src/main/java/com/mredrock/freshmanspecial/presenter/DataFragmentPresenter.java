@@ -39,10 +39,34 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
     }
 
     @Override
+    public void setMajorList(String collegeName) {
+        fragment.getMajorList().clear();
+        if(model.getMajorList(collegeName) != null){
+            fragment.getMajorList().addAll(model.getMajorList(collegeName));
+        }
+    }
+
+    @Override
     public void setSexRateDataList(String collegeName) {
         fragment.getDataList().clear();
         if(model.getSexRateDataList(collegeName) != null){
             fragment.getDataList().addAll(model.getSexRateDataList(collegeName));
+        }
+    }
+
+    @Override
+    public void setMostDifficultDataList(String majorName) {
+        fragment.getDataList().clear();
+        if(model.getMostDifficultDataList(majorName) != null){
+            fragment.getDataList().addAll(model.getMostDifficultDataList(majorName));
+        }
+    }
+
+    @Override
+    public void setJobRateDataList(String collegeName) {
+        fragment.getDataList().clear();
+        if(model.getSexRateDataList(collegeName) != null){
+            fragment.getDataList().addAll(model.getJobRateDataList(collegeName));
         }
     }
 

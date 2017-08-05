@@ -10,9 +10,11 @@
         android:id="@+id/sexRate_button"
         android:text="请选择学院"
         android:layout_margin="20dp"
-        android:elevation="0dp"
+        style="?android:attr/borderlessButtonStyle"
         android:background="@drawable/special_2017_button_background"
         android:textColor="#959C9F"
+        android:gravity="center_vertical"
+        android:padding="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -20,8 +22,8 @@
         android:id="@+id/sexRate_chart"
         android:layout_margin="40dp"
         android:layout_gravity="center"
-        android:layout_width="250dp"
-        android:layout_height="250dp" />
+        android:layout_width="220dp"
+        android:layout_height="220dp" />
 
     <ImageView
         android:layout_width="match_parent"

@@ -38,6 +38,7 @@ public class DataActivity extends BaseActivity implements IDataActivity {
         String[] tabTitles = new String[]{"男女比例", "最难科目", "就业比例"};
         Fragment[] fragments = new Fragment[]{new SexRateFragment(), new MostDifficultFragment(), new JobRateFragment()};
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), tabTitles, fragments);
+        viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
