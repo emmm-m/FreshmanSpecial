@@ -35,7 +35,7 @@ public class StudentGroupFragment extends BaseFragment {
         for (int i= 0; i< 6; i++){
             fragments[i] = new GroupContentFragment(tabTitles[i]);
         }
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager(), tabTitles, fragments);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity(),getActivity().getSupportFragmentManager(), tabTitles, fragments);
         viewPager.setAdapter(adapter);
         tabs.setupWithViewPager(viewPager);
     }

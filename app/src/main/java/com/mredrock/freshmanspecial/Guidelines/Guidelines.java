@@ -3,7 +3,9 @@ package com.mredrock.freshmanspecial.Guidelines;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.Guidelines.Adapter.InfoFragmentAdapter;
@@ -36,7 +38,7 @@ public class Guidelines extends BaseActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private HorizontalScrollView horizontalScrollView;
-
+    private ImageView back;
     private InfoFragmentAdapter adapter;
 
 
@@ -64,7 +66,15 @@ public class Guidelines extends BaseActivity {
                 , titles, fragments, Guidelines.this);
         initViews();
         title.setText("邮子攻略");
-
+        setBack();
+    }
+    private void setBack(){
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
@@ -76,10 +86,10 @@ public class Guidelines extends BaseActivity {
         tabLayout = (TabLayout) findViewById(R.id.guidelines_tablayout);
         viewPager = (ViewPager) findViewById(R.id.guidelines_viewpager);
         title = (TextView) findViewById(R.id.title_text);
+        back = (ImageView) findViewById(R.id.back);
 //        horizontalScrollView = (HorizontalScrollView) findViewById(R.id.guidelines_horizontal_scroller);
 
         viewPager.setAdapter(adapter);
-
 
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);

@@ -3,11 +3,15 @@ package com.mredrock.freshmanspecial.view;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.R;
-import com.mredrock.freshmanspecial.Units.base.BaseActivity;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 import com.mredrock.freshmanspecial.Units.ViewPagerAdapter;
+import com.mredrock.freshmanspecial.Units.base.BaseActivity;
 import com.mredrock.freshmanspecial.presenter.IMienPresenter;
 import com.mredrock.freshmanspecial.presenter.MienPresenter;
 import com.mredrock.freshmanspecial.view.MienFragments.BeautyFragment;
@@ -22,6 +26,7 @@ public class MienActivity extends BaseActivity implements IMienActivity{
     private TabLayout tabLayout;
     private IMienPresenter presenter;
     private TextView title;
+    private ImageView back;
 
 
     private void setTitle(String title) {
@@ -30,7 +35,12 @@ public class MienActivity extends BaseActivity implements IMienActivity{
 
     private void setPager() {
         //设置下划线边距
-        presenter.setTabLayoutBottomLine(20);
+//        presenter.setTabLayoutBottomLine(20);
+        int wide = ScreenUnit.bulid(this).getDpWide();
+        float density = ScreenUnit.bulid(this).getDensity();
+        Log.d("zzz", "setPager: "+wide/100*density);
+        presenter.setTabLayoutBottomLine(wide/30);
+
     }
 
     private void initPager() {
@@ -38,9 +48,24 @@ public class MienActivity extends BaseActivity implements IMienActivity{
 //        tabLayout.setMinimumWidth(wide);
         String[] tabTitles = new String[]{"学生组织", "原创重邮", "美在重邮","优秀师生"};
         Fragment[] fragments = new Fragment[]{new StudentGroupFragment(), new OriginalFragment(), new BeautyFragment(), new ExcellentFragment()};
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), tabTitles, fragments);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this,getSupportFragmentManager(), tabTitles, fragments);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+        for (int i = 0; i < tabTitles.length; i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            if (tabLayout != null) {
+                tab.setCustomView(adapter.getTabView(i)); // 将自定义的tab加入
+            }
+        }
+    }
+
+    private void setBack(){
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
 
@@ -49,10 +74,12 @@ public class MienActivity extends BaseActivity implements IMienActivity{
         viewPager = $(R.id.vp_mien);
         tabLayout = $(R.id.tab_mien);
         title = $(R.id.title_text);
+        back = $(R.id.back);
         presenter = new MienPresenter(this);
         initPager();
         setPager();
         setTitle("重邮风采");
+        setBack();
     }
 
     @Override
