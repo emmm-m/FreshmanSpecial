@@ -27,7 +27,7 @@ public class DecorteView extends android.support.v7.widget.AppCompatTextView {
         super(context, attrs, defStyleAttr);
         mPaint = new Paint();
         mPaint.setStrokeWidth(3);
-        mPaint.setColor(Color.GRAY);
+        mPaint.setColor(Color.parseColor("#CCCCCC"));
         mPaint.setStyle(Paint.Style.STROKE);
     }
 

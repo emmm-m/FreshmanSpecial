@@ -33,7 +33,7 @@ public class WheelOptions<T> {
     private WheelView.DividerType dividerType;
 
     // 条目间距倍数
-    float lineSpacingMultiplier = 1.6F;
+    float lineSpacingMultiplier = 1.8F;
 
     public View getView() {
         return view;

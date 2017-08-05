@@ -1,15 +1,30 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.mredrock.freshmanspecial.view.dataFragments.SexRateFragment">
 
     <Button
         android:id="@+id/sexRate_button"
-        android:text="选择"
-        android:layout_margin="10dp"
+        android:text="请选择学院"
+        android:layout_margin="20dp"
+        android:elevation="0dp"
         android:background="@drawable/special_2017_button_background"
+        android:textColor="#959C9F"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-</FrameLayout>
+    <com.mredrock.freshmanspecial.Units.CircleChart
+        android:id="@+id/sexRate_chart"
+        android:layout_margin="40dp"
+        android:layout_gravity="center"
+        android:layout_width="250dp"
+        android:layout_height="250dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
+</LinearLayout>
