@@ -14,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -70,9 +71,8 @@ public class HttpModel {
 
     /**
      * 获取就业率
-     * @param subscriber
      */
-    public void getWork(Subscriber<WorkBean> subscriber){
+    public Observable<WorkBean> getWork(){
         retrofit = new Retrofit.Builder()
                 .client(httpClientBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -80,11 +80,10 @@ public class HttpModel {
                 .baseUrl(URL)
                 .build();
         service = retrofit.create(Services.class);
-        service.getWork("WorkRatio")
-                .subscribeOn(Schedulers.io())
+        return  service.getWork("WorkRatio").
+                subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**

@@ -1,19 +1,27 @@
 package com.mredrock.freshmanspecial.presenter;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
 import com.mredrock.freshmanspecial.Beans.SexBean;
 import com.mredrock.freshmanspecial.Beans.WorkBean;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.Units.ChartData;
 import com.mredrock.freshmanspecial.model.DataModel;
+import com.mredrock.freshmanspecial.model.HttpModel;
 import com.mredrock.freshmanspecial.view.dataFragments.IDataFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.functions.Func1;
 
 /**
  * Created by zia on 17-8-5.
@@ -112,5 +120,51 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
                 .build();
         optionsPickerView.setPicker(collegeList);
         optionsPickerView.show();
+    }
+
+    @Override
+    public void runChart(List<ChartData> dataList){
+        if(fragment.getChart() == null) return;
+        fragment.getChart().setData(dataList);
+        fragment.getChart().setSpace(90);
+        fragment.getChart().setSpeed(2);
+        fragment.getChart().run();
+    }
+
+    /**
+     * 回调
+     */
+    public interface OnDataLoaded{
+        void finish(String msg);
+    }
+
+    @Override
+    public void loadJobRateData(final String college, final OnDataLoaded onDataLoaded) {
+        HttpModel.bulid().getWork()
+                .flatMap(new Func1<WorkBean, Observable<WorkBean.DataBean>>() {
+                    @Override
+                    public Observable<WorkBean.DataBean> call(WorkBean workBean) {
+                        return Observable.from(workBean.getData());
+                    }
+                })
+                .subscribe(new Subscriber<WorkBean.DataBean>() {
+                    @Override
+                    public void onCompleted() {
+                        onDataLoaded.finish(college);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        fragment.toast("获取信息失败！");
+                    }
+
+                    @Override
+                    public void onNext(WorkBean.DataBean dataBean) {
+                        if(dataBean.getCollege().equals(college)){
+                            Log.d("Job",dataBean.getCollege());
+                            setJobRateDataList(dataBean);
+                        }
+                    }
+                });
     }
 }

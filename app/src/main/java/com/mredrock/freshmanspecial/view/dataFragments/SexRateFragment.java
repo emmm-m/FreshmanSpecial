@@ -112,4 +112,14 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
     public List<String> getMajorList() {
         return null;
     }
+
+    @Override
+    public CircleChart getChart() {
+        return circleChart;
+    }
+
+    @Override
+    public void toast(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
 }

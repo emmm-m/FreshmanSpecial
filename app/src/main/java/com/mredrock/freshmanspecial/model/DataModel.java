@@ -100,11 +100,18 @@ public class DataModel {
         boy.setStrokeColor(boyCircleStrokeColor);
         //-----------------------------------------------//
         List<ChartData> list = new ArrayList<>();
-        float girlRate = Float.valueOf(10.00f);
-        girl.setText(girlRate*100.00f+"");girl.setPercentage((int)girlRate*100);
-        boy.setText(100-girlRate*100.00f+"");boy.setPercentage((int)(100-girlRate*100.00f));
-        list.add(girl);
+        float girlRate = Float.valueOf(bean.getRatio());
+        DecimalFormat decimalFormat = new DecimalFormat(".00");
+        girl.setText(decimalFormat.format(girlRate*100.00f)+"%");
+        girl.setPercentage((int)(girlRate*100.00f));
+        boy.setText(decimalFormat.format(100-girlRate*100.00f)+"%");
+        boy.setPercentage(100-(int)(girlRate*100.00f));
+        Log.d("girl",girlRate*100.00f+"");
+        Log.d("girl",(int)(girlRate*100.00f)+"");
+        Log.d("boy",100-girlRate*100.00f+"");
+        Log.d("boy",100-(int)(girlRate*100.00f)+"");
         list.add(boy);
+        list.add(girl);
         return list;
     }
 

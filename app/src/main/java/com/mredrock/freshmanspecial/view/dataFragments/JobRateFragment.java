@@ -1,13 +1,10 @@
 package com.mredrock.freshmanspecial.view.dataFragments;
 
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.ChartData;
@@ -40,16 +37,20 @@ public class JobRateFragment extends BaseFragment implements IDataFragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //弹出选择窗口
                 presenter.showPickerView(collegeList, new DataFragmentPresenter.OnPickerViewChoosed() {
                     @Override
-                    public void getString(String data) {
+                    public void getString(final String data) {
+                        //设置按钮文字为选中文字
                         button.setText(data);
-                        presenter.setJobRateDataList(null);
-                        circleChart.setData(dataList);
-                        circleChart.setSpace(90);
-                        circleChart.setSpeed(2);
-                        circleChart.openLog();
-                        circleChart.run();
+                        //网络请求
+                        presenter.loadJobRateData(data, new DataFragmentPresenter.OnDataLoaded() {
+                            @Override
+                            public void finish(String msg) {
+                                //启动数据图动画
+                                presenter.runChart(dataList);
+                            }
+                        });
                     }
                 });
             }
@@ -74,5 +75,15 @@ public class JobRateFragment extends BaseFragment implements IDataFragment {
     @Override
     public List<String> getMajorList() {
         return null;
+    }
+
+    @Override
+    public CircleChart getChart() {
+        return circleChart;
+    }
+
+    @Override
+    public void toast(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 }
