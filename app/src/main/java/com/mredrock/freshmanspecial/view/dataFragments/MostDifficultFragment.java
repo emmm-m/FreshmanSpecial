@@ -95,4 +95,14 @@ public class MostDifficultFragment extends BaseFragment implements IDataFragment
     public List<String> getMajorList() {
         return majorList;
     }
+
+    @Override
+    public CircleChart getChart() {
+        return circleChart;
+    }
+
+    @Override
+    public void toast(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
 }

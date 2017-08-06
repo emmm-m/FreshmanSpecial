@@ -1,6 +1,5 @@
 package com.mredrock.freshmanspecial.model;
 
-import android.content.Context;
 
 import com.mredrock.freshmanspecial.Beans.FailBean;
 import com.mredrock.freshmanspecial.Beans.QQGroupsBean;
@@ -9,10 +8,13 @@ import com.mredrock.freshmanspecial.Beans.WorkBean;
 
 import java.util.concurrent.TimeUnit;
 
+
 import okhttp3.OkHttpClient;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -28,12 +30,12 @@ public class HttpModel {
     private OkHttpClient.Builder httpClientBuilder;
     private Retrofit retrofit;
     private Services service;
-    private Context context;
+    //private Context context;
 
     //构造方法私有
-    private HttpModel(Context context) {
+    private HttpModel() {
         //手动创建一个OkHttpClient并设置超时时间
-        this.context = context;
+        //this.context = context;
         httpClientBuilder = new OkHttpClient.Builder();
         httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
 
@@ -41,11 +43,10 @@ public class HttpModel {
 
     /**
      * 获取单例
-     * @param context
      * @return
      */
-    public static HttpModel bulid(Context context){
-        return new HttpModel(context);
+    public static HttpModel bulid(){
+        return new HttpModel();
     }
 
 
@@ -70,9 +71,8 @@ public class HttpModel {
 
     /**
      * 获取就业率
-     * @param subscriber
      */
-    public void getWork(Subscriber<WorkBean> subscriber){
+    public Observable<WorkBean> getWork(){
         retrofit = new Retrofit.Builder()
                 .client(httpClientBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -80,11 +80,10 @@ public class HttpModel {
                 .baseUrl(URL)
                 .build();
         service = retrofit.create(Services.class);
-        service.getWork("WorkRatio")
-                .subscribeOn(Schedulers.io())
+        return  service.getWork("WorkRatio").
+                subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**

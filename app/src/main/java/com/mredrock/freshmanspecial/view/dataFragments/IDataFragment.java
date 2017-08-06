@@ -3,6 +3,7 @@ package com.mredrock.freshmanspecial.view.dataFragments;
 import android.app.Activity;
 
 import com.mredrock.freshmanspecial.Units.ChartData;
+import com.mredrock.freshmanspecial.Units.CircleChart;
 
 import java.util.List;
 
@@ -14,5 +15,7 @@ public interface IDataFragment {
     List<String> getCollegeList();
     List<ChartData> getDataList();
     List<String> getMajorList();
+    CircleChart getChart();
     Activity getActivity();
+    void toast(String msg);
 }
