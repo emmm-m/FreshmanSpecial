@@ -9,7 +9,7 @@
     <include layout="@layout/special_2017_title_bar" android:id="@+id/bar_mien"/>
 
     <android.support.design.widget.TabLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tab_mien"
         android:background="@color/colorWhite"
@@ -20,11 +20,18 @@
         android:overScrollMode="ifContentScrolls"
         android:layout_below="@+id/bar_mien"
         />
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tab_mien"
+        android:background="#898989"/>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_mien"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tab_mien">
+        android:layout_below="@id/view_line">
 
     </android.support.v4.view.ViewPager>
 
