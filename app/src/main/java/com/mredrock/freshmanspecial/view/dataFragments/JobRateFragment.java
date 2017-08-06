@@ -44,7 +44,7 @@ public class JobRateFragment extends BaseFragment implements IDataFragment {
                     @Override
                     public void getString(String data) {
                         button.setText(data);
-                        presenter.setJobRateDataList(data);
+                        presenter.setJobRateDataList(null);
                         circleChart.setData(dataList);
                         circleChart.setSpace(90);
                         circleChart.setSpeed(2);

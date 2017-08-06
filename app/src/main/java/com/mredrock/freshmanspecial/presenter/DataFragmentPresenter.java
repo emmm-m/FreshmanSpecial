@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
+import com.mredrock.freshmanspecial.Beans.SexBean;
+import com.mredrock.freshmanspecial.Beans.WorkBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.model.DataModel;
 import com.mredrock.freshmanspecial.view.dataFragments.IDataFragment;
@@ -47,11 +49,9 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
     }
 
     @Override
-    public void setSexRateDataList(String collegeName) {
+    public void setSexRateDataList(SexBean.DataBean bean) {
         fragment.getDataList().clear();
-        if(model.getSexRateDataList(collegeName) != null){
-            fragment.getDataList().addAll(model.getSexRateDataList(collegeName));
-        }
+        fragment.getDataList().addAll(model.getSexRateDataList(bean));
     }
 
     @Override
@@ -63,10 +63,10 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
     }
 
     @Override
-    public void setJobRateDataList(String collegeName) {
+    public void setJobRateDataList(WorkBean.DataBean bean) {
         fragment.getDataList().clear();
-        if(model.getSexRateDataList(collegeName) != null){
-            fragment.getDataList().addAll(model.getJobRateDataList(collegeName));
+        if(model.getJobRateDataList(bean) != null){
+            fragment.getDataList().addAll(model.getJobRateDataList(bean));
         }
     }
 

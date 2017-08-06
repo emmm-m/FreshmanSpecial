@@ -1,5 +1,8 @@
 package com.mredrock.freshmanspecial.presenter;
 
+import com.mredrock.freshmanspecial.Beans.SexBean;
+import com.mredrock.freshmanspecial.Beans.WorkBean;
+
 import java.util.List;
 
 /**
@@ -9,8 +12,8 @@ import java.util.List;
 public interface IDataFragmentPresenter {
     void setCollegeList();
     void setMajorList(String collegeName);
-    void setSexRateDataList(String collegeName);
+    void setSexRateDataList(SexBean.DataBean bean);
     void setMostDifficultDataList(String majorName);
-    void setJobRateDataList(String collegeName);
+    void setJobRateDataList(WorkBean.DataBean bean);
     void showPickerView(List<String> collegeList, DataFragmentPresenter.OnPickerViewChoosed onPickerViewChoosed);
 }
