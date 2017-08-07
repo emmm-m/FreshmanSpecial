@@ -3,9 +3,11 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="美在重邮"
-        android:gravity="center"/>
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/list_beauty"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       >
+
+   </android.support.v7.widget.RecyclerView>
 </LinearLayout>
