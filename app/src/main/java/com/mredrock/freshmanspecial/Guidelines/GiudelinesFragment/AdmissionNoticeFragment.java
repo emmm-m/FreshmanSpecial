@@ -19,7 +19,7 @@ public class AdmissionNoticeFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_admission_notice, container, false);
+        View view = inflater.inflate(R.layout.special_2017_fragment_admission, container, false);
         return view;
     }
 }

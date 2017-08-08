@@ -19,7 +19,7 @@ public class SurroundingBeautyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_surrounding, container, false);
+        View view = inflater.inflate(R.layout.special_2017_fragment_surrounding, container, false);
         return view;
     }
 }

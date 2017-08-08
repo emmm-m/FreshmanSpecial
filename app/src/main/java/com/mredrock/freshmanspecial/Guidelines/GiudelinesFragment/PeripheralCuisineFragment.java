@@ -19,7 +19,7 @@ public class PeripheralCuisineFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cuisine, container, false);
+        View view = inflater.inflate(R.layout.special_2017_fragment_cuisine, container, false);
         return view;
     }
 }

@@ -19,7 +19,7 @@ public class CafeteriaFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cafeteria, container, false);
+        View view = inflater.inflate(R.layout.special_2017_fragment_cafeteria, container, false);
         return view;
     }
 }

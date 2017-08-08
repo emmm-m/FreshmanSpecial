@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--专题 ： 邮子攻略；界面 ： recycler 排版纵向，学校寝室、食堂、环境 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="340dp"
+        android:layout_height="180dp"
+        android:id="@+id/picword_vertical_item_image"
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="19dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/picword_vertical_item_title"
+        android:textColor="@color/colorDeepGray"
+        android:textSize="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="13dp"/>
+    
+    <TextView
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/picword_vertical_item_text"
+        android:textColor="@color/tabTextColor"
+        android:textSize="13dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="18dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@color/underTabColor"/>
+
+</LinearLayout>
