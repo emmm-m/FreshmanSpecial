@@ -28,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
-    public static final int BEAUTY = 0,EXCELLENT = 1,ORIGINAL = 2;
+    public static final int BEAUTY = 0,STUDENT = 1,TEACHER = 2;
     private List data = new ArrayList<>();
     private Context context;
     private int type;
@@ -46,9 +46,13 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         if (type == BEAUTY) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_beauty, parent, false);
             return new MyViewHolder(view,BEAUTY);
-        }else if (type == EXCELLENT) {
+        }else if (type == STUDENT) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_excellent, parent, false);
-            return new MyViewHolder(view,EXCELLENT);
+            return new MyViewHolder(view,STUDENT);
+        }
+        else if (type == TEACHER) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_excellent, parent, false);
+            return new MyViewHolder(view,TEACHER);
         }
         return null;
     }
@@ -62,7 +66,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 holder.content_beauty.setText(beautyBean.getContent());
                 holder.title_beauty.setText(beautyBean.getTitle());
                 break;
-            case EXCELLENT:
+            case STUDENT:
                 final ExcellentBean excellentBean = (ExcellentBean) data.get(position);
                 holder.name_excellent.setText(excellentBean.getName());
                 holder.img_excellent.setImageDrawable(excellentBean.getImg());
@@ -74,13 +78,18 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                     }
                 });
                 break;
+            case TEACHER:
+                final ExcellentBean excellentBean_teacher = (ExcellentBean) data.get(position);
+                holder.name_excellent.setText(excellentBean_teacher.getName());
+                holder.img_excellent.setImageDrawable(excellentBean_teacher.getImg());
+                holder.content_excellent.setText(excellentBean_teacher.getContent());
+                break;
         }
     }
 
 
     @Override
     public int getItemCount() {
-        Log.d("xxx", "getItemCount: "+data.size());
         return data.size();
     }
 
@@ -88,7 +97,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     private void initPopupWindow(View view, ExcellentBean bean) {
         View popupView = LayoutInflater.from(context).inflate(R.layout.pop_window_excellent, null);
         // 三部曲第二  构造函数关联
-        View parent = LayoutInflater.from(context).inflate(R.layout.special_2017_fragment_excellent,null);
+        View parent = LayoutInflater.from(context).inflate(R.layout.special_2017_fragment_student,null);
         TextView name,content;
         CircleImageView img;
         ImageView close;
@@ -99,8 +108,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         name.setText(bean.getName());
         content.setText(bean.getContent());
         img.setImageDrawable(bean.getImg());
-        float density = ScreenUnit.bulid(context).getDensity();
-        popupWindow = new PopupWindow(popupView,(int) (250*density),(int) (350*density), true);
+        int wide = ScreenUnit.bulid(context).getPxWide();
+        int height = ScreenUnit.bulid(context).getPxHiget();
+        popupWindow = new PopupWindow(popupView,wide*3/4, height*2/3, true);
         // =======  两者结合才能让popup点击外部消失
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
@@ -152,7 +162,12 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                     title_beauty = (TextView) itemView.findViewById(R.id.title_item_beauty);
                     content_beauty = (TextView) itemView.findViewById(R.id.tx_item_beauty);
                     break;
-                case EXCELLENT:
+                case STUDENT:
+                    img_excellent = (CircleImageView) itemView.findViewById(R.id.img_item_excellent);
+                    name_excellent = (TextView) itemView.findViewById(R.id.name_item_excellent);
+                    content_excellent = (TextView) itemView.findViewById(R.id.tx_item_excellent);
+                    break;
+                case TEACHER:
                     img_excellent = (CircleImageView) itemView.findViewById(R.id.img_item_excellent);
                     name_excellent = (TextView) itemView.findViewById(R.id.name_item_excellent);
                     content_excellent = (TextView) itemView.findViewById(R.id.tx_item_excellent);

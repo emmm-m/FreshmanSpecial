@@ -15,9 +15,10 @@ import com.mredrock.freshmanspecial.Units.base.BaseActivity;
 import com.mredrock.freshmanspecial.presenter.IMienPresenter;
 import com.mredrock.freshmanspecial.presenter.MienPresenter;
 import com.mredrock.freshmanspecial.view.MienFragments.BeautyFragment;
-import com.mredrock.freshmanspecial.view.MienFragments.ExcellentFragment;
 import com.mredrock.freshmanspecial.view.MienFragments.OriginalFragment;
+import com.mredrock.freshmanspecial.view.MienFragments.StudentFragment;
 import com.mredrock.freshmanspecial.view.MienFragments.StudentGroupFragment;
+import com.mredrock.freshmanspecial.view.MienFragments.TeacherFragment;
 
 public class MienActivity extends BaseActivity implements IMienActivity{
 
@@ -46,8 +47,8 @@ public class MienActivity extends BaseActivity implements IMienActivity{
     private void initPager() {
 //        int wide = ScreenUnit.bulid(this).getDpWide()*2/7;
 //        tabLayout.setMinimumWidth(wide);
-        String[] tabTitles = new String[]{"学生组织", "原创重邮", "美在重邮","优秀师生"};
-        Fragment[] fragments = new Fragment[]{new StudentGroupFragment(), new OriginalFragment(), new BeautyFragment(), new ExcellentFragment()};
+        String[] tabTitles = new String[]{"学生组织", "原创重邮", "美在重邮","优秀学生","优秀教师"};
+        Fragment[] fragments = new Fragment[]{new StudentGroupFragment(), new OriginalFragment(), new BeautyFragment(), new StudentFragment(), new TeacherFragment()};
         ViewPagerAdapter adapter = new ViewPagerAdapter(this,getSupportFragmentManager(), tabTitles, fragments);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
