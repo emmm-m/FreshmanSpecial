@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.mredrock.freshmanspecial.Guidelines.Guidelines">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#fff"
+              android:orientation="vertical"
+              tools:context="com.mredrock.freshmanspecial.Guidelines.Guidelines">
 
     <!--tab横向滑动容器
     <HorizontalScrollView
@@ -16,21 +17,22 @@
             </HorizontalScrollView>
 
     -->
-<include layout="@layout/special_2017_title_bar"/>
-        <android.support.design.widget.TabLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guidelines_tablayout"
-            android:background="@color/colorWhite"
-            app:tabTextColor="@color/colorDeepGray"
-            app:tabSelectedTextColor="@color/colorDeepGray"
-            app:tabIndicatorColor="@color/colorPrimary"
-            android:overScrollMode="ifContentScrolls"
-            />
+    <include layout="@layout/special_2017_title_bar"/>
 
-   <android.support.v4.view.ViewPager
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:id="@+id/guidelines_viewpager"/>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/guidelines_tablayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:overScrollMode="ifContentScrolls"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabSelectedTextColor="@color/colorDeepGray"
+        app:tabTextColor="@color/colorDeepGray"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/guidelines_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

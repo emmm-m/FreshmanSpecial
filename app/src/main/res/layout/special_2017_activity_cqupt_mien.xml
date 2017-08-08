@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:orientation="vertical">
 
     <include layout="@layout/special_2017_title_bar" android:id="@+id/bar_mien"/>
@@ -12,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tab_mien"
-        android:background="@color/colorWhite"
+        android:background="#fff"
         app:tabTextColor="@color/colorDeepGray"
         app:tabSelectedTextColor="@color/colorDeepGray"
         app:tabIndicatorColor="@color/colorPrimary"
@@ -25,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/tab_mien"
-        android:background="#898989"/>
+        android:background="#EBF0F2"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_mien"

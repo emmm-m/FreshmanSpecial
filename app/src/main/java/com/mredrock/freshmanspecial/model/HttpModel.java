@@ -27,19 +27,11 @@ public class HttpModel {
 
     public static final String URL = "http://www.yangruixin.com/";
     private static final int DEFAULT_TIMEOUT = 5;
-    private OkHttpClient.Builder httpClientBuilder;
+    private OkHttpClient.Builder httpClientBuilder = new OkHttpClient().newBuilder();
     private Retrofit retrofit;
     private Services service;
     //private Context context;
 
-    //构造方法私有
-    private HttpModel() {
-        //手动创建一个OkHttpClient并设置超时时间
-        //this.context = context;
-        httpClientBuilder = new OkHttpClient.Builder();
-        httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-
-    }
 
     /**
      * 获取单例
