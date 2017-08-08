@@ -33,7 +33,7 @@ public class JobRateFragment extends BaseFragment implements IDataFragment {
         presenter = new DataFragmentPresenter(this);
         button = $(R.id.jobRate_button);
         circleChart = $(R.id.jobRate_chart);
-        presenter.setCollegeList();
+        presenter.setSexRateCollegeList();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
