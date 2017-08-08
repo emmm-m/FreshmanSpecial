@@ -80,9 +80,8 @@ public class HttpModel {
 
     /**
      * 获取挂科率
-     * @param subscriber
      */
-    public void getFail(Subscriber<FailBean> subscriber){
+    public Observable<FailBean> getFail(){
         retrofit = new Retrofit.Builder()
                 .client(httpClientBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -90,11 +89,10 @@ public class HttpModel {
                 .baseUrl(URL)
                 .build();
         service = retrofit.create(Services.class);
-        service.getFail("FailRatio")
+        return service.getFail("FailRatio")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**

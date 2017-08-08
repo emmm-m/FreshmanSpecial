@@ -4,10 +4,10 @@ import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
+import com.mredrock.freshmanspecial.Beans.FailBean;
 import com.mredrock.freshmanspecial.Beans.SexBean;
 import com.mredrock.freshmanspecial.Beans.WorkBean;
 import com.mredrock.freshmanspecial.R;
@@ -32,6 +32,8 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
     private IDataFragment fragment;
     private DataModel model;
     private OptionsPickerView optionsPickerView;
+    private List<FailBean.DataBean> failDataBeanList = new ArrayList<FailBean.DataBean>();
+    private final static String TAG = "dataFragmentPresenter";
 
     public DataFragmentPresenter(IDataFragment fragment){
         this.fragment = fragment;
@@ -43,18 +45,17 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
      * 设置学院名称集合，fragment必须实现IDataFragment接口
      */
     @Override
-    public void setCollegeList() {
+    public void setSexRateCollegeList() {
         fragment.getCollegeList().clear();
-        fragment.getCollegeList().addAll(model.getCollegeList());
+        fragment.getCollegeList().addAll(model.getSexCollegeList());
     }
 
     @Override
-    public void setMajorList(String collegeName) {
-        fragment.getMajorList().clear();
-        if(model.getMajorList(collegeName) != null){
-            fragment.getMajorList().addAll(model.getMajorList(collegeName));
-        }
+    public void setWorkRateCollegeList() {
+        fragment.getCollegeList().clear();
+        fragment.getCollegeList().addAll(model.getWorkRateCollegeList());
     }
+
 
     @Override
     public void setSexRateDataList(SexBean.DataBean bean) {
@@ -63,11 +64,9 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
     }
 
     @Override
-    public void setMostDifficultDataList(String majorName) {
-        fragment.getDataList().clear();
-        if(model.getMostDifficultDataList(majorName) != null){
-            fragment.getDataList().addAll(model.getMostDifficultDataList(majorName));
-        }
+    public void setFailCollegeList() {
+        fragment.getCollegeList().clear();
+        fragment.getCollegeList().addAll(model.getMostDifficultCollege());
     }
 
     @Override
@@ -123,6 +122,13 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
     }
 
     @Override
+    public void disMissPickerView() {
+        if(optionsPickerView != null) {
+            optionsPickerView.dismiss();
+        }
+    }
+
+    @Override
     public void runChart(List<ChartData> dataList){
         if(fragment.getChart() == null) return;
         fragment.getChart().setData(dataList);
@@ -166,5 +172,64 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void loadFailMajorList(final String college, final OnDataLoaded onDataLoaded) {
+        failDataBeanList.clear();
+        HttpModel.bulid().getFail()
+                .flatMap(new Func1<FailBean, Observable<FailBean.DataBean>>() {
+                    @Override
+                    public Observable<FailBean.DataBean> call(FailBean failBean) {
+                        return Observable.from(failBean.getData());
+                    }
+                })
+                .subscribe(new Subscriber<FailBean.DataBean>() {
+                    @Override
+                    public void onCompleted() {
+                        fragment.getMajorList().clear();
+                        for (FailBean.DataBean d : failDataBeanList) {
+                            fragment.getMajorList().add(d.getMajor());
+                        }
+                        //清除重复元素
+                        for  ( int  i  =   0 ; i  <  fragment.getMajorList().size()  -   1 ; i ++ ) {
+                            for (int j = fragment.getMajorList().size() - 1; j > i; j--) {
+                                if (fragment.getMajorList().get(j).equals(fragment.getMajorList().get(i))) {
+                                    fragment.getMajorList().remove(j);
+                                }
+                            }
+                        }
+                        onDataLoaded.finish("Load OK");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(FailBean.DataBean dataBean) {
+                        if(dataBean.getCollege().equals(college)){
+                            failDataBeanList.add(dataBean);
+                            Log.d(TAG,dataBean.getCourse());
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void loadFailData(final String major, OnDataLoaded onDataLoaded) {
+        if(failDataBeanList == null) return;
+        //挑选该学院所有major，交给model排序并返回chartData
+        List<FailBean.DataBean> majorBeanList = new ArrayList<FailBean.DataBean>();
+        for (FailBean.DataBean bean : failDataBeanList) {
+            if(bean.getMajor().equals(major)){
+                majorBeanList.add(bean);
+                Log.d(TAG,bean.getRatio());
+            }
+        }
+        fragment.getDataList().clear();
+        fragment.getDataList().addAll(model.getMostDifficultDataList(majorBeanList));
+        onDataLoaded.finish("");
     }
 }

@@ -1,11 +1,8 @@
 package com.mredrock.freshmanspecial.view.dataFragments;
 
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -44,32 +41,55 @@ public class MostDifficultFragment extends BaseFragment implements IDataFragment
             }
         });
         circleChart = $(R.id.mostDifficult_chart);
-        presenter.setCollegeList();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //获取所有学院信息，加载到第一个按钮上
+                presenter.setFailCollegeList();
+                //将获取到的信息以PickerView呈现出来
                 presenter.showPickerView(collegeList, new DataFragmentPresenter.OnPickerViewChoosed() {
                     @Override
                     public void getString(String data) {
+                        //设置按钮文字
                         button.setText(data);
-                        presenter.setMajorList(data);
-                        majorButton.setOnClickListener(new View.OnClickListener() {
+                        //将选择的学院进行网络请求，获取该学院专业，同时刷新到majorList保存
+                        presenter.loadFailMajorList(data, new DataFragmentPresenter.OnDataLoaded() {
                             @Override
-                            public void onClick(View view) {
-                                presenter.showPickerView(majorList, new DataFragmentPresenter.OnPickerViewChoosed() {
+                            public void finish(String msg) {
+                                //关闭之前的pickerView
+                                presenter.disMissPickerView();
+                                //将majorList的数据呈现在新的PickerView上
+                                showMajorPickerView();
+                                //同时给按钮设置监听
+                                majorButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
-                                    public void getString(String data1) {
-                                        majorButton.setText(data1);
-                                        presenter.setMostDifficultDataList(data1);
-                                        circleChart.setData(dataList);
-                                        circleChart.setSpace(90);
-                                        circleChart.setSpeed(2);
-                                        circleChart.openLog();
-                                        circleChart.run();
+                                    public void onClick(View view) {
+                                        showMajorPickerView();
                                     }
                                 });
                             }
                         });
+                    }
+                });
+            }
+        });
+    }
+
+    private void showMajorPickerView(){
+        presenter.showPickerView(majorList, new DataFragmentPresenter.OnPickerViewChoosed() {
+            @Override
+            public void getString(String data) {
+                //设置按钮文字
+                majorButton.setText(data);
+                //将选取的学院给presenter处理，得到circleChart数据
+                presenter.loadFailData(data, new DataFragmentPresenter.OnDataLoaded() {
+                    @Override
+                    public void finish(String msg) {
+                        circleChart.setData(dataList);
+                        circleChart.setSpace(90);
+                        circleChart.setSpeed(2);
+                        circleChart.openLog();
+                        circleChart.run();
                     }
                 });
             }
