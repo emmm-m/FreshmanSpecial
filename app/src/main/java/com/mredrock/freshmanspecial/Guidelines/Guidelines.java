@@ -7,10 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.HorizontalScrollView;
-import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.Guidelines.Adapter.InfoFragmentAdapter;
 import com.mredrock.freshmanspecial.Guidelines.GiudelinesFragment.AdmissionNoticeFragment;
@@ -21,7 +18,6 @@ import com.mredrock.freshmanspecial.Guidelines.GiudelinesFragment.DormitoryFragm
 import com.mredrock.freshmanspecial.Guidelines.GiudelinesFragment.PeripheralCuisineFragment;
 import com.mredrock.freshmanspecial.Guidelines.GiudelinesFragment.QQgroupFragment;
 import com.mredrock.freshmanspecial.Guidelines.GiudelinesFragment.SurroundingBeautyFragment;
-import com.mredrock.freshmanspecial.Guidelines.Tools.GradientTextView;
 import com.mredrock.freshmanspecial.R;
 
 import java.util.ArrayList;
@@ -34,20 +30,20 @@ import java.util.List;
  **/
 
 public class Guidelines extends AppCompatActivity {
-    private final String TAG = "Guidelines";
+
+
     private List<String> titles = new ArrayList<>();
     private List<Fragment> fragments = new ArrayList<>();
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private TextView titleText;
     private HorizontalScrollView horizontalScrollView;
 
     private InfoFragmentAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.special_2017_activity_guidelines);
+        setContentView(R.layout.activity_guidelines);
 
         initData();
         initViews();
@@ -80,33 +76,19 @@ public class Guidelines extends AppCompatActivity {
     public void initViews() {
         tabLayout = (TabLayout) findViewById(R.id.guidelines_tablayout);
         viewPager = (ViewPager) findViewById(R.id.guidelines_viewpager);
-        titleText = (TextView) findViewById(R.id.title_text);
 //        horizontalScrollView = (HorizontalScrollView) findViewById(R.id.guidelines_horizontal_scroller);
 
-        titleText.setText("邮子攻略");
         viewPager.setAdapter(adapter);
 
-        setTab(3);
-    }
-
-    /**
-     * setTab : 添加自定义tab
-     * @param position 当前 tabLayut 所在的位置
-     */
-    public  void setTab(int position) {
-        tabLayout = null;
-        tabLayout = (TabLayout) findViewById(R.id.guidelines_tablayout);
 
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-//        for (int i = 0; i < titles.size(); i++) {
-//            TabLayout.Tab tab = tabLayout.getTabAt(i);
-//            if (tabLayout != null) {
-//                if (i == position) {
-//                    tab.setCustomView(adapter.getTabView(i, true));
-//                } else {
-//                    tab.setCustomView(adapter.getTabView(i, false)); // 将自定义的tab加入
-//            }
-//        }
+        for (int i = 0; i < titles.size(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            if (tabLayout != null) {
+                tab.setCustomView(adapter.getTabView(i)); // 将自定义的tab加入
+            }
+        }
+
     }
 }

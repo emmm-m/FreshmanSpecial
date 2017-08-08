@@ -54,7 +54,7 @@ public class JunxunActivity extends BaseActivity implements IDataActivity {
     private void initPager() {
         String[] tabTitles = new String[]{"军训贴士", "军训风采"};
         Fragment[] fragments = new Fragment[]{new TipsFragment(), new FengcaiFragment()};
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), tabTitles, fragments);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this,getSupportFragmentManager(), tabTitles, fragments);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }

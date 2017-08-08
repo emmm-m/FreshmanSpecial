@@ -2,6 +2,7 @@ package com.mredrock.freshmanspecial.Units;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.WindowManager;
 
 /**
@@ -11,6 +12,7 @@ import android.view.WindowManager;
 public class ScreenUnit {
     private Context context;
     private int dpWide,dpHeight,pxWide,pxHiget,dpi;
+    private float density;
 
     private  ScreenUnit(Context context){
         this.context = context;
@@ -27,20 +29,26 @@ public class ScreenUnit {
         wm.getDefaultDisplay().getMetrics(dm);
         pxWide = dm.widthPixels;         // 屏幕宽度（像素）
         pxHiget = dm.heightPixels;       // 屏幕高度（像素）
-        float density = dm.density;         // 屏幕密度（0.75 / 1.0 / 1.5）
+        density = dm.density;         // 屏幕密度（0.75 / 1.0 / 1.5）
         dpi = dm.densityDpi;     // 屏幕密度dpi（120 / 160 / 240）
         // 屏幕宽度算法:屏幕宽度（像素）/屏幕密度
         dpWide = (int) (pxWide / density);  // 屏幕宽度(dp)
         dpHeight = (int) (pxHiget / density);// 屏幕高度(dp)
 
     }
+    public float getDensity(){
+        return density;
+    }
+
     public int getDpWide(){
+
         return dpWide;
     }
     public int getDpHeight(){
         return dpHeight;
     }
     public int getPxWide(){
+        Log.d("zzx", "getDpWide: "+pxWide);
         return pxWide;
     }
     public int getPxHiget(){

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.R;
@@ -17,6 +18,7 @@ public class MainActivity extends BaseActivity{
     private CardView junxun,shuju,fengcai,gonglve;
     private IMainPresenter presenter;
     private TextView title;
+    private ImageView back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +53,14 @@ public class MainActivity extends BaseActivity{
             }
         });
     }
+    private void setBack(){
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
 
     @Override
     protected void initData() {
@@ -60,6 +70,8 @@ public class MainActivity extends BaseActivity{
         gonglve = $(R.id.main_gonglve);
         title = $(R.id.title_text);
         title.setText("2017迎新网");
+        back = $(R.id.back);
+        setBack();
     }
 
 

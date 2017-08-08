@@ -2,8 +2,8 @@ package com.mredrock.freshmanspecial.presenter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
+import com.mredrock.freshmanspecial.Guidelines.Guidelines;
 import com.mredrock.freshmanspecial.view.DataActivity;
 import com.mredrock.freshmanspecial.view.JunxunActivity;
 import com.mredrock.freshmanspecial.view.MainActivity;
@@ -41,8 +41,7 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void gotoStrategyActivity() {
-//        Intent intent = new Intent(context, xxx.class);
-//        context.startActivity(intent);
-        Toast.makeText(context,"跳转到重邮攻略",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(context, Guidelines.class);
+        context.startActivity(intent);
     }
 }

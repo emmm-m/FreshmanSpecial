@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mredrock.freshmanspecial.Guidelines.Guidelines">
+
+    <!--tab横向滑动容器
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidelines_horizontal_scroller"
+        android:scrollbars="none">
+            </HorizontalScrollView>
+
+    -->
+
+        <android.support.design.widget.TabLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guidelines_tablayout"
+            android:background="@color/colorWhite"
+            app:tabTextColor="@color/colorDeepGray"
+            app:tabSelectedTextColor="@color/colorDeepGray"
+            app:tabIndicatorColor="@color/colorPrimary"
+            android:overScrollMode="ifContentScrolls"
+            />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@color/underTabColor"/>
+
+   <android.support.v4.view.ViewPager
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/guidelines_viewpager"/>
+
+</LinearLayout>

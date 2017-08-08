@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 
-import com.mredrock.freshmanspecial.Guidelines.Tools.GradientTextView;
 import com.mredrock.freshmanspecial.R;
 
 import java.util.List;
@@ -22,7 +20,7 @@ import java.util.List;
  */
 
 public class InfoFragmentAdapter extends FragmentPagerAdapter {
-    private final String TAG = "InfoFragmentAdapter";
+
     private List<String> titles;      //tab 标题
     private List<Fragment> fragments;
 
@@ -56,24 +54,12 @@ public class InfoFragmentAdapter extends FragmentPagerAdapter {
 
     /**
      *  getTabView : 自定义 Tab 的布局View
-     *  @param ifGradient   文字颜色是否需要渐变
-     **/
-    public View getTabView(int position, boolean ifGradient){
+     * */
+    public View getTabView(int position){
         layoutInflater =LayoutInflater.from(activity);
-        View view = null;
-        if (ifGradient) {
-
-            view = layoutInflater.inflate(R.layout.special_2017_gradienttab_item_layout, null);
-            GradientTextView gradientText = (GradientTextView) view.findViewById(R.id.gradienttab_item_tabname);
-            gradientText.setText(titles.get(position));
-            Log.d(TAG, "getTabView: ttttttttttttttttttttttttttttt");
-        } else {
-            Log.d(TAG, "getTabView: sssssssssssssss");
-            view=layoutInflater.inflate(R.layout.special_2017_tab_item_layout,null);
-            TextView textView = (TextView) view.findViewById(R.id.tab_item_tabname);
-            textView.setText(titles.get(position));
-        }
+        View view=layoutInflater.inflate(R.layout.tab_item_layout,null);
+        TextView textView = (TextView) view.findViewById(R.id.tab_item_tabname);
+        textView.setText(titles.get(position));
         return view;
     }
-
 }
