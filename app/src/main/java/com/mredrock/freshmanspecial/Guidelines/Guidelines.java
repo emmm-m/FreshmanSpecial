@@ -1,13 +1,12 @@
 package com.mredrock.freshmanspecial.Guidelines;
 
-import android.support.v4.app.Fragment;
-
 import android.support.design.widget.TabLayout;
-
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.View;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.Guidelines.Adapter.InfoFragmentAdapter;
 import com.mredrock.freshmanspecial.Guidelines.GiudelinesFragment.AdmissionNoticeFragment;
@@ -19,6 +18,7 @@ import com.mredrock.freshmanspecial.Guidelines.GiudelinesFragment.PeripheralCuis
 import com.mredrock.freshmanspecial.Guidelines.GiudelinesFragment.QQgroupFragment;
 import com.mredrock.freshmanspecial.Guidelines.GiudelinesFragment.SurroundingBeautyFragment;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.Units.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,27 +29,20 @@ import java.util.List;
  * 界面 ： 邮子攻略-主界面
  **/
 
-public class Guidelines extends AppCompatActivity {
+public class Guidelines extends BaseActivity {
 
 
     private List<String> titles = new ArrayList<>();
     private List<Fragment> fragments = new ArrayList<>();
-
+    private TextView title;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private HorizontalScrollView horizontalScrollView;
-
+    private ImageView back;
     private InfoFragmentAdapter adapter;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guidelines);
-
-        initData();
-        initViews();
-    }
-
-
     public void initData() {
         titles.add("校园环境");
         titles.add("学生寝室");
@@ -71,15 +64,32 @@ public class Guidelines extends AppCompatActivity {
 
         adapter = new InfoFragmentAdapter(getSupportFragmentManager()
                 , titles, fragments, Guidelines.this);
+        initViews();
+        title.setText("邮子攻略");
+        setBack();
+    }
+    private void setBack(){
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+
+    @Override
+    protected int getContentViewId() {
+        return R.layout.activity_guidelines;
     }
 
     public void initViews() {
         tabLayout = (TabLayout) findViewById(R.id.guidelines_tablayout);
         viewPager = (ViewPager) findViewById(R.id.guidelines_viewpager);
+        title = (TextView) findViewById(R.id.title_text);
+        back = (ImageView) findViewById(R.id.back);
 //        horizontalScrollView = (HorizontalScrollView) findViewById(R.id.guidelines_horizontal_scroller);
 
         viewPager.setAdapter(adapter);
-
 
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
