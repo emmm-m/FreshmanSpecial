@@ -57,7 +57,7 @@ public class InfoFragmentAdapter extends FragmentPagerAdapter {
      * */
     public View getTabView(int position){
         layoutInflater =LayoutInflater.from(activity);
-        View view=layoutInflater.inflate(R.layout.tab_item_layout,null);
+        View view=layoutInflater.inflate(R.layout.special_2017_tab_item_layout,null);
         TextView textView = (TextView) view.findViewById(R.id.tab_item_tabname);
         textView.setText(titles.get(position));
         return view;

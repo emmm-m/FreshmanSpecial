@@ -55,7 +55,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
      * */
     public View getTabView(int position){
         layoutInflater = LayoutInflater.from(context);
-        View view=layoutInflater.inflate(R.layout.tab_item_layout,null);
+        View view=layoutInflater.inflate(R.layout.special_2017_tab_item_layout,null);
         int wide = ScreenUnit.bulid(context).getPxWide();
         float density = ScreenUnit.bulid(context).getDensity();
         TextView textView = (TextView) view.findViewById(R.id.tab_item_tabname);
