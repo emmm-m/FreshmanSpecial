@@ -24,7 +24,7 @@
     <TextView
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        style="?android:attr/borderlessButtonStyle"
+        android:clickable="false"
         android:textColor="#959C9F"
         android:gravity="center_vertical"
         android:padding="18dp"
@@ -36,7 +36,7 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:layout_width="280dp"
-        android:layout_height="280dp" />
+        android:layout_height="250dp" />
 
     <com.mredrock.freshmanspecial.Units.SmallCircle
         android:id="@+id/jobRate_circle"

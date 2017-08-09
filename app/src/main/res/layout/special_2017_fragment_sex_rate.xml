@@ -28,6 +28,7 @@
         android:textColor="#959C9F"
         android:gravity="center_vertical"
         android:padding="18dp"
+        android:clickable="false"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 
@@ -36,7 +37,7 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:layout_width="280dp"
-        android:layout_height="280dp" />
+        android:layout_height="250dp" />
 
     <com.mredrock.freshmanspecial.Units.SmallCircle
         android:id="@+id/sexRate_circle"

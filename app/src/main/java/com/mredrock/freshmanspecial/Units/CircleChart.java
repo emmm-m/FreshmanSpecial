@@ -30,7 +30,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
     private int startAngle = -90;//起始角度，默认在最上方开始
     private boolean isRun = false;
     private List<ChartData> list;//数据
-    private int space = paintWidth / 3;//线间距
+    private int space = ScreenUnit.dip2px(getContext(),8);//线间距
     private float centerX = 0, centerY = 0;
     private int radius = ScreenUnit.dip2px(getContext(),55);//最小半径
     private boolean autoSpace = false;//默认自动调整间距
@@ -171,7 +171,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
             path.addArc(oval, -130, textWidth);
             canvas.drawTextOnPath(text, path, 0, 15, paint);
         } else {
-            canvas.drawText(text, centerX - textWidth - getWidth() / 20, centerY - radius + getWidth() / 30, paint);
+            canvas.drawText(text, centerX - textWidth - getWidth() / 20, centerY - radius + paintWidth/4, paint);
         }
     }
 

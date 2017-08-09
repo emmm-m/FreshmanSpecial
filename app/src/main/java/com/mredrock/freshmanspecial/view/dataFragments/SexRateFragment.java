@@ -46,26 +46,21 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
                     @Override
                     public void onCompleted() {
                         collegeList.clear();
-                        for(SexBean.DataBean bean : mSexBean.getData()){
+                        for (SexBean.DataBean bean : mSexBean.getData()) {
                             collegeList.add(bean.getCollege());
                         }
-                        /*button.setOnClickListener(new View.OnClickListener() {
+                        presenter.showPickerView(collegeList, new DataFragmentPresenter.OnPickerViewChoosed() {
                             @Override
-                            public void onClick(View view) {*/
-                                presenter.showPickerView(collegeList, new DataFragmentPresenter.OnPickerViewChoosed() {
-                                    @Override
-                                    public void getString(String data) {
-                                        button.setText(data);
-                                        for(SexBean.DataBean bean : mSexBean.getData()){
-                                            if(data.equals(bean.getCollege())){
-                                                presenter.setSexRateDataList(bean);
-                                                presenter.runChart(dataList);
-                                            }
-                                        }
+                            public void getString(String data) {
+                                button.setText(data);
+                                for (SexBean.DataBean bean : mSexBean.getData()) {
+                                    if (data.equals(bean.getCollege())) {
+                                        presenter.setSexRateDataList(bean);
+                                        presenter.runChart(dataList);
                                     }
-                                });
-                        /*    }
-                        });*/
+                                }
+                            }
+                        });
                     }
 
                     @Override

@@ -22,7 +22,7 @@ public class SmallCircle extends android.support.v7.widget.AppCompatTextView {
     private Paint textPaint;
     private List<String> texts = new ArrayList<>();
     private List<Integer> colors = new ArrayList<>();
-    private int strokeWidth = ScreenUnit.dip2px(getContext(),18);
+    private int strokeWidth = ScreenUnit.dip2px(getContext(),12);
 
     public SmallCircle(Context context) {
         super(context);
@@ -43,8 +43,9 @@ public class SmallCircle extends android.support.v7.widget.AppCompatTextView {
         textPaint = new Paint();
         textPaint.setAntiAlias(true);//抗锯齿
         textPaint.setDither(true);//防抖动
+        textPaint.setColor(Color.parseColor("#343434"));
         textPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        textPaint.setTextSize(ScreenUnit.dip2px(getContext(),18));
+        textPaint.setTextSize(ScreenUnit.dip2px(getContext(),16));
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
 
@@ -61,7 +62,7 @@ public class SmallCircle extends android.support.v7.widget.AppCompatTextView {
 
             circlePaint.setStrokeWidth(strokeWidth-3);
             circlePaint.setShadowLayer(30,-2,1, Color.WHITE);
-            canvas.drawCircle(space/3+space*i,strokeWidth,height/6,circlePaint);
+            canvas.drawCircle(space/3+space*i,strokeWidth+ScreenUnit.dip2px(getContext(),2),height/7,circlePaint);
 
             canvas.drawText(texts.get(i),space/3+space*i + height/3,strokeWidth+height/12,textPaint);
         }
