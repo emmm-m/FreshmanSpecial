@@ -11,7 +11,7 @@ import com.mredrock.freshmanspecial.R;
 
 public class BeautyBean extends RecyclerBean{
     private Drawable img;
-    private String title, content;
+    private String title, content, url_img;
 
     public void setImg(Drawable img){
         this.img = img;
@@ -27,6 +27,14 @@ public class BeautyBean extends RecyclerBean{
 
     public String getTitle(){
         return title;
+    }
+
+    public void setUrl_img(String url_img){
+        this.url_img = url_img;
+    }
+
+    public String getUrl_img(){
+        return url_img;
     }
 
     public void setContent(String content){

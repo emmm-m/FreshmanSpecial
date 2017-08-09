@@ -109,6 +109,9 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
      * @param s          速度
      */
     private void drawArc(Canvas canvas, float percentage, int color, int strokeColor, float radius, int s) {
+        if (percentage > 93) {  //防止首尾相接
+            percentage = 93;
+        }
         if ((float) rotate / 360 * 100 < percentage) {//还没到达终点
             drawArc(canvas, radius, startAngle, rotate, paintWidth + 10, strokeColor,paint);//绘制底层阴影
             drawArc(canvas, radius, startAngle, rotate, paintWidth - 1, color,paint1);//绘制上层，宽度稍微小点，留出空间

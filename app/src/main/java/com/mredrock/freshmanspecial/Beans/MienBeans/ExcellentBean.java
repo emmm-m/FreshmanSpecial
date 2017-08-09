@@ -10,7 +10,7 @@ import com.mredrock.freshmanspecial.Beans.RecyclerBean;
 
 public class ExcellentBean extends RecyclerBean {
     private Drawable img;
-    private String name, content;
+    private String name, content, url_img;
 
     public void setImg(Drawable img){
         this.img = img;
@@ -26,6 +26,14 @@ public class ExcellentBean extends RecyclerBean {
 
     public String getName(){
         return name;
+    }
+
+    public void setUrl_img(String url_img){
+        this.url_img = url_img;
+    }
+
+    public String getUrl_img(){
+        return url_img;
     }
 
     public void setContent(String content){
