@@ -1,5 +1,6 @@
 package com.mredrock.freshmanspecial.view.dataFragments;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import com.mredrock.freshmanspecial.Beans.SexBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.ChartData;
 import com.mredrock.freshmanspecial.Units.CircleChart;
+import com.mredrock.freshmanspecial.Units.SmallCircle;
 import com.mredrock.freshmanspecial.Units.base.BaseFragment;
 import com.mredrock.freshmanspecial.model.HttpModel;
 import com.mredrock.freshmanspecial.presenter.DataFragmentPresenter;
@@ -27,6 +29,7 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
     private SexBean mSexBean = new SexBean();
     private List<ChartData> dataList = new ArrayList<>();
     private CircleChart circleChart;
+    private SmallCircle smallCircle;
     private IDataFragmentPresenter presenter;
 
     @Override
@@ -34,6 +37,8 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
         presenter = new DataFragmentPresenter(this);
         button = $(R.id.sexRate_button);
         circleChart = $(R.id.sexRate_chart);
+        smallCircle = $(R.id.sexRate_circle);
+        setSmallCircle();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,10 +59,7 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
                                         for(SexBean.DataBean bean : mSexBean.getData()){
                                             if(data.equals(bean.getCollege())){
                                                 presenter.setSexRateDataList(bean);
-                                                circleChart.setData(dataList);
-                                                circleChart.setSpace(90);
-                                                circleChart.setSpeed(2);
-                                                circleChart.run();
+                                                presenter.runChart(dataList);
                                             }
                                         }
                                     }
@@ -78,6 +80,18 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
                 });
             }
         });
+    }
+
+    private void setSmallCircle() {
+        List<String> texts = new ArrayList<>();
+        texts.add("女生");
+        texts.add("男生");
+        List<Integer> colors = new ArrayList<>();
+        colors.add(Color.parseColor("#FFD2E3"));
+        colors.add(Color.parseColor("#B9E5FE"));
+        smallCircle.setTexts(texts);
+        smallCircle.setColors(colors);
+        smallCircle.draw();
     }
 
     @Override

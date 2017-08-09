@@ -36,13 +36,17 @@
 
     <com.mredrock.freshmanspecial.Units.CircleChart
         android:id="@+id/mostDifficult_chart"
-        android:layout_margin="40dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
-        android:layout_width="220dp"
-        android:layout_height="220dp" />
+        android:layout_width="280dp"
+        android:layout_height="280dp" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
+    <com.mredrock.freshmanspecial.Units.SmallCircle
+        android:id="@+id/mostDifficult_circle"
+        android:layout_gravity="center"
+        android:layout_width="280dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_height="80dp" />
 
 </LinearLayout>

@@ -37,7 +37,7 @@ public class DataModel {
         final int girlCircleColor = Color.parseColor("#FFD2E3");
         final int girlCircleStrokeColor = Color.parseColor("#FFAACA");
         final int girlBackColor = Color.parseColor("#FFFDFF");
-        final int girlBackStrokeColor = Color.parseColor("#FFFDFF");
+        final int girlBackStrokeColor = Color.parseColor("#FFF5F7");
         final int girlTextColor = Color.parseColor("#FFABC6");
         final int boyCircleColor = Color.parseColor("#B9E5FE");
         final int boyCircleStrokeColor = Color.parseColor("#7AC8EF");
@@ -163,21 +163,25 @@ public class DataModel {
         Collections.sort(beans, new Comparator<FailBean.DataBean>() {
             @Override
             public int compare(FailBean.DataBean dataBean, FailBean.DataBean t1) {
-                return dataBean.getRatio().compareTo(t1.getRatio());
+                return t1.getRatio().compareTo(dataBean.getRatio());
             }
         });
         DecimalFormat decimalFormat = new DecimalFormat(".00");
-        if(beans.get(0) != null){
-            girl.setText(decimalFormat.format(Float.valueOf(beans.get(0).getRatio())*100)+"%");
-            girl.setPercentage((int)(Float.valueOf(beans.get(0).getRatio())*100));
-        }else{Log.d("DataModel","beans.get(0) == null");}
-        if(beans.get(1) != null){
-            boy.setText(decimalFormat.format(Float.valueOf(beans.get(1).getRatio())*100)+"%");
-            boy.setPercentage((int)(Float.valueOf(beans.get(1).getRatio())*100));
-        }
-        if(beans.get(2) != null){
-            renyao.setText(decimalFormat.format(Float.valueOf(beans.get(2).getRatio())*100)+"%");
-            renyao.setPercentage((int)(Float.valueOf(beans.get(2).getRatio())*100));
+        try {
+            if(beans.get(0) != null){
+                girl.setText(decimalFormat.format(Float.valueOf(beans.get(0).getRatio())*100)+"%");
+                girl.setPercentage((int)(Float.valueOf(beans.get(0).getRatio())*100));
+            }else{Log.d("DataModel","beans.get(0) == null");}
+            if(beans.get(1) != null){
+                boy.setText(decimalFormat.format(Float.valueOf(beans.get(1).getRatio())*100)+"%");
+                boy.setPercentage((int)(Float.valueOf(beans.get(1).getRatio())*100));
+            }
+            if(beans.get(2) != null){
+                renyao.setText(decimalFormat.format(Float.valueOf(beans.get(2).getRatio())*100)+"%");
+                renyao.setPercentage((int)(Float.valueOf(beans.get(2).getRatio())*100));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         Log.d("12333",girl.getPercentage()+"");
         Log.d("12333",boy.getPercentage()+"");
