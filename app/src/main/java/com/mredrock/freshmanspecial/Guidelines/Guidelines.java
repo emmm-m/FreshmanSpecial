@@ -37,7 +37,6 @@ public class Guidelines extends BaseActivity {
     private TextView title;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private HorizontalScrollView horizontalScrollView;
     private ImageView back;
     private InfoFragmentAdapter adapter;
 
@@ -79,7 +78,7 @@ public class Guidelines extends BaseActivity {
 
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_guidelines;
+        return R.layout.special_2017_activity_guidelines;
     }
 
     public void initViews() {

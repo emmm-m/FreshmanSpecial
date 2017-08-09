@@ -11,7 +11,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         android:layout_gravity="end"
-        android:src="@drawable/delete"/>
+        android:src="@drawable/special_2017_delete"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_pop"

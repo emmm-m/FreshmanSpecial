@@ -110,7 +110,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         img.setImageDrawable(bean.getImg());
         int wide = ScreenUnit.bulid(context).getPxWide();
         int height = ScreenUnit.bulid(context).getPxHiget();
-        popupWindow = new PopupWindow(popupView,wide*3/4, height*2/3, true);
+        popupWindow = new PopupWindow(popupView
+                ,wide*3/4, height*2/3, true);
         // =======  两者结合才能让popup点击外部消失
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
