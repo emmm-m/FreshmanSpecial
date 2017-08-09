@@ -10,7 +10,10 @@
     <Button
         android:id="@+id/sexRate_button"
         android:text="请选择学院"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         style="?android:attr/borderlessButtonStyle"
         android:background="@drawable/special_2017_button_background"
         android:textColor="#959C9F"
@@ -18,16 +21,29 @@
         android:padding="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="#959C9F"
+        android:gravity="center_vertical"
+        android:padding="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 
     <com.mredrock.freshmanspecial.Units.CircleChart
         android:id="@+id/sexRate_chart"
-        android:layout_margin="40dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
-        android:layout_width="220dp"
-        android:layout_height="220dp" />
+        android:layout_width="280dp"
+        android:layout_height="280dp" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
+    <com.mredrock.freshmanspecial.Units.SmallCircle
+        android:id="@+id/sexRate_circle"
+        android:layout_gravity="center"
+        android:layout_width="280dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_height="80dp" />
 
 </LinearLayout>

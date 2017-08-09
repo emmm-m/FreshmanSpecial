@@ -12,6 +12,7 @@ import com.mredrock.freshmanspecial.Beans.SexBean;
 import com.mredrock.freshmanspecial.Beans.WorkBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.ChartData;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 import com.mredrock.freshmanspecial.model.DataModel;
 import com.mredrock.freshmanspecial.model.HttpModel;
 import com.mredrock.freshmanspecial.view.dataFragments.IDataFragment;
@@ -132,7 +133,7 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
     public void runChart(List<ChartData> dataList){
         if(fragment.getChart() == null) return;
         fragment.getChart().setData(dataList);
-        fragment.getChart().setSpace(90);
+        //fragment.getChart().setSpace(ScreenUnit.dip2px(fragment.getActivity(),28));
         fragment.getChart().setSpeed(2);
         fragment.getChart().run();
     }

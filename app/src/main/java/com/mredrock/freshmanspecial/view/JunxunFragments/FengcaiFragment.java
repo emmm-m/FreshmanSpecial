@@ -3,28 +3,34 @@ package com.mredrock.freshmanspecial.view.JunxunFragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.Units.base.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FengcaiFragment extends Fragment {
+public class FengcaiFragment extends BaseFragment {
 
-
-    public FengcaiFragment() {
-        // Required empty public constructor
-    }
-
+    private RecyclerView recyclerView;
+    private FengcaiAdapter adapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.special_2017_fragment_fengcai, container, false);
+    protected void initData() {
+        recyclerView = $(R.id.fengcai_recycler);
+        adapter = new FengcaiAdapter(getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    @Override
+    protected int getResourceId() {
+        return R.layout.special_2017_fragment_fengcai;
     }
 
 }
