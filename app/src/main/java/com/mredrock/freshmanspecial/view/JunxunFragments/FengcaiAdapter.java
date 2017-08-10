@@ -1,6 +1,8 @@
 package com.mredrock.freshmanspecial.view.JunxunFragments;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,12 +20,12 @@ import java.util.List;
 
 public class FengcaiAdapter extends RecyclerView.Adapter<FengcaiAdapter.MyViewHolder> {
 
-    public static final int JUNXUN_TUPIAN = 0;
-    public static final int JUNXUN_SHIPING = 1;
-    public static final int JUNXUN_TUIJIAN = 2;
+    private static final int JUNXUN_TUPIAN = 0;
+    private static final int JUNXUN_SHIPING = 1;
+    private static final int JUNXUN_TUIJIAN = 2;
 
-    private Context context;
-    private List<String> list = new ArrayList<>();
+    private Context context = null;
+    private JunxunRecyclerAdapter adapter = null;
 
 
     public FengcaiAdapter (Context context){
@@ -49,8 +51,22 @@ public class FengcaiAdapter extends RecyclerView.Adapter<FengcaiAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        if(position == 0){
-
+        switch (position){
+            case 0://图片
+                adapter = new JunxunRecyclerAdapter(context,JunxunRecyclerAdapter.TUPIAN);
+                holder.junxunpicRecycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
+                holder.junxunpicRecycler.setAdapter(adapter);
+                break;
+            case 1://视频
+                adapter = new JunxunRecyclerAdapter(context,JunxunRecyclerAdapter.SHIPING);
+                holder.junxunvideoRecycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
+                holder.junxunvideoRecycler.setAdapter(adapter);
+                break;
+            case 2://推荐
+                adapter = new JunxunRecyclerAdapter(context,JunxunRecyclerAdapter.TUIJIAN);
+                holder.junxunrecommendRecycler.setLayoutManager(new GridLayoutManager(context,2));
+                holder.junxunrecommendRecycler.setAdapter(adapter);
+                break;
         }
         Log.d("123",position+"");
     }
@@ -72,17 +88,20 @@ public class FengcaiAdapter extends RecyclerView.Adapter<FengcaiAdapter.MyViewHo
 
 
     class MyViewHolder extends RecyclerView.ViewHolder {
+
+        RecyclerView junxunvideoRecycler,junxunpicRecycler,junxunrecommendRecycler;
+
         public MyViewHolder(View itemView, int viewType) {
             super(itemView);
             switch (viewType){
                 case JUNXUN_TUPIAN:
-
+                    junxunpicRecycler = itemView.findViewById(R.id.junxunpic_recycler);
                     break;
                 case JUNXUN_SHIPING:
-
+                    junxunvideoRecycler = itemView.findViewById(R.id.junxunvideo_recycler);
                     break;
                 case JUNXUN_TUIJIAN:
-
+                    junxunrecommendRecycler = itemView.findViewById(R.id.junxunrecommend_recycler);
                     break;
             }
         }

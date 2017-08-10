@@ -1,4 +1,4 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,33 +10,43 @@
     <Button
         android:id="@+id/sexRate_button"
         android:text="请选择学院"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         style="?android:attr/borderlessButtonStyle"
         android:background="@drawable/special_2017_button_background"
         android:textColor="#959C9F"
-        android:paddingLeft="20dp"
         android:gravity="center_vertical"
+        android:paddingLeft="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <Button
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="invisible"
+        android:text="请选择学院"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="#959C9F"
+        android:gravity="center_vertical"
+        android:padding="18dp"
+        android:clickable="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <com.mredrock.freshmanspecial.Units.CircleChart
-        android:layout_below="@id/sexRate_button"
         android:id="@+id/sexRate_chart"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:layout_gravity="center"
         android:layout_width="280dp"
-        android:layout_height="280dp" />
+        android:layout_height="240dp" />
 
     <com.mredrock.freshmanspecial.Units.SmallCircle
         android:id="@+id/sexRate_circle"
-        android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:layout_width="280dp"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
         android:layout_height="80dp" />
 
-</RelativeLayout>
+</LinearLayout>

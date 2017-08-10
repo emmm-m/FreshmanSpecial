@@ -32,7 +32,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
     private List<ChartData> list;//数据
     private int space = ScreenUnit.dip2px(getContext(),8);//线间距
     private float centerX = 0, centerY = 0;
-    private int radius = ScreenUnit.dip2px(getContext(),55);//最小半径
+    private int radius = ScreenUnit.dip2px(getContext(),50);//最小半径
     private boolean autoSpace = false;//默认自动调整间距
     private boolean textSlope = false;//设置字沿圈写
     static int defaultColor = Color.RED, defaultStrokeColor = Color.BLACK, defaultTextColor = Color.BLACK,
