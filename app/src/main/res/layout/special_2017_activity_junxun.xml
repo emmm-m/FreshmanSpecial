@@ -21,7 +21,7 @@
             android:background="#ffffff"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/tabSelectedTextColor"
-            app:tabTextAppearance="@style/MyTabLayoutTextAppearance" />
+             />
 
         <com.mredrock.freshmanspecial.Units.DecorteView
             android:id="@+id/junxun_docorateView"

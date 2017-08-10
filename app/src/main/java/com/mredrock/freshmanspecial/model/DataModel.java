@@ -59,17 +59,12 @@ public class DataModel {
         //-----------------------------------------------//
         List<ChartData> list = new ArrayList<>();
         float girlRate = Float.valueOf(bean.getWomenRatio());
-        DecimalFormat decimalFormat = new DecimalFormat(".00");
-        girl.setText(decimalFormat.format(girlRate*100.00f)+"%");
-        girl.setPercentage((int)(girlRate*100.00f));
-        boy.setText(decimalFormat.format(100-girlRate*100.00f)+"%");
-        boy.setPercentage(100-(int)(girlRate*100.00f));
-        Log.d("girl",girlRate*100.00f+"");
-        Log.d("girl",(int)(girlRate*100.00f)+"");
-        Log.d("boy",100-girlRate*100.00f+"");
-        Log.d("boy",100-(int)(girlRate*100.00f)+"");
-        list.add(boy);
+        girl.setText("女生");
+        girl.setPercentage((int)(girlRate*100));
+        boy.setText("男生");
+        boy.setPercentage(100-(int)(girlRate*100));
         list.add(girl);
+        list.add(boy);
         return list;
     }
 
@@ -104,15 +99,10 @@ public class DataModel {
         //-----------------------------------------------//
         List<ChartData> list = new ArrayList<>();
         float girlRate = Float.valueOf(bean.getRatio());
-        DecimalFormat decimalFormat = new DecimalFormat(".00");
-        girl.setText(decimalFormat.format(girlRate*100.00f)+"%");
+        girl.setText("已就业");
         girl.setPercentage((int)(girlRate*100.00f));
-        boy.setText(decimalFormat.format(100-girlRate*100.00f)+"%");
+        boy.setText("未就业");
         boy.setPercentage(100-(int)(girlRate*100.00f));
-        Log.d("girl",girlRate*100.00f+"");
-        Log.d("girl",(int)(girlRate*100.00f)+"");
-        Log.d("boy",100-girlRate*100.00f+"");
-        Log.d("boy",100-(int)(girlRate*100.00f)+"");
         list.add(boy);
         list.add(girl);
         return list;
@@ -166,29 +156,28 @@ public class DataModel {
                 return t1.getRatio().compareTo(dataBean.getRatio());
             }
         });
-        DecimalFormat decimalFormat = new DecimalFormat(".00");
         try {
             if(beans.get(0) != null){
-                girl.setText(decimalFormat.format(Float.valueOf(beans.get(0).getRatio())*100)+"%");
+                girl.setText(beans.get(0).getCourse());
                 girl.setPercentage((int)(Float.valueOf(beans.get(0).getRatio())*100));
+                girl.setText(beans.get(0).getCourse());
             }else{Log.d("DataModel","beans.get(0) == null");}
             if(beans.get(1) != null){
-                boy.setText(decimalFormat.format(Float.valueOf(beans.get(1).getRatio())*100)+"%");
+                boy.setText(beans.get(1).getCourse());
                 boy.setPercentage((int)(Float.valueOf(beans.get(1).getRatio())*100));
+                boy.setText(beans.get(1).getCourse());
             }
             if(beans.get(2) != null){
-                renyao.setText(decimalFormat.format(Float.valueOf(beans.get(2).getRatio())*100)+"%");
+                renyao.setText(beans.get(2).getCourse());
                 renyao.setPercentage((int)(Float.valueOf(beans.get(2).getRatio())*100));
+                renyao.setText(beans.get(2).getCourse());
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        Log.d("12333",girl.getPercentage()+"");
-        Log.d("12333",boy.getPercentage()+"");
-        Log.d("12333",renyao.getPercentage()+"");
-        list.add(girl);
-        list.add(boy);
         list.add(renyao);
+        list.add(boy);
+        list.add(girl);
         return list;
     }
 

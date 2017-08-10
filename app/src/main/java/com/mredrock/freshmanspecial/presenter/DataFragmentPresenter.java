@@ -205,7 +205,7 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        fragment.toast("获取信息失败！");
                     }
 
                     @Override

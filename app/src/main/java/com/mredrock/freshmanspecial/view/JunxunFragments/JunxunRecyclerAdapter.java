@@ -69,7 +69,7 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
                 holder.junxunshiping_text.setText((String) stringList.get(position));
                 break;
             case 2:
-                if(position<10){
+                if(position<9){
                     holder.junxuntuijian_number.setText("0"+(position+1));
                 }
                 else{

@@ -91,7 +91,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
                 //绘制动画数据条
                 drawArc(canvas, data.getPercentage(), data.getColor(), data.getStrokeColor(), data.getRadius(), data.getSpeed());
                 //绘制文字，这里设置字体为线宽的一半
-                drawText(canvas, data.getText(), paint.measureText(data.getText()), paintWidth / 2, data.getTextColor(), data.getRadius());
+                drawText(canvas, data.getPercentage()+"%", paint.measureText(data.getPercentage()+"%"), paintWidth / 3 * 2, data.getTextColor(), data.getRadius());
             }
         } else {
             invalidate();

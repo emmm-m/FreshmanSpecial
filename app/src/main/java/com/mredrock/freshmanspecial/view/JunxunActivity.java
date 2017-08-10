@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.DecorteView;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 import com.mredrock.freshmanspecial.Units.ViewPagerAdapter;
 import com.mredrock.freshmanspecial.Units.base.BaseActivity;
 import com.mredrock.freshmanspecial.presenter.DataPresenter;
@@ -52,7 +53,8 @@ public class JunxunActivity extends BaseActivity implements IDataActivity {
 
     private void setPager() {
         //设置下划线边距
-        presenter.setTabLayoutBottomLine(40);
+        int padding = ScreenUnit.bulid(this).getDpWide()/6;
+        presenter.setTabLayoutBottomLine(padding);
     }
 
     private void initPager() {

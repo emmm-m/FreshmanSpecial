@@ -29,10 +29,10 @@
         style="?android:attr/borderlessButtonStyle"
         android:textColor="#959C9F"
         android:gravity="center_vertical"
-        android:padding="18dp"
+        android:paddingLeft="18dp"
         android:clickable="false"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="40dp" />
 
     <com.mredrock.freshmanspecial.Units.CircleChart
         android:id="@+id/sexRate_chart"
@@ -47,6 +47,6 @@
         android:layout_width="280dp"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_height="80dp" />
+        android:layout_height="120dp" />
 
 </LinearLayout>
