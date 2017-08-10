@@ -128,6 +128,11 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
         initView(builder.context);
     }
 
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        returnData();
+    }
 
     //建造器
     public static class Builder {
@@ -521,6 +526,7 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
             returnData();
         }
         dismiss();
+
     }
 
     //抽离接口回调的方法
