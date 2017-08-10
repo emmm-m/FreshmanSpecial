@@ -18,19 +18,18 @@ import java.util.List;
 
 public class TeacherFragment extends BaseFragment {
     private RecyclerView recyclerView;
-    private LinearLayoutManager manager;
     private List<ExcellentBean> list;
 
     @Override
     protected void initData() {
         recyclerView = $(R.id.list_teacher);
-        manager = new GridLayoutManager(getActivity(), 1);
         list = new ArrayList<>();
         setData();
 
     }
 
     private void setData() {
+        LinearLayoutManager manager = new GridLayoutManager(getActivity(), 2);
         ExcellentBean bean1 = new ExcellentBean();
         bean1.setImg(getResources().getDrawable(R.mipmap.special_2017_chongyoufengcai));
         bean1.setName("陈痒痒");

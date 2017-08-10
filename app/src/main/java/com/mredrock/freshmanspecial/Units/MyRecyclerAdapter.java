@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.Beans.MienBeans.BeautyBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.ExcellentBean;
+import com.mredrock.freshmanspecial.Beans.MienBeans.GroupBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.OriginalBean;
 import com.mredrock.freshmanspecial.R;
 
@@ -30,12 +31,26 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
-    public static final int BEAUTY = 0,STUDENT = 1,TEACHER = 2,ORIGINAL = 3;
+    public static final int BEAUTY = 0,STUDENT = 1,TEACHER = 2,ORIGINAL = 3,TABS = 4,GROUP = 5;
     private List data = new ArrayList<>();
     private Context context;
     private int type;
     private PopupWindow popupWindow;
+    private OnTabClickListener listener;
+    private View firstView;
+    private boolean isFirst = true;
 
+    public interface OnTabClickListener {
+        void onTabClickListener(int i, View view);
+    }
+
+    public View getFirstView(){
+        return firstView;
+    }
+
+    public void setOnTabClickListener(OnTabClickListener listener){
+        this.listener = listener;
+    }
 
     public MyRecyclerAdapter(Context context, List data, int viewType){
         this.context = context;
@@ -57,12 +72,18 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         } else if (type == ORIGINAL) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_original, parent, false);
             return new MyViewHolder(view,ORIGINAL);
+        } else if (type == TABS) {
+            View view = LayoutInflater.from(context).inflate(R.layout.tab_groups, parent, false);
+            return new MyViewHolder(view,TABS);
+        } else if (type == GROUP) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_groups, parent, false);
+            return new MyViewHolder(view,GROUP);
         }
         return null;
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         switch (holder.viewType){
             case BEAUTY:
                 BeautyBean beautyBean = (BeautyBean) data.get(position);
@@ -102,6 +123,28 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                         context.startActivity(intent);
                     }
                 });
+                break;
+            case TABS:
+                if (isFirst && position == 0) {
+                    firstView = holder.title_tab;
+                    holder.title_tab.setBackgroundResource(R.drawable.tab_focus);
+                    isFirst = false;
+                }
+                holder.title_tab.setText(data.get(position).toString());
+                holder.title_tab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (listener != null) {
+                            listener.onTabClickListener(position,holder.title_tab);
+                        }
+                        holder.title_tab.setBackgroundResource(R.drawable.tab_focus);
+                    }
+                });
+                break;
+            case GROUP:
+                GroupBean bean = (GroupBean) data.get(position);
+                holder.content_group.setText(bean.getContent());
+                holder.title_group.setText(bean.getTitle());
                 break;
         }
     }
@@ -168,10 +211,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView img_student,img_teacher;
-        MyImageView img_original;
+        CircleImageView img_student;
+        MyImageView img_original,img_teacher;
         ImageView img_beauty;
-        TextView title_beauty,name_student,content_beauty,content_student,title_orignial,time_original,name_teacher;
+        TextView title_beauty,name_student,content_beauty,content_student,title_orignial,time_original,name_teacher
+                ,title_tab,title_group,content_group;
         int viewType;
         public MyViewHolder(View itemView, int viewType) {
             super(itemView);
@@ -188,14 +232,20 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                     content_student = (TextView) itemView.findViewById(R.id.tx_item_student);
                     break;
                 case TEACHER:
-                    img_teacher = (CircleImageView) itemView.findViewById(R.id.img_item_teacher);
-                    name_teacher = (TextView) itemView.findViewById(R.id.name_item_teacher);
+                    img_teacher = (MyImageView) itemView.findViewById(R.id.img_teacher);
+                    name_teacher = (TextView) itemView.findViewById(R.id.name_teacher);
                     break;
                 case ORIGINAL:
                     img_original = (MyImageView) itemView.findViewById(R.id.img_original);
                     title_orignial = (TextView) itemView.findViewById(R.id.title_original);
                     time_original = (TextView) itemView.findViewById(R.id.time_original);
                     break;
+                case TABS:
+                    title_tab = (TextView) itemView.findViewById(R.id.tab_groups_title);
+                    break;
+                case GROUP:
+                    title_group = (TextView) itemView.findViewById(R.id.item_groups_title);
+                    content_group = (TextView) itemView.findViewById(R.id.item_groups_content);
             }
         }
     }
