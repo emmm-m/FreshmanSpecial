@@ -19,6 +19,7 @@
         android:id="@+id/picword_horizontal_item_title"
         android:textColor="@color/colorDeepGray"
         android:textSize="14dp"
+        android:gravity="center_vertical"
         android:layout_marginLeft="142dp"
         android:layout_marginTop="19dp"/>
 
@@ -27,16 +28,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/picword_horizontal_item_text"
         android:textColor="@color/tabTextColor"
+        android:gravity="center_vertical"
         android:textSize="12dp"
         android:layout_marginLeft="161dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="43.5dp"
         />
 
     <ImageView
         android:layout_width="14dp"
         android:layout_height="16dp"
         android:layout_marginLeft="141dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="67.5dp"
         android:src="@drawable/special_2017_location"
         android:scaleType="centerCrop"/>
 
@@ -44,8 +46,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/picword_horizontal_item_address"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="67dp"
         android:layout_marginLeft="161dp"
+        android:gravity="center_vertical"
         android:textSize="12dp"
         android:textColor="@color/addressColor"/>
 
@@ -61,7 +64,7 @@
         android:layout_width="12dp"
         android:layout_height="14dp"
         android:layout_marginLeft="142dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="44.5dp"
         android:scaleType="centerCrop"
         android:src="@drawable/special_2017_comment"/>
 
