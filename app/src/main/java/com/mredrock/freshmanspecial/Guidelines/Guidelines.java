@@ -92,12 +92,5 @@ public class Guidelines extends BaseActivity {
 
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        for (int i = 0; i < titles.size(); i++) {
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
-            if (tabLayout != null) {
-                tab.setCustomView(adapter.getTabView(i)); // 将自定义的tab加入
-            }
-        }
-
     }
 }
