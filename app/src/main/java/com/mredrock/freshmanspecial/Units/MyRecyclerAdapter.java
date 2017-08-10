@@ -2,9 +2,10 @@ package com.mredrock.freshmanspecial.Units;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.Beans.MienBeans.BeautyBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.ExcellentBean;
+import com.mredrock.freshmanspecial.Beans.MienBeans.OriginalBean;
 import com.mredrock.freshmanspecial.R;
 
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
-    public static final int BEAUTY = 0,STUDENT = 1,TEACHER = 2;
+    public static final int BEAUTY = 0,STUDENT = 1,TEACHER = 2,ORIGINAL = 3;
     private List data = new ArrayList<>();
     private Context context;
     private int type;
@@ -46,13 +48,15 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         if (type == BEAUTY) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_beauty, parent, false);
             return new MyViewHolder(view,BEAUTY);
-        }else if (type == STUDENT) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_excellent, parent, false);
+        } else if (type == STUDENT) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_student, parent, false);
             return new MyViewHolder(view,STUDENT);
-        }
-        else if (type == TEACHER) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_excellent, parent, false);
+        } else if (type == TEACHER) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_teacher, parent, false);
             return new MyViewHolder(view,TEACHER);
+        } else if (type == ORIGINAL) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_original, parent, false);
+            return new MyViewHolder(view,ORIGINAL);
         }
         return null;
     }
@@ -68,9 +72,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 break;
             case STUDENT:
                 final ExcellentBean excellentBean = (ExcellentBean) data.get(position);
-                holder.name_excellent.setText(excellentBean.getName());
-                holder.img_excellent.setImageDrawable(excellentBean.getImg());
-                holder.content_excellent.setText(excellentBean.getContent());
+                holder.name_student.setText(excellentBean.getName());
+                holder.img_student.setImageDrawable(excellentBean.getImg());
+                holder.content_student.setText(excellentBean.getContent());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -80,9 +84,24 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 break;
             case TEACHER:
                 final ExcellentBean excellentBean_teacher = (ExcellentBean) data.get(position);
-                holder.name_excellent.setText(excellentBean_teacher.getName());
-                holder.img_excellent.setImageDrawable(excellentBean_teacher.getImg());
-                holder.content_excellent.setText(excellentBean_teacher.getContent());
+                holder.name_teacher.setText(excellentBean_teacher.getName());
+                holder.img_teacher.setImageDrawable(excellentBean_teacher.getImg());
+                break;
+            case ORIGINAL:
+                final OriginalBean originalBean = (OriginalBean) data.get(position);
+                holder.title_orignial.setText(originalBean.getTitle());
+                holder.img_original.setImageDrawable(originalBean.getImg());
+                holder.time_original.setText(originalBean.getTime());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent();
+                        intent.setAction("android.intent.action.VIEW");
+                        Uri content_url = Uri.parse(originalBean.getUrl());
+                        intent.setData(content_url);
+                        context.startActivity(intent);
+                    }
+                });
                 break;
         }
     }
@@ -118,7 +137,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         // 让popup占有优先于activity的交互响应能力，不单单是焦点问题。
         popupWindow.setFocusable(true);
         // 设置动画  这里选用系统提供的
-        popupWindow.setAnimationStyle(android.R.style.Animation_InputMethod);
+        popupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
         // popup和软键盘的关系
         // 三部曲第三   展示popup
         backgroundAlpaha((Activity) context, 0.5f);
@@ -149,9 +168,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView img_excellent;
+        CircleImageView img_student,img_teacher;
+        MyImageView img_original;
         ImageView img_beauty;
-        TextView title_beauty,name_excellent,content_beauty,content_excellent;
+        TextView title_beauty,name_student,content_beauty,content_student,title_orignial,time_original,name_teacher;
         int viewType;
         public MyViewHolder(View itemView, int viewType) {
             super(itemView);
@@ -163,14 +183,18 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                     content_beauty = (TextView) itemView.findViewById(R.id.tx_item_beauty);
                     break;
                 case STUDENT:
-                    img_excellent = (CircleImageView) itemView.findViewById(R.id.img_item_excellent);
-                    name_excellent = (TextView) itemView.findViewById(R.id.name_item_excellent);
-                    content_excellent = (TextView) itemView.findViewById(R.id.tx_item_excellent);
+                    img_student = (CircleImageView) itemView.findViewById(R.id.img_item_student);
+                    name_student = (TextView) itemView.findViewById(R.id.name_item_student);
+                    content_student = (TextView) itemView.findViewById(R.id.tx_item_student);
                     break;
                 case TEACHER:
-                    img_excellent = (CircleImageView) itemView.findViewById(R.id.img_item_excellent);
-                    name_excellent = (TextView) itemView.findViewById(R.id.name_item_excellent);
-                    content_excellent = (TextView) itemView.findViewById(R.id.tx_item_excellent);
+                    img_teacher = (CircleImageView) itemView.findViewById(R.id.img_item_teacher);
+                    name_teacher = (TextView) itemView.findViewById(R.id.name_item_teacher);
+                    break;
+                case ORIGINAL:
+                    img_original = (MyImageView) itemView.findViewById(R.id.img_original);
+                    title_orignial = (TextView) itemView.findViewById(R.id.title_original);
+                    time_original = (TextView) itemView.findViewById(R.id.time_original);
                     break;
             }
         }

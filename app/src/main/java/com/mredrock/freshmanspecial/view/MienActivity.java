@@ -1,5 +1,7 @@
 package com.mredrock.freshmanspecial.view;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -28,6 +30,7 @@ public class MienActivity extends BaseActivity implements IMienActivity{
     private IMienPresenter presenter;
     private TextView title;
     private ImageView back;
+    private View view_left, view_right;
 
 
     private void setTitle(String title) {
@@ -58,6 +61,34 @@ public class MienActivity extends BaseActivity implements IMienActivity{
                 tab.setCustomView(adapter.getTabView(i)); // 将自定义的tab加入
             }
         }
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0){
+                    view_left.setVisibility(View.GONE);
+                    view_right.setVisibility(View.VISIBLE);
+                    return;
+                }
+                if (position == 4){
+                    view_right.setVisibility(View.GONE);
+                    view_left.setVisibility(View.VISIBLE);
+                    return;
+                } else {
+                    view_left.setVisibility(View.VISIBLE);
+                    view_right.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void setBack(){
@@ -76,6 +107,8 @@ public class MienActivity extends BaseActivity implements IMienActivity{
         tabLayout = $(R.id.tab_mien);
         title = $(R.id.title_text);
         back = $(R.id.back);
+        view_left = $(R.id.tab_left_mien);
+        view_right = $(R.id.tab_right_mien);
         presenter = new MienPresenter(this);
         initPager();
         setPager();

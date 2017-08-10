@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="5dp"
+              android:layout_marginRight="5dp"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.mredrock.freshmanspecial.Units.MyImageView
+            android:id="@+id/img_original"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:background="#b7b7b7"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/special_2017_chongyoufengcai"
+            />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/special_2017_play"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/time_original"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/colorWhite"
+            android:text="00:00"
+            android:gravity="center"
+            android:background="@drawable/specific_2017_shape_time"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/title_original"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="《重邮》"
+        android:textSize="13dp"/>
+
+</LinearLayout>

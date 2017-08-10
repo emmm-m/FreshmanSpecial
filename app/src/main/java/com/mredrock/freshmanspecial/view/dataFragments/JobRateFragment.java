@@ -1,6 +1,7 @@
 package com.mredrock.freshmanspecial.view.dataFragments;
 
 
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.ChartData;
 import com.mredrock.freshmanspecial.Units.CircleChart;
+import com.mredrock.freshmanspecial.Units.SmallCircle;
 import com.mredrock.freshmanspecial.Units.base.BaseFragment;
 import com.mredrock.freshmanspecial.presenter.DataFragmentPresenter;
 import com.mredrock.freshmanspecial.presenter.IDataFragmentPresenter;
@@ -25,6 +27,7 @@ public class JobRateFragment extends BaseFragment implements IDataFragment {
     private List<String> collegeList = new ArrayList<>();
     private List<ChartData> dataList = new ArrayList<>();
     private CircleChart circleChart;
+    private SmallCircle smallCircle;
     private IDataFragmentPresenter presenter;
 
 
@@ -33,6 +36,8 @@ public class JobRateFragment extends BaseFragment implements IDataFragment {
         presenter = new DataFragmentPresenter(this);
         button = $(R.id.jobRate_button);
         circleChart = $(R.id.jobRate_chart);
+        smallCircle = $(R.id.jobRate_circle);
+        setSmallCircle();
         presenter.setSexRateCollegeList();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +60,18 @@ public class JobRateFragment extends BaseFragment implements IDataFragment {
                 });
             }
         });
+    }
+
+    private void setSmallCircle() {
+        List<String> texts = new ArrayList<>();
+        texts.add("已就业");
+        texts.add("未就业");
+        List<Integer> colors = new ArrayList<>();
+        colors.add(Color.parseColor("#9EFCEE"));
+        colors.add(Color.parseColor("#B9E5FE"));
+        smallCircle.setTexts(texts);
+        smallCircle.setColors(colors);
+        smallCircle.draw();
     }
 
     @Override

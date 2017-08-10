@@ -85,11 +85,7 @@ public class MostDifficultFragment extends BaseFragment implements IDataFragment
                 presenter.loadFailData(data, new DataFragmentPresenter.OnDataLoaded() {
                     @Override
                     public void finish(String msg) {
-                        circleChart.setData(dataList);
-                        circleChart.setSpace(90);
-                        circleChart.setSpeed(2);
-                        circleChart.openLog();
-                        circleChart.run();
+                        presenter.runChart(dataList);
                     }
                 });
             }

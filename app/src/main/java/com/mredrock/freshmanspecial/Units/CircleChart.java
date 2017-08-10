@@ -24,15 +24,16 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
     private boolean isLog = true;
     private Paint paint;//画笔
     private Paint paint1;//圆圈的画笔
-    private int paintWidth = 70;//线宽
+    private int paintWidth = ScreenUnit.dip2px(getContext(),18);//线宽
     private int speed = 1;//移动速度
     private int rotate = 0;//转动角度
     private int startAngle = -90;//起始角度，默认在最上方开始
     private boolean isRun = false;
     private List<ChartData> list;//数据
-    private int space = paintWidth + 20;//线间距
+    private int space = ScreenUnit.dip2px(getContext(),8);//线间距
     private float centerX = 0, centerY = 0;
-    private boolean autoSpace = true;//默认自动调整间距
+    private int radius = ScreenUnit.dip2px(getContext(),55);//最小半径
+    private boolean autoSpace = false;//默认自动调整间距
     private boolean textSlope = false;//设置字沿圈写
     static int defaultColor = Color.RED, defaultStrokeColor = Color.BLACK, defaultTextColor = Color.BLACK,
             defultBackgroundColor = Color.LTGRAY, defultBackgroundStrokeColor = Color.DKGRAY;
@@ -55,7 +56,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
         paint1.setAntiAlias(true);//抗锯齿
         paint1.setDither(true);//防抖动
         paint1.setShadowLayer(3,-2,1,Color.WHITE);
-        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        //setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
 
     @Override
@@ -77,7 +78,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
                         data.setRadius(centerX - centerX / 7 - space * count);
                         count++;
                     } else {
-                        data.setRadius(centerX - centerX / 7 - space * count);
+                        data.setRadius(radius + (space+ paintWidth) * count );
                         count++;
                     }
                     if (data.getSpeed() == 1) {
@@ -95,7 +96,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
         } else {
             invalidate();
         }
-        if(rotate >= 360) isRun = false;
+        //if(rotate >= 360) isRun = false;
     }
 
     /**
@@ -108,15 +109,18 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
      * @param s          速度
      */
     private void drawArc(Canvas canvas, float percentage, int color, int strokeColor, float radius, int s) {
+        if (percentage > 93) {  //防止首尾相接
+            percentage = 93;
+        }
         if ((float) rotate / 360 * 100 < percentage) {//还没到达终点
-            drawArc(canvas, radius, startAngle, rotate, paintWidth + 13, strokeColor,paint);//绘制底层阴影
+            drawArc(canvas, radius, startAngle, rotate, paintWidth + 10, strokeColor,paint);//绘制底层阴影
             drawArc(canvas, radius, startAngle, rotate, paintWidth - 1, color,paint1);//绘制上层，宽度稍微小点，留出空间
             rotate = rotate + s;//角度增加一度
             log(rotate + "");
             invalidate();
         } else {//到达终点,停止绘制
-            drawArc(canvas, radius, startAngle, (int) (percentage / 100 * 360), paintWidth + 12, strokeColor,paint);//绘制底层阴影
-            drawArc(canvas, radius, startAngle, (int) (percentage / 100 * 360), paintWidth - 2, color,paint1);//绘制上层，宽度稍微小点，留出空间
+            drawArc(canvas, radius, startAngle, (int) (percentage / 100 * 360), paintWidth + 10, strokeColor,paint);//绘制底层阴影
+            drawArc(canvas, radius, startAngle, (int) (percentage / 100 * 360), paintWidth - 1, color,paint1);//绘制上层，宽度稍微小点，留出空间
         }
     }
 
@@ -170,7 +174,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
             path.addArc(oval, -130, textWidth);
             canvas.drawTextOnPath(text, path, 0, 15, paint);
         } else {
-            canvas.drawText(text, centerX - textWidth - getWidth() / 20, centerY - radius + getWidth() / 30, paint);
+            canvas.drawText(text, centerX - textWidth - getWidth() / 20, centerY - radius + paintWidth/4, paint);
         }
     }
 
