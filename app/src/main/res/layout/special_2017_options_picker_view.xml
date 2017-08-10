@@ -10,8 +10,8 @@
         android:id="@+id/optionspicker"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
 
@@ -58,6 +58,7 @@
             android:layout_marginRight="17dp"
             android:padding="8dp"
             android:text="完成"
+            android:visibility="gone"
             android:textColor="#81C0FE"
             android:textSize="18sp" />
 
