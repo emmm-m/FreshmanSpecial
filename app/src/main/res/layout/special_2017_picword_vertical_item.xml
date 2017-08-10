@@ -5,12 +5,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="340dp"
+    <com.mredrock.freshmanspecial.Units.MyImageView
+        android:background="#d6d6d6"
+        android:layout_width="match_parent"
         android:layout_height="180dp"
         android:id="@+id/picword_vertical_item_image"
         android:scaleType="centerCrop"
         android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
         android:layout_marginTop="19dp"/>
     <LinearLayout
         android:layout_width="match_parent"

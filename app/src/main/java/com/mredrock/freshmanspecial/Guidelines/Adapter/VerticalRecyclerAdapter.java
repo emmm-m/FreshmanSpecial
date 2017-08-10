@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.Beans.AdmissionBean;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.Units.MyImageView;
 
 import java.util.List;
 
@@ -33,13 +34,13 @@ public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecycl
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView mainImage; // 主图
+        MyImageView mainImage; // 主图
         TextView title; // 建筑名称
         TextView text;  // 建筑介绍
         TextView dormitoryNumber;   //Only for Dormitory List
         public ViewHolder(View itemView) {
             super(itemView);
-            mainImage = (ImageView) itemView.findViewById(R.id.picword_vertical_item_image);
+            mainImage = (MyImageView) itemView.findViewById(R.id.picword_vertical_item_image);
             title = (TextView) itemView.findViewById(R.id.picword_vertical_item_title);
             text = (TextView) itemView.findViewById(R.id.picword_vertical_item_text);
             dormitoryNumber = (TextView) itemView.findViewById(R.id.picwod_vertical_dormitory_number);

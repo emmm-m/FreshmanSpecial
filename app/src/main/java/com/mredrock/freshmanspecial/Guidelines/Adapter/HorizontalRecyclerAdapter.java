@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.mredrock.freshmanspecial.Beans.AdmissionBean;
 import com.mredrock.freshmanspecial.Beans.ShopBean;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.Units.MyImageView;
 
 import java.util.List;
 
