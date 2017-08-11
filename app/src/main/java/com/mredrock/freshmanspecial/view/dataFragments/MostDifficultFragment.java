@@ -61,7 +61,7 @@ public class MostDifficultFragment extends BaseFragment implements IDataFragment
                             @Override
                             public void finish(String msg) {
                                 //关闭之前的pickerView
-                                presenter.disMissPickerView();
+                                //presenter.disMissPickerView();
                                 //将majorList的数据呈现在新的PickerView上
                                 showMajorPickerView();
                                 //同时给按钮设置监听

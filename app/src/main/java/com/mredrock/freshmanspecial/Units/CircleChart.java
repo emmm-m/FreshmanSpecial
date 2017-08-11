@@ -21,7 +21,7 @@ import java.util.List;
 
 public class CircleChart extends android.support.v7.widget.AppCompatTextView {
 
-    private boolean isLog = true;
+    private boolean isLog = false;
     private Paint paint;//画笔
     private Paint paint1;//圆圈的画笔
     private int paintWidth = ScreenUnit.dip2px(getContext(),18);//线宽

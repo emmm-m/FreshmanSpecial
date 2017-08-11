@@ -112,7 +112,7 @@ public class DataModel {
      * 组装最难科目信息
      * @return 集合
      */
-    public List<ChartData> getMostDifficultDataList(List<FailBean.DataBean> beans){
+    public List<ChartData> getMostDifficultDataList(final List<FailBean.DataBean> beans){
         final int girlCircleColor = Color.parseColor("#FBFEB9");
         final int girlCircleStrokeColor = Color.parseColor("#EEDC79");
         final int girlBackColor = Color.parseColor("#FFFFFB");
