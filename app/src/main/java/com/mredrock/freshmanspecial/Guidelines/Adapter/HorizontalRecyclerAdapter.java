@@ -5,11 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mredrock.freshmanspecial.Beans.AdmissionBean;
-import com.mredrock.freshmanspecial.Beans.ShopBean;
+import com.mredrock.freshmanspecial.Beans.GuidelinesHorizontalBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
 
@@ -24,9 +22,9 @@ import java.util.List;
 public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRecyclerAdapter.ViewHolder> {
 
     private Context context;
-    private List<ShopBean> list;  // 卡片里的内容单独组成一个类
+    private List<GuidelinesHorizontalBean> list;  // 卡片里的内容单独组成一个类
 
-    public HorizontalRecyclerAdapter(List<ShopBean> list, Context context) {
+    public HorizontalRecyclerAdapter(List<GuidelinesHorizontalBean> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -35,14 +33,14 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
         TextView shopName; //  名称
         TextView commit;  //  具体描述
         TextView address;   //  所在地点
-        ImageView mainImage;    //  图片
+        MyImageView mainImage;    //  图片
 
         public ViewHolder(View itemView) {
             super(itemView);
             shopName = (TextView) itemView.findViewById(R.id.picword_horizontal_item_title);
             commit = (TextView) itemView.findViewById(R.id.picword_horizontal_item_text);
             address = (TextView) itemView.findViewById(R.id.picword_horizontal_item_address);
-            mainImage = (ImageView) itemView.findViewById(R.id.picword_horizontal_item_image);
+            mainImage = (MyImageView) itemView.findViewById(R.id.picword_horizontal_item_image);
 
         }
     }
@@ -57,7 +55,7 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ShopBean shopBean = list.get(position);
+        GuidelinesHorizontalBean shopBean = list.get(position);
         holder.address.setText(shopBean.address);
         holder.shopName.setText(shopBean.shopName);
         holder.commit.setText(shopBean.commit);

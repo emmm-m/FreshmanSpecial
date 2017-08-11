@@ -3,20 +3,16 @@ package com.mredrock.freshmanspecial.Guidelines.Adapter;
 import android.content.Context;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mredrock.freshmanspecial.Beans.AdmissionBean;
+import com.mredrock.freshmanspecial.Beans.GuidelinesVerticalBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
 
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by glossimar on 2017/8/4.
@@ -26,9 +22,9 @@ import static android.content.ContentValues.TAG;
 
 public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecyclerAdapter.ViewHolder>{
     private Context context;
-    private List<AdmissionBean> list;  // 卡片里的内容单独组成一个类
+    private List<GuidelinesVerticalBean> list;  // 卡片里的内容单独组成一个类
 
-    public VerticalRecyclerAdapter(List<AdmissionBean> list, Context context) {
+    public VerticalRecyclerAdapter(List<GuidelinesVerticalBean> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -57,7 +53,7 @@ public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecycl
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        AdmissionBean admissionBean = list.get(position);
+        GuidelinesVerticalBean admissionBean = list.get(position);
         holder.title.setText(admissionBean.title);
         holder.text.setText(admissionBean.text);
         holder.dormitoryNumber.setText(admissionBean.dormitoryNumber);

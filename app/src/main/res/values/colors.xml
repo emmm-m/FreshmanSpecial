@@ -9,4 +9,5 @@
     <color name="tabSelectedTextColor">#65B2FF</color>
     <color name="underTabColor">#EBF0F2</color>
     <color name="addressColor">#65B2FF</color>
+    <color name="colorBlack">#000000</color>
 </resources>
