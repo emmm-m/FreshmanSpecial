@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -169,6 +170,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         img = popupView.findViewById(R.id.img_pop);
         name.setText(bean.getName());
         content.setText(bean.getContent());
+        content.setMovementMethod(ScrollingMovementMethod.getInstance());
         img.setImageDrawable(bean.getImg());
         int wide = ScreenUnit.bulid(context).getPxWide();
         int height = ScreenUnit.bulid(context).getPxHiget();
@@ -180,7 +182,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         // 让popup占有优先于activity的交互响应能力，不单单是焦点问题。
         popupWindow.setFocusable(true);
         // 设置动画  这里选用系统提供的
-        popupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
+        popupWindow.setAnimationStyle(android.R.style.Animation_Translucent);
         // popup和软键盘的关系
         // 三部曲第三   展示popup
         backgroundAlpaha((Activity) context, 0.5f);
