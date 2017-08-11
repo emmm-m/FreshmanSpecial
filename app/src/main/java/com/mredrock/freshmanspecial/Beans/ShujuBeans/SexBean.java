@@ -1,4 +1,4 @@
-package com.mredrock.freshmanspecial.Beans;
+package com.mredrock.freshmanspecial.Beans.ShujuBeans;
 
 import java.util.List;
 

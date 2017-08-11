@@ -4,15 +4,24 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunpicBeans;
+import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunvideoBeans;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.model.HttpModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.functions.Func1;
 
 /**
  * Created by zia on 17-8-8.
@@ -53,29 +62,76 @@ public class FengcaiAdapter extends RecyclerView.Adapter<FengcaiAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         switch (position){
             case 0:
                 holder.textView.setText("军训图片");
                 break;
             case 1://图片
-                adapter = new JunxunRecyclerAdapter(context,JunxunRecyclerAdapter.TUPIAN);
+                final JunxunRecyclerAdapter picAdapter = new JunxunRecyclerAdapter(context,JunxunRecyclerAdapter.TUPIAN);
                 holder.junxunpicRecycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
-                holder.junxunpicRecycler.setAdapter(adapter);
-                List<String> list = new ArrayList<>();
-                list.add("123");list.add("1234");list.add("12123");list.add("12123");list.add("12143");list.add("153123");
-                adapter.setStringList(list);
+                holder.junxunpicRecycler.setAdapter(picAdapter);
+                HttpModel.bulid()
+                        .getJunxunpic()
+                        .subscribe(new Observer<JunxunpicBeans>() {
+                            List<String> titleList = new ArrayList<String>();
+                            List<String> urlList = new ArrayList<String>();
+                            @Override
+                            public void onCompleted() {
+                                picAdapter.setPicList(titleList,urlList);
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.d("FengcaiAdapter","request error");
+                            }
+
+                            @Override
+                            public void onNext(JunxunpicBeans junxunpicBeans) {
+                                Log.d("FengcaiAdapter",junxunpicBeans.getData().getTitle().get(0));
+                                titleList.addAll(junxunpicBeans.getData().getTitle());
+                                urlList.addAll(junxunpicBeans.getData().getUrl());
+                                onCompleted();
+                            }
+                        });
+
                 break;
             case 2:
                 holder.textView.setText("军训视频");
                 break;
             case 3://视频
-                adapter = new JunxunRecyclerAdapter(context,JunxunRecyclerAdapter.SHIPING);
+                final JunxunRecyclerAdapter videoAdapter = new JunxunRecyclerAdapter(context,JunxunRecyclerAdapter.SHIPING);
                 holder.junxunvideoRecycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
-                holder.junxunvideoRecycler.setAdapter(adapter);
-                List<String> list1 = new ArrayList<>();
-                list1.add("123");list1.add("1234");list1.add("12123");list1.add("12123");list1.add("12143");list1.add("153123");
-                adapter.setStringList(list1);
+                holder.junxunvideoRecycler.setAdapter(videoAdapter);
+                HttpModel.bulid().getJunxunvideo()
+                        .flatMap(new Func1<JunxunvideoBeans, Observable<JunxunvideoBeans.DataBean>>() {
+                            @Override
+                            public Observable<JunxunvideoBeans.DataBean> call(JunxunvideoBeans junxunvideoBeans) {
+                                return Observable.from(junxunvideoBeans.getData());
+                            }
+                        })
+                        .subscribe(new Subscriber<JunxunvideoBeans.DataBean>() {
+                            List<String> picList = new ArrayList<String>();
+                            List<String> urlList = new ArrayList<String>();
+                            List<String> titleList = new ArrayList<String>();
+                            @Override
+                            public void onCompleted() {
+                                videoAdapter.setVideoList(titleList,picList,urlList);
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.d("FengcaiAdapter","request error");
+                            }
+
+                            @Override
+                            public void onNext(JunxunvideoBeans.DataBean dataBean) {
+                                Log.d("FengcaiAdapter",dataBean.getTitle());
+                                picList.add(dataBean.getCover());
+                                urlList.add(dataBean.getUrl());
+                                titleList.add(dataBean.getTitle());
+                            }
+                        });
                 break;
             case 4:
                 holder.textView.setText("军歌推荐");

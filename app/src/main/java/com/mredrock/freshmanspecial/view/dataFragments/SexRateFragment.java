@@ -1,12 +1,10 @@
 package com.mredrock.freshmanspecial.view.dataFragments;
 
-import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.mredrock.freshmanspecial.Beans.SexBean;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.SexBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.ChartData;
 import com.mredrock.freshmanspecial.Units.CircleChart;

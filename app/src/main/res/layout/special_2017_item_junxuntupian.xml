@@ -7,15 +7,16 @@
     android:layout_margin="5dp">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/junxuntupian_image"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:elevation="4dp">
         <ImageView
-            android:background="#bdbdbd"
+            android:id="@+id/junxuntupian_image"
             android:src="@mipmap/special_2017_chongyoufengcai"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"
+            android:contentDescription="picture" />
     </android.support.v7.widget.CardView>
 
     <TextView
