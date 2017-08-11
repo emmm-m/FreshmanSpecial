@@ -5,19 +5,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mredrock.freshmanspecial.Beans.AdmissionBean;
+import com.mredrock.freshmanspecial.Beans.GuidelinesVerticalBean;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.VerticalRecyclerAdapter;
 import com.mredrock.freshmanspecial.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Glossimar on 2017/8/3.
@@ -26,7 +23,7 @@ import static android.content.ContentValues.TAG;
  */
 
 public class CafeteriaFragment extends Fragment {
-    private List<AdmissionBean> admissionBeanList;
+    private List<GuidelinesVerticalBean> admissionBeanList;
     private RecyclerView recyclerView;
     private VerticalRecyclerAdapter adapter;
     @Nullable
@@ -65,7 +62,7 @@ public class CafeteriaFragment extends Fragment {
     }
 
     public void addCafetira(String title, String text) {
-        AdmissionBean admissionBean = new AdmissionBean();
+        GuidelinesVerticalBean admissionBean = new GuidelinesVerticalBean();
         admissionBean.title = title;
         admissionBean.text = text;
         admissionBeanList.add(admissionBean);
