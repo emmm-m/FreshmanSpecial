@@ -14,6 +14,7 @@ import android.util.AttributeSet;
 public class DecorteView extends android.support.v7.widget.AppCompatTextView {
 
     private Paint mPaint;
+    private int count = 3;
 
     public DecorteView(Context context) {
         super(context);
@@ -31,11 +32,16 @@ public class DecorteView extends android.support.v7.widget.AppCompatTextView {
         mPaint.setStyle(Paint.Style.STROKE);
     }
 
+    public void setCount(int count){
+        this.count = count;
+        postInvalidate();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //这里取高度的三分之二作为分割线
-        canvas.drawLine(getWidth()/3,getHeight()/3,getWidth()/3,getHeight()/3*2,mPaint);
-        canvas.drawLine(getWidth()/3*2,getHeight()/3,getWidth()/3*2,getHeight()/3*2,mPaint);
+        canvas.drawLine(getWidth()/count,getHeight()/3,getWidth()/count,getHeight()/3*2,mPaint);
+        canvas.drawLine(getWidth()/count*(count-1),getHeight()/3,getWidth()/count*(count-1),getHeight()/3*2,mPaint);
     }
 }

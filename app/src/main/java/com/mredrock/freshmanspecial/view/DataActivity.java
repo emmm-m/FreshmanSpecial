@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 import com.mredrock.freshmanspecial.Units.base.BaseActivity;
 import com.mredrock.freshmanspecial.Units.ViewPagerAdapter;
 import com.mredrock.freshmanspecial.presenter.DataPresenter;
@@ -31,7 +32,8 @@ public class DataActivity extends BaseActivity implements IDataActivity {
 
     private void setPager() {
         //设置下划线边距
-        presenter.setTabLayoutBottomLine(20);
+        int padding = ScreenUnit.bulid(this).getDpWide()/12;
+        presenter.setTabLayoutBottomLine(padding);
     }
 
     private void initPager() {

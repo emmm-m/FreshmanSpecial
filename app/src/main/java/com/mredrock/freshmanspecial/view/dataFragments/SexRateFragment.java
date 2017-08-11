@@ -26,7 +26,7 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
 
     private Button button;
     private List<String> collegeList = new ArrayList<>();
-    private SexBean mSexBean = new SexBean();
+
     private List<ChartData> dataList = new ArrayList<>();
     private CircleChart circleChart;
     private SmallCircle smallCircle;
@@ -38,54 +38,62 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
         button = $(R.id.sexRate_button);
         circleChart = $(R.id.sexRate_chart);
         smallCircle = $(R.id.sexRate_circle);
-        setSmallCircle();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HttpModel.bulid().getSex(new Subscriber<SexBean>() {
+                //从本地设置学院集合
+                presenter.setSexRateCollegeList();
+                //将集合加载到pickerView里
+                presenter.showPickerView(collegeList, new DataFragmentPresenter.OnPickerViewChoosed() {
                     @Override
-                    public void onCompleted() {
-                        collegeList.clear();
-                        for (SexBean.DataBean bean : mSexBean.getData()) {
-                            collegeList.add(bean.getCollege());
-                        }
-                        presenter.showPickerView(collegeList, new DataFragmentPresenter.OnPickerViewChoosed() {
+                    public void getString(final String data) {
+                        //在按钮上显示选中学院
+                        button.setText(data);
+                        //网络请求该学院数据
+                        HttpModel.bulid().getSex(new Subscriber<SexBean>() {
+                            private SexBean mSexBean = new SexBean();
                             @Override
-                            public void getString(String data) {
-                                button.setText(data);
+                            public void onCompleted() {
                                 for (SexBean.DataBean bean : mSexBean.getData()) {
                                     if (data.equals(bean.getCollege())) {
                                         presenter.setSexRateDataList(bean);
                                         presenter.runChart(dataList);
+                                        initSmallCircle();
                                     }
                                 }
                             }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Toast.makeText(getContext(), "获取信息失败！", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onNext(SexBean sexBean) {
+                                mSexBean = sexBean;
+                            }
                         });
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(getContext(), "获取信息出错！", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onNext(SexBean sexBean) {
-                        mSexBean = sexBean;
                     }
                 });
+
             }
         });
     }
 
-    private void setSmallCircle() {
-        List<String> texts = new ArrayList<>();
-        texts.add("女生");
-        texts.add("男生");
-        List<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#FFD2E3"));
-        colors.add(Color.parseColor("#B9E5FE"));
+    private void initSmallCircle(){
+        List<String> texts = new ArrayList<String>();
+        List<Integer> colors = new ArrayList<Integer>();
+        List<Integer> shadows = new ArrayList<Integer>();
+        for (ChartData d : dataList) {
+            texts.add(d.getText());
+            colors.add(d.getColor());
+            shadows.add(d.getStrokeColor());
+        }
         smallCircle.setTexts(texts);
         smallCircle.setColors(colors);
+        smallCircle.setShadows(shadows);
         smallCircle.draw();
     }
 

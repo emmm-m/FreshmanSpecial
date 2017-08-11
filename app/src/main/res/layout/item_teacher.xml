@@ -2,47 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:background="#fff"
-              android:layout_height="61dp"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="5dp"
+              android:layout_marginRight="5dp"
               android:orientation="vertical">
 
-    <LinearLayout
+
+        <com.mredrock.freshmanspecial.Units.MyImageView
+            android:layout_marginTop="5dp"
+            android:id="@+id/img_teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:background="#b7b7b7"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/special_2017_chongyoufengcai"
+            />
+
+
+    <TextView
+        android:id="@+id/name_teacher"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="#000"
+        android:gravity="center"
+        android:text="name"
+        android:textSize="13dp"/>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/img_item_teacher"
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher"
-            android:layout_height="match_parent"/>
-
-
-            <TextView
-                android:id="@+id/name_item_teacher"
-                android:layout_width="0dp"
-                android:layout_weight="7"
-                android:layout_gravity="center_vertical"
-                android:layout_height="wrap_content"
-                android:text="name"
-                android:textColor="#262626"
-                android:textSize="17dp"/>
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:padding="18dp"
-            android:src="@drawable/special_2017_next"/>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="#EBF0F2"/>
 </LinearLayout>

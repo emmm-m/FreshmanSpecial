@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tab_item_tabname"
         android:background="#00ffffff"
+        android:textColor="@color/colorDeepGray"
         android:textSize="15dp"
         android:gravity="center"
         android:layout_gravity="center_horizontal"/>

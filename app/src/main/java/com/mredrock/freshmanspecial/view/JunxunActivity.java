@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.Units.DecorteView;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 import com.mredrock.freshmanspecial.Units.ViewPagerAdapter;
 import com.mredrock.freshmanspecial.Units.base.BaseActivity;
 import com.mredrock.freshmanspecial.presenter.DataPresenter;
@@ -28,6 +30,7 @@ public class JunxunActivity extends BaseActivity implements IDataActivity {
     private TextView title;
     private IDataPresenter presenter;
     private ImageView back;
+    private DecorteView decorteView;
 
     @Override
     protected void initData() {
@@ -36,6 +39,8 @@ public class JunxunActivity extends BaseActivity implements IDataActivity {
         tabLayout = $(R.id.junxun_tabLayout);
         title = $(R.id.title_text);
         back = $(R.id.back);
+        decorteView = $(R.id.junxun_docorateView);
+        decorteView.setCount(2);
         initPager();
         setPager();
         setTitle("军训特辑");
@@ -48,7 +53,8 @@ public class JunxunActivity extends BaseActivity implements IDataActivity {
 
     private void setPager() {
         //设置下划线边距
-        presenter.setTabLayoutBottomLine(40);
+        int padding = ScreenUnit.bulid(this).getDpWide()/6;
+        presenter.setTabLayoutBottomLine(padding);
     }
 
     private void initPager() {

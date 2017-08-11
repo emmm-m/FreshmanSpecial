@@ -37,8 +37,7 @@ public class JobRateFragment extends BaseFragment implements IDataFragment {
         button = $(R.id.jobRate_button);
         circleChart = $(R.id.jobRate_chart);
         smallCircle = $(R.id.jobRate_circle);
-        setSmallCircle();
-        presenter.setSexRateCollegeList();
+        presenter.setWorkRateCollegeList();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +53,7 @@ public class JobRateFragment extends BaseFragment implements IDataFragment {
                             public void finish(String msg) {
                                 //启动数据图动画
                                 presenter.runChart(dataList);
+                                initSmallCircle();
                             }
                         });
                     }
@@ -62,17 +62,21 @@ public class JobRateFragment extends BaseFragment implements IDataFragment {
         });
     }
 
-    private void setSmallCircle() {
-        List<String> texts = new ArrayList<>();
-        texts.add("已就业");
-        texts.add("未就业");
-        List<Integer> colors = new ArrayList<>();
-        colors.add(Color.parseColor("#9EFCEE"));
-        colors.add(Color.parseColor("#B9E5FE"));
+    private void initSmallCircle(){
+        List<String> texts = new ArrayList<String>();
+        List<Integer> colors = new ArrayList<Integer>();
+        List<Integer> shadows = new ArrayList<Integer>();
+        for (ChartData d : dataList) {
+            texts.add(d.getText());
+            colors.add(d.getColor());
+            shadows.add(d.getStrokeColor());
+        }
         smallCircle.setTexts(texts);
         smallCircle.setColors(colors);
+        smallCircle.setShadows(shadows);
         smallCircle.draw();
     }
+
 
     @Override
     protected int getResourceId() {

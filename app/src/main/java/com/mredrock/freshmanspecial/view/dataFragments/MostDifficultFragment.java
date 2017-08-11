@@ -6,9 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.mredrock.freshmanspecial.Beans.FailBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.ChartData;
 import com.mredrock.freshmanspecial.Units.CircleChart;
+import com.mredrock.freshmanspecial.Units.SmallCircle;
 import com.mredrock.freshmanspecial.Units.base.BaseFragment;
 import com.mredrock.freshmanspecial.presenter.DataFragmentPresenter;
 import com.mredrock.freshmanspecial.presenter.IDataFragmentPresenter;
@@ -26,6 +28,7 @@ public class MostDifficultFragment extends BaseFragment implements IDataFragment
     private List<String> majorList = new ArrayList<>();
     private List<ChartData> dataList = new ArrayList<>();
     private CircleChart circleChart;
+    private SmallCircle smallCircle;
     private IDataFragmentPresenter presenter;
 
 
@@ -41,6 +44,7 @@ public class MostDifficultFragment extends BaseFragment implements IDataFragment
             }
         });
         circleChart = $(R.id.mostDifficult_chart);
+        smallCircle = $(R.id.mostDifficult_circle);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +61,7 @@ public class MostDifficultFragment extends BaseFragment implements IDataFragment
                             @Override
                             public void finish(String msg) {
                                 //关闭之前的pickerView
-                                presenter.disMissPickerView();
+                                //presenter.disMissPickerView();
                                 //将majorList的数据呈现在新的PickerView上
                                 showMajorPickerView();
                                 //同时给按钮设置监听
@@ -86,10 +90,26 @@ public class MostDifficultFragment extends BaseFragment implements IDataFragment
                     @Override
                     public void finish(String msg) {
                         presenter.runChart(dataList);
+                        initSmallCircle();
                     }
                 });
             }
         });
+    }
+
+    private void initSmallCircle(){
+        List<String> texts = new ArrayList<String>();
+        List<Integer> colors = new ArrayList<Integer>();
+        List<Integer> shadows = new ArrayList<Integer>();
+        for (ChartData d : dataList) {
+            texts.add(d.getText());
+            colors.add(d.getColor());
+            shadows.add(d.getStrokeColor());
+        }
+        smallCircle.setTexts(texts);
+        smallCircle.setColors(colors);
+        smallCircle.setShadows(shadows);
+        smallCircle.draw();
     }
 
     @Override

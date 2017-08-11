@@ -97,19 +97,12 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
                 //返回的分别是三个级别的选中位置
                 //选择回调接口
                 onPickerViewChoosed.getString(collegeList.get(options1));
+                Log.d("test",collegeList.get(options1));
             }
         })
                 .setLayoutRes(R.layout.special_2017_options_picker_view, new CustomListener() {
                     @Override
                     public void customLayout(View v) {
-                        final TextView tvSubmit = (TextView) v.findViewById(R.id.tv_finish);
-                        tvSubmit.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                optionsPickerView.returnData();
-                                optionsPickerView.dismiss();
-                            }
-                        });
 
                     }
                 })
@@ -205,7 +198,7 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        fragment.toast("获取信息失败！");
                     }
 
                     @Override

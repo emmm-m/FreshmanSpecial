@@ -21,7 +21,7 @@ import java.util.List;
 
 public class CircleChart extends android.support.v7.widget.AppCompatTextView {
 
-    private boolean isLog = true;
+    private boolean isLog = false;
     private Paint paint;//画笔
     private Paint paint1;//圆圈的画笔
     private int paintWidth = ScreenUnit.dip2px(getContext(),18);//线宽
@@ -32,7 +32,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
     private List<ChartData> list;//数据
     private int space = ScreenUnit.dip2px(getContext(),8);//线间距
     private float centerX = 0, centerY = 0;
-    private int radius = ScreenUnit.dip2px(getContext(),55);//最小半径
+    private int radius = ScreenUnit.dip2px(getContext(),50);//最小半径
     private boolean autoSpace = false;//默认自动调整间距
     private boolean textSlope = false;//设置字沿圈写
     static int defaultColor = Color.RED, defaultStrokeColor = Color.BLACK, defaultTextColor = Color.BLACK,
@@ -91,7 +91,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
                 //绘制动画数据条
                 drawArc(canvas, data.getPercentage(), data.getColor(), data.getStrokeColor(), data.getRadius(), data.getSpeed());
                 //绘制文字，这里设置字体为线宽的一半
-                drawText(canvas, data.getText(), paint.measureText(data.getText()), paintWidth / 2, data.getTextColor(), data.getRadius());
+                drawText(canvas, data.getPercentage()+"%", paint.measureText(data.getPercentage()+"%"), paintWidth / 3 * 2, data.getTextColor(), data.getRadius());
             }
         } else {
             invalidate();

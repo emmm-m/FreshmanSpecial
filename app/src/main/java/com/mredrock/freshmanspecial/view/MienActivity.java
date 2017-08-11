@@ -1,5 +1,6 @@
 package com.mredrock.freshmanspecial.view;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
@@ -41,9 +42,7 @@ public class MienActivity extends BaseActivity implements IMienActivity{
         //设置下划线边距
 //        presenter.setTabLayoutBottomLine(20);
         int wide = ScreenUnit.bulid(this).getDpWide();
-        float density = ScreenUnit.bulid(this).getDensity();
-        Log.d("zzz", "setPager: "+wide/100*density);
-        presenter.setTabLayoutBottomLine(wide/30);
+//        presenter.setTabLayoutBottomLine(wide/30);
 
     }
 
@@ -86,6 +85,26 @@ public class MienActivity extends BaseActivity implements IMienActivity{
 
             @Override
             public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                View view = tab.getCustomView();
+                TextView textView = (TextView) view.findViewById(R.id.tab_item_tabname);
+                textView.setTextColor(Color.parseColor("#65B2FF"));
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                View view = tab.getCustomView();
+                TextView textView = (TextView) view.findViewById(R.id.tab_item_tabname);
+                textView.setTextColor(Color.parseColor("#FF383535"));
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
