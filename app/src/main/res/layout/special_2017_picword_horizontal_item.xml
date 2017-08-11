@@ -1,71 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--专题 ： 邮子攻略；界面 ： recycler 排版横向，周边美景，周边美食-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+             android:layout_width="match_parent"
+             android:layout_height="120dp">
 
-    <ImageView
-        android:layout_width="105dp"
-        android:layout_height="81dp"
-        android:id="@+id/picword_horizontal_item_image"
-        android:scaleType="centerCrop"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="19dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="119dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/picword_horizontal_item_title"
-        android:textColor="@color/colorDeepGray"
-        android:textSize="14dp"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="142dp"
-        android:layout_marginTop="19dp"/>
+        <com.mredrock.freshmanspecial.Units.MyImageView
+            android:id="@+id/picword_horizontal_item_image"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="15dp"
+            android:layout_weight="2"
+            android:background="#979797"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/picword_horizontal_item_text"
-        android:textColor="@color/tabTextColor"
-        android:gravity="center_vertical"
-        android:textSize="12dp"
-        android:layout_marginLeft="161dp"
-        android:layout_marginTop="43.5dp"
-        />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="3"
+            android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="14dp"
-        android:layout_height="16dp"
-        android:layout_marginLeft="141dp"
-        android:layout_marginTop="67.5dp"
-        android:src="@drawable/special_2017_location"
-        android:scaleType="centerCrop"/>
+            <TextView
+                android:id="@+id/picword_horizontal_item_title"
+                android:layout_width="match_parent"
+                android:paddingLeft="5dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorDeepGray"
+                android:textSize="14dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/picword_horizontal_item_address"
-        android:layout_marginTop="67dp"
-        android:layout_marginLeft="161dp"
-        android:gravity="center_vertical"
-        android:textSize="12dp"
-        android:textColor="@color/addressColor"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="340dp"
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="6dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/special_2017_comment"/>
+
+                <TextView
+                    android:id="@+id/picword_horizontal_item_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/tabTextColor"
+                    android:textSize="12dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="6dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/special_2017_location"/>
+
+                <TextView
+                    android:id="@+id/picword_horizontal_item_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/addressColor"
+                    android:textSize="12dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:background="@color/underTabColor"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="114dp"/>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="12dp"
-        android:layout_height="14dp"
-        android:layout_marginLeft="142dp"
-        android:layout_marginTop="44.5dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/special_2017_comment"/>
+        />
 
 </FrameLayout>
