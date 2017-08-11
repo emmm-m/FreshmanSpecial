@@ -1,6 +1,7 @@
 package com.mredrock.freshmanspecial.Units;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -63,6 +64,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         linearParams.width = (int)(wide-85*density)*2/7;// 控件的宽强制设置
         textView.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
         textView.setText(titles[position]);
+        if (position == 0) {
+            textView.setTextColor(Color.parseColor("#65B2FF"));
+        }
         return view;
     }
 
