@@ -32,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
-    public static final int BEAUTY = 0,STUDENT = 1,TEACHER = 2,ORIGINAL = 3,TABS = 4,GROUP = 5;
+    public static final int BEAUTY = 0,STUDENT = 1,TEACHER = 2,ORIGINAL = 3,TABS = 4,GROUP = 5,QQGROUP = 6;
     private List data = new ArrayList<>();
     private Context context;
     private int type;
@@ -79,6 +79,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         } else if (type == GROUP) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_groups, parent, false);
             return new MyViewHolder(view,GROUP);
+        } else if (type == QQGROUP) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_qq_search, parent, false);
+            return new MyViewHolder(view,QQGROUP);
         }
         return null;
     }
@@ -128,7 +131,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             case TABS:
                 if (isFirst && position == 0) {
                     firstView = holder.title_tab;
-                    holder.title_tab.setBackgroundResource(R.drawable.tab_focus);
+                    holder.title_tab.setBackgroundResource(R.drawable.special_2017_tab_focus);
                     isFirst = false;
                 }
                 holder.title_tab.setText(data.get(position).toString());
@@ -138,7 +141,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                         if (listener != null) {
                             listener.onTabClickListener(position,holder.title_tab);
                         }
-                        holder.title_tab.setBackgroundResource(R.drawable.tab_focus);
+                        holder.title_tab.setBackgroundResource(R.drawable.special_2017_tab_focus);
                     }
                 });
                 break;
@@ -146,6 +149,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 GroupBean bean = (GroupBean) data.get(position);
                 holder.content_group.setText(bean.getContent());
                 holder.title_group.setText(bean.getTitle());
+                break;
+            case QQGROUP:
+                holder.tx_qq_searh.setText(data.get(position).toString());
                 break;
         }
     }
@@ -217,7 +223,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         MyImageView img_original,img_teacher;
         ImageView img_beauty;
         TextView title_beauty,name_student,content_beauty,content_student,title_orignial,time_original,name_teacher
-                ,title_tab,title_group,content_group;
+                ,title_tab,title_group,content_group,tx_qq_searh;
         int viewType;
         public MyViewHolder(View itemView, int viewType) {
             super(itemView);
@@ -248,6 +254,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 case GROUP:
                     title_group = (TextView) itemView.findViewById(R.id.item_groups_title);
                     content_group = (TextView) itemView.findViewById(R.id.item_groups_content);
+                    break;
+                case QQGROUP:
+                    tx_qq_searh = (TextView) itemView.findViewById(R.id.tx_item_qq);
             }
         }
     }
