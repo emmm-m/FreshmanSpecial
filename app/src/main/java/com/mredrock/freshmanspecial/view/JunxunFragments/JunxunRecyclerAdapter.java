@@ -1,15 +1,17 @@
 package com.mredrock.freshmanspecial.view.JunxunFragments;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.view.ViewGroup.LayoutParams;
 import com.bumptech.glide.Glide;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,10 +81,20 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
     public void onBindViewHolder(MyViewHolder holder, int position) {
         switch (type){
             case 0:
+                LayoutParams params = holder.junxuntupian_image.getLayoutParams();
+                int width = ScreenUnit.bulid(context).getPxWide()/4;
+                params.width = width;
+                params.height = width/16*10;
+                holder.junxuntupian_image.setLayoutParams(params);
                 holder.junxuntupian_text.setText((String) picTitleList.get(position));
                 Glide.with(context).load(picImageList.get(position)).into(holder.junxuntupian_image);
                 break;
             case 1:
+                LayoutParams para = holder.junxunshiping_image.getLayoutParams();
+                int w = ScreenUnit.bulid(context).getPxWide()/2-5;
+                para.width = w;
+                para.height = w/16*10;
+                holder.junxunshiping_image.setLayoutParams(para);
                 holder.junxunshiping_text.setText((String) videoTitleList.get(position));
                 Glide.with(context).load(videoImageList.get(position)).into(holder.junxunshiping_image);
                 break;
