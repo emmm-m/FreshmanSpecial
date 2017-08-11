@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mredrock.freshmanspecial.Beans.AdmissionBean;
+import com.mredrock.freshmanspecial.Beans.GuidelinesVerticalBean;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.VerticalRecyclerAdapter;
 import com.mredrock.freshmanspecial.R;
 
@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 public class CampusEnvironmentFragment extends Fragment{
-    private List<AdmissionBean> admissionBeanList;
+    private List<GuidelinesVerticalBean> admissionBeanList;
     private RecyclerView recyclerView;
     private VerticalRecyclerAdapter adapter;
 
@@ -64,7 +64,7 @@ public class CampusEnvironmentFragment extends Fragment{
     }
 
     public void addCompusEnvironment(String title, String text) {
-        AdmissionBean admissionBean = new AdmissionBean();
+        GuidelinesVerticalBean admissionBean = new GuidelinesVerticalBean();
         admissionBean.title = title;
         admissionBean.text = text;
         admissionBeanList.add(admissionBean);

@@ -1,16 +1,15 @@
 package com.mredrock.freshmanspecial.model;
 
 
-import com.mredrock.freshmanspecial.Beans.FailBean;
+import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunpicBeans;
+import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunvideoBeans;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.FailBean;
 import com.mredrock.freshmanspecial.Beans.QQGroupsBean;
-import com.mredrock.freshmanspecial.Beans.SexBean;
-import com.mredrock.freshmanspecial.Beans.WorkBean;
-
-import java.util.concurrent.TimeUnit;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.SexBean;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.WorkBean;
 
 
 import okhttp3.OkHttpClient;
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -90,6 +89,42 @@ public class HttpModel {
                 .build();
         service = retrofit.create(Services.class);
         return service.getFail("FailRatio")
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取军训视频
+     * @return video
+     */
+    public Observable<JunxunvideoBeans> getJunxunvideo(){
+        retrofit = new Retrofit.Builder()
+                .client(httpClientBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(URL)
+                .build();
+        service = retrofit.create(Services.class);
+        return service.getJunxunvideo("MilitaryTrainingVideo")
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取军训图片
+     * @return pic
+     */
+    public Observable<JunxunpicBeans> getJunxunpic(){
+        retrofit = new Retrofit.Builder()
+                .client(httpClientBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(URL)
+                .build();
+        service = retrofit.create(Services.class);
+        return service.getJunxunpic("MilitaryTrainingPhoto")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

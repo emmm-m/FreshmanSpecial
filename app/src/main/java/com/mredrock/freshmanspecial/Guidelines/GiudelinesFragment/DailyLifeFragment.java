@@ -8,9 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 
-import com.mredrock.freshmanspecial.Beans.ShopBean;
+import com.mredrock.freshmanspecial.Beans.GuidelinesHorizontalBean;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.HorizontalRecyclerAdapter;
 import com.mredrock.freshmanspecial.R;
 
@@ -24,7 +23,7 @@ import java.util.List;
  */
 
 public class DailyLifeFragment extends Fragment {
-    private List<ShopBean> shopBeanList;
+    private List<GuidelinesHorizontalBean> shopBeanList;
     private RecyclerView recyclerView;
     private HorizontalRecyclerAdapter adapter;
 
@@ -54,7 +53,7 @@ public class DailyLifeFragment extends Fragment {
     }
 
     public void addShop(String shopName, String address, String commit) {
-        ShopBean shopBean = new ShopBean();
+        GuidelinesHorizontalBean shopBean = new GuidelinesHorizontalBean();
         shopBean.shopName = shopName;
         shopBean.address = address;
         shopBean.commit = commit;
