@@ -1,5 +1,6 @@
 package com.mredrock.freshmanspecial.view;
 
+import android.app.Activity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -71,4 +72,6 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
     public int getPosition() {
         return getIntent().getIntExtra("position",0);
     }
+
+
 }

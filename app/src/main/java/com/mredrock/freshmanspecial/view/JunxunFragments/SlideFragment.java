@@ -39,10 +39,6 @@ public class SlideFragment extends Fragment {
         imageView = view.findViewById(R.id.slide_image);
         textView = view.findViewById(R.id.slide_title);
         textView.setText(title);
-        ViewGroup.LayoutParams params = imageView.getLayoutParams();
-        params.width = ScreenUnit.bulid(getContext()).getPxWide();
-        params.height = params.width/16*10;
-        imageView.setLayoutParams(params);
         Glide.with(getActivity()).load(url).into(imageView);
     }
 
