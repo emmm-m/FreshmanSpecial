@@ -1,12 +1,13 @@
 package com.mredrock.freshmanspecial.Guidelines.GiudelinesFragment;
 
+import android.content.Context;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ import com.mredrock.freshmanspecial.model.HttpModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import rx.Subscriber;
 
@@ -28,7 +31,7 @@ public class QQSearchFragment extends BaseFragment {
     private ImageView clear;
     private QQGroupsBean bean;
     private List<QQGroupsBean.DataBean> dataList;
-    private List<String> result;
+    private List<QQGroupsBean.DataBean> result;
     private RecyclerView resultList;
     private TextView back;
 
@@ -41,15 +44,33 @@ public class QQSearchFragment extends BaseFragment {
         dataList = new ArrayList<>();
         result = new ArrayList<>();
         bean = new QQGroupsBean();
+        setFocus();
         getData();
         setSearch();
         setClear();
         setCancel();
     }
 
+    private void setFocus() {
+        editText.setFocusable(true);
+        editText.setFocusableInTouchMode(true);
+        editText.requestFocus();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() //保证界面的数据加载完成再跳出键盘
+                       {
+                           public void run()
+                           {
+                               InputMethodManager inputManager =
+                                       (InputMethodManager)editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                               inputManager.showSoftInput(editText, 0);
+                           }
+                       },
+                200);
+    }
+
     @Override
     protected int getResourceId() {
-        return R.layout.speccial_2017_fragment_qqsearch;
+        return R.layout.special_2017_fragment_qqsearch;
     }
 
     private void getData() {
@@ -61,7 +82,7 @@ public class QQSearchFragment extends BaseFragment {
 
             @Override
             public void onError(Throwable e) {
-                Toast.makeText(getActivity(),"获取数据失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "获取数据失败", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -74,14 +95,17 @@ public class QQSearchFragment extends BaseFragment {
     private void setList() {
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         resultList.setLayoutManager(manager);
-        resultList.setAdapter(new MyRecyclerAdapter(getActivity(),result,MyRecyclerAdapter.QQGROUP));
+        resultList.setAdapter(new MyRecyclerAdapter(getActivity(), result, MyRecyclerAdapter.QQGROUP));
     }
 
     private void setCancel() {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().onBackPressed();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.qq_layout, new QQgroupFragment());
+                transaction.commit();
             }
         });
     }
@@ -95,24 +119,28 @@ public class QQSearchFragment extends BaseFragment {
         });
     }
 
-    private void setSearch(){
+    private void setSearch() {
         editText.setOnKeyListener(new View.OnKeyListener() {//输入完后按键盘上的搜索键【回车键改为了搜索键】
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-                if(keyCode==KeyEvent.KEYCODE_ENTER){//修改回车键功能
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {//修改回车键功能
                     ((InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE))
                             .hideSoftInputFromWindow(getActivity().getCurrentFocus()
                                     .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     String obj = editText.getText().toString();
-                    dataList = bean.getData();
-                    result.clear();
-                    for (QQGroupsBean.DataBean b : dataList) {
-                        if (b.getGroupName().contains(obj) || b.getNumber().contains(obj)){
-                            result.add(b.getGroupName() + ": " + b.getNumber());
+                    if (obj.equals("")) {
+                        Toast.makeText(getActivity(),"你要搜什么呀",Toast.LENGTH_SHORT).show();
+                    } else {
+                        dataList = bean.getData();
+                        result.clear();
+                        for (QQGroupsBean.DataBean b : dataList) {
+                            if (b.getGroupName().contains(obj) || b.getNumber().contains(obj)) {
+                                result.add(b);
+                            }
                         }
+                        setList();
                     }
-                    setList();
                     return true;
                 }
                 return false;
