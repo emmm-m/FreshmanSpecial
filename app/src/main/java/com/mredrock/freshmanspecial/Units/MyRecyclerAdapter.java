@@ -16,10 +16,13 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mredrock.freshmanspecial.Beans.MienBeans.BeautyBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.ExcellentBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.GroupBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.OriginalBean;
+import com.mredrock.freshmanspecial.Beans.MienBeans.StudentsBean;
+import com.mredrock.freshmanspecial.Beans.MienBeans.TeacherBean;
 import com.mredrock.freshmanspecial.R;
 
 import java.util.ArrayList;
@@ -90,27 +93,27 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         switch (holder.viewType){
             case BEAUTY:
-                BeautyBean beautyBean = (BeautyBean) data.get(position);
-                holder.img_beauty.setImageDrawable(beautyBean.getImg());
-                holder.content_beauty.setText(beautyBean.getContent());
-                holder.title_beauty.setText(beautyBean.getTitle());
+                BeautyBean.DataBean beauty = (BeautyBean.DataBean) data.get(position);
+                Glide.with(context).load(beauty.getUrl()).into(holder.img_beauty);
+                holder.content_beauty.setText(beauty.getContent());
+                holder.title_beauty.setText(beauty.getTitle());
                 break;
             case STUDENT:
-                final ExcellentBean excellentBean = (ExcellentBean) data.get(position);
-                holder.name_student.setText(excellentBean.getName());
-                holder.img_student.setImageDrawable(excellentBean.getImg());
-                holder.content_student.setText(excellentBean.getContent());
+                final StudentsBean.DataBean student = (StudentsBean.DataBean) data.get(position);
+                holder.name_student.setText(student.getName());
+                Glide.with(context).load(student.getUrl()).into(holder.img_student);
+                holder.content_student.setText(student.getResume());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        initPopupWindow(view, excellentBean);
+                        initPopupWindow(view, student);
                     }
                 });
                 break;
             case TEACHER:
-                final ExcellentBean excellentBean_teacher = (ExcellentBean) data.get(position);
-                holder.name_teacher.setText(excellentBean_teacher.getName());
-                holder.img_teacher.setImageDrawable(excellentBean_teacher.getImg());
+                final TeacherBean.DataBean teacher = (TeacherBean.DataBean) data.get(position);
+                holder.name_teacher.setText(teacher.getName());
+                Glide.with(context).load(teacher.getUrl()).into(holder.img_teacher);
                 break;
             case ORIGINAL:
                 final OriginalBean originalBean = (OriginalBean) data.get(position);
@@ -163,7 +166,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     }
 
 
-    private void initPopupWindow(View view, ExcellentBean bean) {
+    private void initPopupWindow(View view, StudentsBean.DataBean bean) {
         View popupView = LayoutInflater.from(context).inflate(R.layout.pop_window_excellent, null);
         // 三部曲第二  构造函数关联
         View parent = LayoutInflater.from(context).inflate(R.layout.special_2017_fragment_student,null);
@@ -175,9 +178,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         content = popupView.findViewById(R.id.tx_pop);
         img = popupView.findViewById(R.id.img_pop);
         name.setText(bean.getName());
-        content.setText(bean.getContent());
+        content.setText(bean.getResume());
         content.setMovementMethod(ScrollingMovementMethod.getInstance());
-        img.setImageDrawable(bean.getImg());
+        Glide.with(context).load(bean.getUrl()).into(img);
         int wide = ScreenUnit.bulid(context).getPxWide();
         int height = ScreenUnit.bulid(context).getPxHiget();
         popupWindow = new PopupWindow(popupView,wide*3/4, height*2/3, true);
