@@ -1,8 +1,10 @@
 package com.mredrock.freshmanspecial.Guidelines.Adapter;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +27,7 @@ import java.util.List;
  * Created by glossimar on 2017/8/11.
  */
 
-public class DormitoryRecyclerAdapter  extends RecyclerView.Adapter<DormitoryRecyclerAdapter.ViewHolder>{
+public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecyclerAdapter.ViewHolder> {
     private Context context;
     private List<DormitoryBean.DormitoryDataBean> list;  // 卡片里的内容单独组成一个类
 
@@ -41,6 +43,7 @@ public class DormitoryRecyclerAdapter  extends RecyclerView.Adapter<DormitoryRec
         TextView pictureNumber;
         TextView dormitoryNumber;   //Only for Dormitory List
         LinearLayout linearLayout;
+
         public ViewHolder(View itemView) {
             super(itemView);
             mainImage = (MyImageView) itemView.findViewById(R.id.picword_vertical_item_image);
@@ -61,7 +64,7 @@ public class DormitoryRecyclerAdapter  extends RecyclerView.Adapter<DormitoryRec
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final DormitoryBean.DormitoryDataBean dormitoy = list.get(position);
         holder.title.setText(dormitoy.getName());
         holder.text.setText(dormitoy.getResume());
@@ -70,15 +73,18 @@ public class DormitoryRecyclerAdapter  extends RecyclerView.Adapter<DormitoryRec
             @Override
             public void onClick(View view) {
                 List<String> picTitleList = new ArrayList<String>();
-                for(int i = 0;i<dormitoy.getUrl().size();i++){
+                for (int i = 0; i < dormitoy.getUrl().size(); i++) {
                     picTitleList.add(dormitoy.getResume());
                 }
                 Intent intent = new Intent(context, SlideActivity.class);
-                intent.putStringArrayListExtra("imageUrlList",(ArrayList)dormitoy.getUrl());
-                intent.putStringArrayListExtra("titleList",(ArrayList)picTitleList);
-                intent.putExtra("position",0);
-                context.startActivity(intent);
-                ((Activity)context).overridePendingTransition(R.anim.fade_in,0);
+                intent.putStringArrayListExtra("imageUrlList", (ArrayList) dormitoy.getUrl());
+                intent.putStringArrayListExtra("titleList", (ArrayList) picTitleList);
+                intent.putExtra("position", 0);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.mainImage, "share").toBundle());
+                }else {
+                    context.startActivity(intent);
+                }
             }
         });
         holder.dormitoryNumber.setText(getDormitoryNumber(dormitoy.getName()));

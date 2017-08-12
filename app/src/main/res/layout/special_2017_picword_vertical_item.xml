@@ -15,6 +15,7 @@
        android:layout_height="wrap_content"
        android:id="@+id/picword_vertical_item_image"
        android:scaleType="fitCenter"
+       android:transitionName="share"
        android:adjustViewBounds="true"
        android:layout_marginLeft="18dp"
        android:layout_marginRight="18dp"

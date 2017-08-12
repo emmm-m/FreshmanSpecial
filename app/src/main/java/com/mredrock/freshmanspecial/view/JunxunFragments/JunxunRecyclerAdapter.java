@@ -1,6 +1,7 @@
 package com.mredrock.freshmanspecial.view.JunxunFragments;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -103,8 +104,11 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
                         intent.putStringArrayListExtra("imageUrlList",(ArrayList)picImageList);
                         intent.putStringArrayListExtra("titleList",(ArrayList)picTitleList);
                         intent.putExtra("position",position);
-                        context.startActivity(intent);
-                        ((Activity)context).overridePendingTransition(R.anim.fade_in,0);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.junxuntupian_image, "share").toBundle());
+                        } else {
+                            context.startActivity(intent);
+                        }
                     }
                 });
                 //glide加载小图片

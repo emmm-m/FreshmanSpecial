@@ -6,6 +6,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.Units.MyViewPager;
 import com.mredrock.freshmanspecial.Units.SlidePagerAdapter;
 import com.mredrock.freshmanspecial.Units.base.BaseActivity;
 
@@ -27,9 +29,11 @@ import java.util.List;
  */
 public class SlideActivity extends BaseActivity implements ISlideActivity {
 
-    private ViewPager viewPager;
+    private MyViewPager viewPager;
     private TextView progressView,titleView;
     private RelativeLayout layout;
+    private Animation alpha_in,alpha_out;
+    private boolean isImgClick = true;
 
     @Override
     protected void initData() {
@@ -37,6 +41,8 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
         progressView = $(R.id.slide_progress);
         titleView = $(R.id.slide_title);
         layout = $(R.id.slide_layout);
+        alpha_in = AnimationUtils.loadAnimation(this,R.anim.fade_in);
+        alpha_out = AnimationUtils.loadAnimation(this,R.anim.fade_out);
         //第一次进入界面加载文字
         progressView.setText((getPosition()+1)+"/"+getImageUrlList().size());
         titleView.setText(getTitleList().get(getPosition()));
@@ -59,11 +65,31 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
                 /*layout.setVisibility(View.VISIBLE);
                 Animation animation = AnimationUtils.loadAnimation(SlideActivity.this,R.anim.fade_out);
                 layout.setAnimation(animation);*/
+                if (isImgClick == false){
+                    titleView.startAnimation(alpha_in);
+                    isImgClick = true;
+                }
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Log.d("000", "onPointClick: "+motionEvent.getPointerCount());
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    if (isImgClick) {
+                        titleView.startAnimation(alpha_out);
+                        isImgClick = false;
+                    } else {
+                        titleView.startAnimation(alpha_in);
+                        isImgClick = true;
+                    }
+                }
+                return false;
             }
         });
     }
@@ -100,5 +126,8 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
         return getIntent().getIntExtra("position",0);
     }
 
-
+    public void alphaOut() {
+        progressView.setAnimation(alpha_out);
+        titleView.setAnimation(alpha_out);
+    }
 }

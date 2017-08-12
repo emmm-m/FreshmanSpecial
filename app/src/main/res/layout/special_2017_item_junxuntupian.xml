@@ -16,6 +16,7 @@
             android:src="@mipmap/special_2017_chongyoufengcai"
             android:layout_width="100dp"
             android:layout_height="80dp"
+            android:transitionName="share"
             android:scaleType="fitXY" />
     </android.support.v7.widget.CardView>
 
