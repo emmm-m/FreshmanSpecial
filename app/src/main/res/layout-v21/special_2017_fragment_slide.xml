@@ -7,20 +7,21 @@
     android:layout_height="match_parent"
     tools:context="com.mredrock.freshmanspecial.view.JunxunFragments.SlideFragment">
 
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/slide_image"
-        android:scaleType="fitCenter"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <!--
     <TextView
         android:id="@+id/slide_title"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:textColor="@color/colorWhite"
         android:gravity="top|center"
-        android:transitionName="slide"
         android:layout_gravity="bottom"
         />
--->
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/slide_image"
+        android:scaleType="fitCenter"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </FrameLayout>

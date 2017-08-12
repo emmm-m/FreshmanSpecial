@@ -1,10 +1,14 @@
 package com.mredrock.freshmanspecial.view.JunxunFragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +86,7 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         switch (type){
             case 0://图片
                 LayoutParams params = holder.junxuntupian_image.getLayoutParams();
@@ -100,6 +104,7 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
                         intent.putStringArrayListExtra("titleList",(ArrayList)picTitleList);
                         intent.putExtra("position",position);
                         context.startActivity(intent);
+                        ((Activity)context).overridePendingTransition(R.anim.fade_in,0);
                     }
                 });
                 //glide加载小图片

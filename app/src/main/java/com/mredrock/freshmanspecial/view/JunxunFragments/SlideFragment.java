@@ -22,7 +22,7 @@ public class SlideFragment extends Fragment {
     private String title,url;
     private View view;
     private ImageView imageView;
-    private TextView textView;
+    //private TextView textView;
     private int screenWidth = 0;
 
     public SlideFragment(String title,String url) {
@@ -37,12 +37,8 @@ public class SlideFragment extends Fragment {
             screenWidth = ScreenUnit.bulid(getContext()).getPxWide();
         }
         imageView = view.findViewById(R.id.slide_image);
-        textView = view.findViewById(R.id.slide_title);
-        textView.setText(title);
-        ViewGroup.LayoutParams params = imageView.getLayoutParams();
-        params.width = ScreenUnit.bulid(getContext()).getPxWide();
-        params.height = params.width/16*10;
-        imageView.setLayoutParams(params);
+        //textView = view.findViewById(R.id.slide_title);
+        //textView.setText(title);
         Glide.with(getActivity()).load(url).into(imageView);
     }
 
