@@ -2,9 +2,11 @@ package com.mredrock.freshmanspecial.Guidelines.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -31,13 +33,17 @@ public class CampusRecyclerAdapter extends RecyclerView.Adapter<CampusRecyclerAd
         MyImageView mainImage; // 主图
         TextView title; // 建筑名称
         TextView text;  // 建筑介绍
+        TextView pictureNumber;
         TextView dormitoryNumber;   //Only for Dormitory List
+        LinearLayout linearLayout;
         public ViewHolder(View itemView) {
             super(itemView);
             mainImage = (MyImageView) itemView.findViewById(R.id.picword_vertical_item_image);
             title = (TextView) itemView.findViewById(R.id.picword_vertical_item_title);
             text = (TextView) itemView.findViewById(R.id.picword_vertical_item_text);
             dormitoryNumber = (TextView) itemView.findViewById(R.id.picwod_vertical_dormitory_number);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.picwod_vertical_picture_linear);
+            pictureNumber = (TextView) itemView.findViewById(R.id.picwod_vertical_picture_number);
         }
     }
 
@@ -55,11 +61,14 @@ public class CampusRecyclerAdapter extends RecyclerView.Adapter<CampusRecyclerAd
         holder.title.setText(campus.getTitle());
         holder.text.setText(campus.getContent());
         holder.dormitoryNumber.setText(campus.getDormitoryNumber());
+        holder.pictureNumber.setText("1"+ "");
+        holder.linearLayout.getBackground().setAlpha(170);
         Glide.with(context).load(campus.getUrl().get(0)).into(holder.mainImage);
     }
 
     @Override
     public int getItemCount() {
+        Log.d("adapter", "getItemCount: ......................................................");
         return list.size();
     }
 }

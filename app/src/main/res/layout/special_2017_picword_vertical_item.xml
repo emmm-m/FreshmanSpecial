@@ -5,16 +5,54 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.mredrock.freshmanspecial.Units.MyImageView
-        android:background="#d6d6d6"
+   <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/picword_vertical_item_image"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_marginTop="19dp"/>
+        android:layout_height="wrap_content">
+
+   <com.mredrock.freshmanspecial.Units.MyImageView
+       android:background="#d6d6d6"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/picword_vertical_item_image"
+       android:scaleType="fitCenter"
+       android:adjustViewBounds="true"
+       android:layout_marginLeft="18dp"
+       android:layout_marginRight="18dp"
+       android:layout_marginTop="19dp"/>
+        <LinearLayout
+            android:layout_width="53dp"
+            android:layout_height="19dp"
+            android:id="@+id/picwod_vertical_picture_linear"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="277dp"
+            android:background="@color/colorBlack">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/special_2017_picture_number"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="4dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/picwod_vertical_picture_number"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="2dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="12dp"
+                android:text="张"
+                android:layout_marginTop="2dp"/>
+            </LinearLayout>
+    </FrameLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

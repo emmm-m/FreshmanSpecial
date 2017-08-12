@@ -15,6 +15,8 @@ import com.bignerdranch.android.imageloadingwan.HttpMethod;
 import com.google.gson.Gson;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.Beans.GuidelinesVerticalBean;
+import com.mredrock.freshmanspecial.Guidelines.Adapter.CafetriaRecyclerAdapter;
+import com.mredrock.freshmanspecial.Guidelines.Adapter.CampusRecyclerAdapter;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.VerticalRecyclerAdapter;
 import com.mredrock.freshmanspecial.R;
 
@@ -32,7 +34,7 @@ import static android.content.ContentValues.TAG;
 public class CampusEnvironmentFragment extends Fragment{
     private List<GuidelinesVerticalBean> admissionBeanList;
     private RecyclerView recyclerView;
-    private VerticalRecyclerAdapter adapter;
+    private CampusRecyclerAdapter adapter;
 
     @Nullable
     @Override
@@ -62,7 +64,7 @@ public class CampusEnvironmentFragment extends Fragment{
                             @Override
                             public void run() {
                                 recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
-                                adapter = new VerticalRecyclerAdapter(bean.getCampusDataBeanList(), v.getContext());
+                                adapter = new CampusRecyclerAdapter(bean.getCampusDataBeanList(), v.getContext());
                                 recyclerView.setAdapter(adapter);
                             }
                         });

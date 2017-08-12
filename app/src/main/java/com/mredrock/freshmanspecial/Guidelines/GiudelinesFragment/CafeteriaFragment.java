@@ -44,9 +44,6 @@ public class CafeteriaFragment extends Fragment {
         View view = inflater.inflate(R.layout.special_2017_fragment_cafeteria, container, false);
         iniData(view);
         recyclerView = (RecyclerView) view.findViewById(R.id.cafeteria_recycler);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-//        adapter = new VerticalRecyclerAdapter(admissionBeanList, view.getContext());
-//        recyclerView.setAdapter(adapter);
         return view;
     }
 
@@ -59,9 +56,6 @@ public class CafeteriaFragment extends Fragment {
                     public void onFinish(String response) {
                         Gson gson = new Gson();
                         final CafeteriaBean bean = gson.fromJson(response, CafeteriaBean.class);
-                        Log.d(TAG, "onFinish: " +response);
-                        Log.d(TAG, "onFinish: " + bean.getData().get(2).getUrl().get(0));
-
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

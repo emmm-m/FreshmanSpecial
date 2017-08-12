@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bignerdranch.android.imageloadingwan.HttpMethod;
@@ -40,13 +41,17 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
         MyImageView mainImage; // 主图
         TextView title; // 建筑名称
         TextView text;  // 建筑介绍
+        TextView pictureNumber;
         TextView dormitoryNumber;   //Only for Dormitory List
+        LinearLayout linearLayout;
         public ViewHolder(View itemView) {
             super(itemView);
             mainImage = (MyImageView) itemView.findViewById(R.id.picword_vertical_item_image);
             title = (TextView) itemView.findViewById(R.id.picword_vertical_item_title);
             text = (TextView) itemView.findViewById(R.id.picword_vertical_item_text);
             dormitoryNumber = (TextView) itemView.findViewById(R.id.picwod_vertical_dormitory_number);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.picwod_vertical_picture_linear);
+            pictureNumber = (TextView) itemView.findViewById(R.id.picwod_vertical_picture_number);
         }
     }
 
@@ -64,7 +69,9 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
         holder.title.setText(cafeteria.getName());
         holder.text.setText(cafeteria.getResume());
         holder.dormitoryNumber.setText(cafeteria.getDormitoryNumber());
+        holder.pictureNumber.setText(cafeteria.getUrl().size() + "");
         Glide.with(context).load(cafeteria.getUrl().get(0)).thumbnail(0).into(holder.mainImage);
+        holder.linearLayout.getBackground().setAlpha(170);
 //        ImageLoad.getImage(activity, admissionBean.getUrl().get(0), holder.mainImage);
     }
 
