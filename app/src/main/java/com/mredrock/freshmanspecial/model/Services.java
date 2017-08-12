@@ -1,13 +1,17 @@
 package com.mredrock.freshmanspecial.model;
 
-import com.mredrock.freshmanspecial.Beans.FailBean;
+import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunpicBeans;
+import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunvideoBeans;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.FailBean;
 import com.mredrock.freshmanspecial.Beans.QQGroupsBean;
-import com.mredrock.freshmanspecial.Beans.SexBean;
-import com.mredrock.freshmanspecial.Beans.WorkBean;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.SexBean;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.WorkBean;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -32,4 +36,10 @@ public interface Services {
     @FormUrlEncoded
     @POST("test/apiRatio.php")
     Observable<FailBean> getFail(@Field("RequestType") String requestType);
+
+    @GET("test/apiForGuide.php")
+    Observable<JunxunpicBeans> getJunxunpic(@Query("RequestType") String requestType);
+
+    @GET("test/apiForGuide.php")
+    Observable<JunxunvideoBeans> getJunxunvideo(@Query("RequestType") String requestType);
 }

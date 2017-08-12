@@ -3,19 +3,15 @@ package com.mredrock.freshmanspecial.model;
 import android.graphics.Color;
 import android.util.Log;
 
-import com.mredrock.freshmanspecial.Beans.FailBean;
-import com.mredrock.freshmanspecial.Beans.SexBean;
-import com.mredrock.freshmanspecial.Beans.WorkBean;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.FailBean;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.SexBean;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.WorkBean;
 import com.mredrock.freshmanspecial.Units.ChartData;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import rx.internal.util.ActionSubscriber;
-import rx.observers.SafeSubscriber;
 
 /**
  * Created by zia on 17-8-5.

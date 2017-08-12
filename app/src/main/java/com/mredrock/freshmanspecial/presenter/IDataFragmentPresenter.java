@@ -1,8 +1,7 @@
 package com.mredrock.freshmanspecial.presenter;
 
-import com.mredrock.freshmanspecial.Beans.FailBean;
-import com.mredrock.freshmanspecial.Beans.SexBean;
-import com.mredrock.freshmanspecial.Beans.WorkBean;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.SexBean;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.WorkBean;
 import com.mredrock.freshmanspecial.Units.ChartData;
 
 import java.util.List;

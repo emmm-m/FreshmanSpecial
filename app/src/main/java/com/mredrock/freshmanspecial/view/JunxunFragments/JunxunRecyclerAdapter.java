@@ -1,15 +1,19 @@
 package com.mredrock.freshmanspecial.view.JunxunFragments;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.view.ViewGroup.LayoutParams;
+import com.bumptech.glide.Glide;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,24 +27,38 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
     public static int TUIJIAN = 2;
     private int type = 0;
     private Context context;
-    List<String> stringList = null;
-    List<String> authorList = null;
+    private List<String> picTitleList = new ArrayList<>();
+    private List<String> videoTitleList = new ArrayList<>();
+    private List<String> musicTitleList = new ArrayList<>();
+    private List<String> musicAuthorList = new ArrayList<>();
+    private List<String> videoUrlList = new ArrayList<>();
+    private List<String> picImageList = new ArrayList<>();
+    private List<String> videoImageList = new ArrayList<>();
 
     public JunxunRecyclerAdapter(Context context,int type) {
         this.context = context;
         this.type = type;
     }
 
-    public void setStringList(List<String> data){
-        this.stringList = data;
+    public void setPicList(List<String> titleList,List<String> urlList){
+        this.picTitleList = titleList;
+        this.picImageList = urlList;
         notifyDataSetChanged();
     }
 
     public void setMusicList(List<String> strings,List<String> authorList){
-        this.authorList = authorList;
-        this.stringList = strings;
+        this.musicAuthorList = authorList;
+        this.musicTitleList = strings;
         notifyDataSetChanged();
     }
+
+    public void setVideoList(List<String> titleList,List<String> picList,List<String> urlList){
+        this.videoUrlList = urlList;
+        this.videoTitleList = titleList;
+        this.videoImageList = picList;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -63,10 +81,22 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
     public void onBindViewHolder(MyViewHolder holder, int position) {
         switch (type){
             case 0:
-                holder.junxuntupian_text.setText((String) stringList.get(position));
+                LayoutParams params = holder.junxuntupian_image.getLayoutParams();
+                int width = ScreenUnit.bulid(context).getPxWide()/4;
+                params.width = width;
+                params.height = width/16*10;
+                holder.junxuntupian_image.setLayoutParams(params);
+                holder.junxuntupian_text.setText((String) picTitleList.get(position));
+                Glide.with(context).load(picImageList.get(position)).into(holder.junxuntupian_image);
                 break;
             case 1:
-                holder.junxunshiping_text.setText((String) stringList.get(position));
+                LayoutParams para = holder.junxunshiping_image.getLayoutParams();
+                int w = ScreenUnit.bulid(context).getPxWide()/2-5;
+                para.width = w;
+                para.height = w/16*10;
+                holder.junxunshiping_image.setLayoutParams(para);
+                holder.junxunshiping_text.setText((String) videoTitleList.get(position));
+                Glide.with(context).load(videoImageList.get(position)).into(holder.junxunshiping_image);
                 break;
             case 2:
                 if(position<9){
@@ -75,23 +105,25 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
                 else{
                     holder.junxuntuijian_number.setText(position+1+"");
                 }
-                holder.junxuntuijian_music.setText(stringList.get(position));
-                holder.junxuntuijian_author.setText(authorList.get(position));
+                holder.junxuntuijian_music.setText(musicTitleList.get(position));
+                holder.junxuntuijian_author.setText(musicAuthorList.get(position));
                 break;
         }
     }
 
     @Override
     public int getItemCount() {
-        if(stringList != null){
-            return stringList.size();
+        switch (type){
+            case 0:return picTitleList.size();
+            case 1:return videoTitleList.size();
+            case 2:return musicTitleList.size();
+            default:return 0;
         }
-        else return 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        CardView junxuntupian_image,junxunshiping_image;
+        ImageView junxuntupian_image,junxunshiping_image;
         TextView junxuntupian_text,junxunshiping_text,junxuntuijian_number,junxuntuijian_music,junxuntuijian_author;
 
         public MyViewHolder(View itemView) {

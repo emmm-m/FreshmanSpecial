@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.mredrock.freshmanspecial.Beans.FailBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.ChartData;
 import com.mredrock.freshmanspecial.Units.CircleChart;
