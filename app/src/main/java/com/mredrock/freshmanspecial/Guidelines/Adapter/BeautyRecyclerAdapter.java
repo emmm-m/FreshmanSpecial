@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mredrock.freshmanspecial.Beans.GuidelinesHorizontalBean;
+import com.mredrock.freshmanspecial.Beans.SurroundingBeautyBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
 
@@ -19,12 +21,12 @@ import java.util.List;
  * 界面 ： 邮子攻略-recyclerview 横向排版，周边美景、美食
  */
 
-public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRecyclerAdapter.ViewHolder> {
+public class BeautyRecyclerAdapter extends RecyclerView.Adapter<BeautyRecyclerAdapter.ViewHolder> {
 
     private Context context;
-    private List<GuidelinesHorizontalBean> list;  // 卡片里的内容单独组成一个类
+    private List<SurroundingBeautyBean.SurroundingBeautyDataBean> list;  // 卡片里的内容单独组成一个类
 
-    public HorizontalRecyclerAdapter(List<GuidelinesHorizontalBean> list, Context context) {
+    public BeautyRecyclerAdapter(List<SurroundingBeautyBean.SurroundingBeautyDataBean> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -46,7 +48,7 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
     }
 
     @Override
-    public HorizontalRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BeautyRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.special_2017_picword_horizontal_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
@@ -55,10 +57,11 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        GuidelinesHorizontalBean shopBean = list.get(position);
-        holder.address.setText(shopBean.address);
-        holder.shopName.setText(shopBean.shopName);
-        holder.commit.setText(shopBean.commit);
+        SurroundingBeautyBean.SurroundingBeautyDataBean shopBean = list.get(position);
+        holder.address.setText(shopBean.getLocation());
+        holder.shopName.setText(shopBean.getName());
+        holder.commit.setText(shopBean.getResume());
+        Glide.with(context).load(shopBean.getUrl().get(0)).into(holder.mainImage);
     }
 
 
