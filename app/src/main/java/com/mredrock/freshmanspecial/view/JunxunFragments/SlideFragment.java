@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.ScreenUnit;
 
@@ -50,7 +49,7 @@ public class SlideFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_slide, container, false);
+        view = inflater.inflate(R.layout.special_2017_fragment_slide, container, false);
         return view;
     }
 
