@@ -52,11 +52,11 @@ public class DormitoryRecyclerAdapter  extends RecyclerView.Adapter<DormitoryRec
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        DormitoryBean.DormitoryDataBean admissionBean = list.get(position);
-        holder.title.setText(admissionBean.getName());
-        holder.text.setText(admissionBean.getResume());
-        holder.dormitoryNumber.setText(admissionBean.getDormitoryNumber());
-        Glide.with(context).load(admissionBean.getUrl().get(0)).into(holder.mainImage);
+        DormitoryBean.DormitoryDataBean dormitoy = list.get(position);
+        holder.title.setText(dormitoy.getName());
+        holder.text.setText(dormitoy.getResume());
+        holder.dormitoryNumber.setText(dormitoy.getDormitoryNumber());
+        Glide.with(context).load(dormitoy.getUrl().get(0)).into(holder.mainImage);
     }
 
     @Override

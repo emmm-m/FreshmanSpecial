@@ -57,11 +57,11 @@ public class BeautyRecyclerAdapter extends RecyclerView.Adapter<BeautyRecyclerAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        SurroundingBeautyBean.SurroundingBeautyDataBean shopBean = list.get(position);
-        holder.address.setText(shopBean.getLocation());
-        holder.shopName.setText(shopBean.getName());
-        holder.commit.setText(shopBean.getResume());
-        Glide.with(context).load(shopBean.getUrl().get(0)).into(holder.mainImage);
+        SurroundingBeautyBean.SurroundingBeautyDataBean  beauty= list.get(position);
+        holder.address.setText(beauty.getLocation());
+        holder.shopName.setText(beauty.getName());
+        holder.commit.setText(beauty.getResume());
+        Glide.with(context).load(beauty.getUrl().get(0)).into(holder.mainImage);
     }
 
 

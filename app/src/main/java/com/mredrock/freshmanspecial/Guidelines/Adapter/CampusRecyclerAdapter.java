@@ -51,11 +51,11 @@ public class CampusRecyclerAdapter extends RecyclerView.Adapter<CampusRecyclerAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CampusBean.CampusDataBean admissionBean = list.get(position);
-        holder.title.setText(admissionBean.getTitle());
-        holder.text.setText(admissionBean.getContent());
-        holder.dormitoryNumber.setText(admissionBean.getDormitoryNumber());
-        Glide.with(context).load(admissionBean.getUrl().get(0)).into(holder.mainImage);
+        CampusBean.CampusDataBean campus = list.get(position);
+        holder.title.setText(campus.getTitle());
+        holder.text.setText(campus.getContent());
+        holder.dormitoryNumber.setText(campus.getDormitoryNumber());
+        Glide.with(context).load(campus.getUrl().get(0)).into(holder.mainImage);
     }
 
     @Override

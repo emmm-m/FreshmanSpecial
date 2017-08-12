@@ -60,11 +60,11 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CafeteriaBean.CafeteriaDataBean admissionBean = list.get(position);
-        holder.title.setText(admissionBean.getName());
-        holder.text.setText(admissionBean.getResume());
-        holder.dormitoryNumber.setText(admissionBean.getDormitoryNumber());
-        Glide.with(context).load(admissionBean.getUrl().get(0)).thumbnail(0).into(holder.mainImage);
+        CafeteriaBean.CafeteriaDataBean cafeteria = list.get(position);
+        holder.title.setText(cafeteria.getName());
+        holder.text.setText(cafeteria.getResume());
+        holder.dormitoryNumber.setText(cafeteria.getDormitoryNumber());
+        Glide.with(context).load(cafeteria.getUrl().get(0)).thumbnail(0).into(holder.mainImage);
 //        ImageLoad.getImage(activity, admissionBean.getUrl().get(0), holder.mainImage);
     }
 

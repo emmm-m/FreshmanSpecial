@@ -55,11 +55,11 @@ public class DailyLifeRecyclerAdapter extends RecyclerView.Adapter<DailyLifeRecy
 
     @Override
     public void onBindViewHolder(DailyLifeRecyclerAdapter.ViewHolder holder, int position) {
-        DailyLifeBean.DailyLifeDataBean shopBean = list.get(position);
-        holder.address.setText(shopBean.getLocation());
-        holder.shopName.setText(shopBean.getName());
-        holder.commit.setText(shopBean.getResume());
-        Glide.with(context).load(shopBean.getUrl().get(0)).into(holder.mainImage);
+        DailyLifeBean.DailyLifeDataBean dailyLife = list.get(position);
+        holder.address.setText(dailyLife.getLocation());
+        holder.shopName.setText(dailyLife.getName());
+        holder.commit.setText(dailyLife.getResume());
+        Glide.with(context).load(dailyLife.getUrl().get(0)).into(holder.mainImage);
     }
 
 
