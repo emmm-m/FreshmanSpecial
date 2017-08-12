@@ -54,7 +54,7 @@ public class CuisineRecyclerAdapter extends RecyclerView.Adapter<CuisineRecycler
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CuisineBean.CuisineDataBean shopBean = list.get(position);
+        CuisineBean.CuisineDataBean cuisine = list.get(position);
         holder.address.setText(shopBean.getLocation());
         holder.shopName.setText(shopBean.getName());
         holder.commit.setText(shopBean.getResume());
