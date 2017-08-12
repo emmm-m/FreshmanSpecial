@@ -37,6 +37,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:src="@drawable/special_2017_search"
                     android:padding="5dp"
                     />
             </FrameLayout>

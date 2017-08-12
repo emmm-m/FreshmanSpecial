@@ -137,8 +137,7 @@ public class QQgroupFragment extends BaseFragment {
                 Log.d("ppp", "onClick: ");
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.add(R.id.qq_layout,new QQSearchFragment());
-                transaction.addToBackStack(null);
+                transaction.replace(R.id.qq_layout,new QQSearchFragment());
                 transaction.commit();
             }
         });

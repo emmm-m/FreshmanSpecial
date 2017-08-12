@@ -1,6 +1,7 @@
 package com.mredrock.freshmanspecial.Units;
 
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -15,14 +16,15 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mredrock.freshmanspecial.Beans.MienBeans.BeautyBean;
-import com.mredrock.freshmanspecial.Beans.MienBeans.ExcellentBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.GroupBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.OriginalBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.StudentsBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.TeacherBean;
+import com.mredrock.freshmanspecial.Beans.QQGroupsBean;
 import com.mredrock.freshmanspecial.R;
 
 import java.util.ArrayList;
@@ -65,25 +67,25 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (type == BEAUTY) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_beauty, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.special_2017_item_beauty, parent, false);
             return new MyViewHolder(view,BEAUTY);
         } else if (type == STUDENT) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_student, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.special_2017_item_student, parent, false);
             return new MyViewHolder(view,STUDENT);
         } else if (type == TEACHER) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_teacher, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.special_2017_item_teacher, parent, false);
             return new MyViewHolder(view,TEACHER);
         } else if (type == ORIGINAL) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_original, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.special_2017_item_original, parent, false);
             return new MyViewHolder(view,ORIGINAL);
         } else if (type == TABS) {
-            View view = LayoutInflater.from(context).inflate(R.layout.tab_groups, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.special_2017_tab_groups, parent, false);
             return new MyViewHolder(view,TABS);
         } else if (type == GROUP) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_groups, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.special_2017_item_groups, parent, false);
             return new MyViewHolder(view,GROUP);
         } else if (type == QQGROUP) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_qq_search, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.special_2017_item_qq_search, parent, false);
             return new MyViewHolder(view,QQGROUP);
         }
         return null;
@@ -102,7 +104,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 final StudentsBean.DataBean student = (StudentsBean.DataBean) data.get(position);
                 holder.name_student.setText(student.getName());
                 Glide.with(context).load(student.getUrl()).into(holder.img_student);
-                holder.content_student.setText(student.getResume());
+                holder.content_student.setText("颁奖词：" + student.getMotto());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -149,12 +151,23 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 });
                 break;
             case GROUP:
-                GroupBean bean = (GroupBean) data.get(position);
-                holder.content_group.setText(bean.getContent());
-                holder.title_group.setText(bean.getTitle());
+                GroupBean groupBean = (GroupBean) data.get(position);
+                holder.content_group.setText(groupBean.getContent());
+                holder.title_group.setText(groupBean.getTitle());
                 break;
             case QQGROUP:
-                holder.tx_qq_searh.setText(data.get(position).toString());
+                final QQGroupsBean.DataBean QQdataBean = (QQGroupsBean.DataBean) data.get(position);
+                holder.tx_qq_searh.setText(QQdataBean.getGroupName() + "：" + QQdataBean.getNumber());
+                holder.tx_qq_searh.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                        // 将文本内容放到系统剪贴板里。
+                        cm.setText(QQdataBean.getNumber());
+                        Toast.makeText(context,QQdataBean.getGroupName()+"已复制到剪贴板",Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
                 break;
         }
     }
@@ -167,7 +180,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
 
 
     private void initPopupWindow(View view, StudentsBean.DataBean bean) {
-        View popupView = LayoutInflater.from(context).inflate(R.layout.pop_window_excellent, null);
+        View popupView = LayoutInflater.from(context).inflate(R.layout.special_2017_pop_window_excellent, null);
         // 三部曲第二  构造函数关联
         View parent = LayoutInflater.from(context).inflate(R.layout.special_2017_fragment_student,null);
         TextView name,content;
@@ -178,7 +191,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         content = popupView.findViewById(R.id.tx_pop);
         img = popupView.findViewById(R.id.img_pop);
         name.setText(bean.getName());
-        content.setText(bean.getResume());
+        content.setText(bean.getResume()+"\n\n"+bean.getMotto());
         content.setMovementMethod(ScrollingMovementMethod.getInstance());
         Glide.with(context).load(bean.getUrl()).into(img);
         int wide = ScreenUnit.bulid(context).getPxWide();
