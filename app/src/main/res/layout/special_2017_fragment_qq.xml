@@ -39,7 +39,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:padding="5dp"
-                    android:src="@drawable/special_2017_search"/>
+                    />
             </FrameLayout>
 
             <TextView

@@ -1,0 +1,24 @@
+<!-- 军训照片幻灯片格式 -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mredrock.freshmanspecial.view.SlideActivity">
+
+    <TextView
+        android:id="@+id/slide_progress"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textSize="25dp"
+        android:text="1/6"
+        android:textColor="@color/colorWhite"
+        android:gravity="center"/>
+
+    <com.mredrock.freshmanspecial.Units.MyViewPager
+        android:id="@+id/slide_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</FrameLayout>
