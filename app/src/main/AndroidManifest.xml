@@ -10,19 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Guidelines.Guidelines"></activity>
-
-        <activity android:name=".view.JunxunActivity"/>
-        <activity android:name=".view.DataActivity"/>
-        <activity android:name=".view.MienActivity"/>
-
+        <activity android:name=".Guidelines.Guidelines" />
+        <activity android:name=".view.JunxunActivity" />
+        <activity android:name=".view.DataActivity" />
+        <activity android:name=".view.MienActivity" />
+        <activity
+            android:name=".view.SlideActivity"
+            android:theme="@style/FullscreenTheme" />
     </application>
 
 </manifest>

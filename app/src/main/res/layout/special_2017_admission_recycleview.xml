@@ -24,13 +24,15 @@
 
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
-        android:layout_width="338dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/admission_recycleview_second_recycler"
-        android:layout_marginTop="17dp"
-        android:layout_marginLeft="18dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="10dp"/>
     
-    <TextView
+    <View
         android:layout_width="match_parent"
         android:layout_height="6dp"
         android:background="#EBF0F2"/>

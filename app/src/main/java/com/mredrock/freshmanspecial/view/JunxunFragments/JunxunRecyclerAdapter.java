@@ -1,6 +1,8 @@
 package com.mredrock.freshmanspecial.view.JunxunFragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.ViewGroup.LayoutParams;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.ScreenUnit;
+import com.mredrock.freshmanspecial.view.SlideActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,27 +82,55 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         switch (type){
-            case 0:
+            case 0://图片
                 LayoutParams params = holder.junxuntupian_image.getLayoutParams();
                 int width = ScreenUnit.bulid(context).getPxWide()/4;
                 params.width = width;
                 params.height = width/16*10;
                 holder.junxuntupian_image.setLayoutParams(params);
                 holder.junxuntupian_text.setText((String) picTitleList.get(position));
-                Glide.with(context).load(picImageList.get(position)).into(holder.junxuntupian_image);
+                //设置图片点击跳转幻灯片
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(context, SlideActivity.class);
+                        intent.putStringArrayListExtra("imageUrlList",(ArrayList)picImageList);
+                        intent.putStringArrayListExtra("titleList",(ArrayList)picTitleList);
+                        intent.putExtra("position",position);
+                        context.startActivity(intent);
+                    }
+                });
+                //glide加载小图片
+                RequestOptions picOptions = new RequestOptions()
+                        .fitCenter()
+                        .override(width, width/16*10);
+                Glide.with(context).load(picImageList.get(position)).apply(picOptions).into(holder.junxuntupian_image);
                 break;
-            case 1:
+            case 1://视频
                 LayoutParams para = holder.junxunshiping_image.getLayoutParams();
                 int w = ScreenUnit.bulid(context).getPxWide()/2-5;
                 para.width = w;
                 para.height = w/16*10;
                 holder.junxunshiping_image.setLayoutParams(para);
                 holder.junxunshiping_text.setText((String) videoTitleList.get(position));
-                Glide.with(context).load(videoImageList.get(position)).into(holder.junxunshiping_image);
+                //设置点击跳转网页
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri uri = Uri.parse(videoUrlList.get(position));
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        context.startActivity(intent);
+                    }
+                });
+                //glide加载封面
+                RequestOptions videoOptions = new RequestOptions()
+                        .fitCenter()
+                        .override(w, w/16*10);
+                Glide.with(context).load(videoImageList.get(position)).apply(videoOptions).into(holder.junxunshiping_image);
                 break;
-            case 2:
+            case 2://歌曲
                 if(position<9){
                     holder.junxuntuijian_number.setText("0"+(position+1));
                 }

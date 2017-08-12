@@ -2,6 +2,7 @@ package com.mredrock.freshmanspecial.Guidelines.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,13 +30,11 @@ public class SecondAdmissionRecyclerAdapter extends RecyclerView.Adapter<SecondA
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView secondTitle;
         TextView seconText;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            secondTitle = (TextView) itemView.findViewById(R.id.admission_recycleview_second_title);
-            seconText = (TextView) itemView.findViewById(R.id.admission_recycleview_second_text);
+            seconText = (TextView) itemView.findViewById(R.id.admission_recycleview_second);
         }
     }
 
@@ -50,8 +49,7 @@ public class SecondAdmissionRecyclerAdapter extends RecyclerView.Adapter<SecondA
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         GuidelinesAdmissionFirBean.GuidelinesAdmissionSecBean secBean = secBeanList.get(position);
-        holder.secondTitle.setText(secBean.getSecondTitle());
-        holder.seconText.setText(secBean.getSecondText());
+        holder.seconText.setText(Html.fromHtml(secBean.getText()));
     }
 
     @Override

@@ -47,38 +47,36 @@ public class AdmissionNoticeFragment extends Fragment{
         firBeenList = new ArrayList<>();
         secBeanList = new ArrayList<>();
 
+        //新生清单
         addSecAdmission("报道时间：", "本科新生2017年9月14、15日报道");
         addSecAdmission("报道地点：", "重庆邮电大学风雨操场");
-        addSecAdmission("新生必带： ", "自带同版近期照片共15张（要求光面相纸洗印，白底一寸，半神，正脸，免冠大头照片），" +
+        addSecAdmission("新生必带：", "自带同版近期照片共15张（要求光面相纸洗印，白底一寸，半神，正脸，免冠大头照片），" +
                 "新生档案，党团关系证明，户口本（需要迁户口的同学携带），录取通知书，高考准考证，身份证以及身份证" +
                 "（复印件多复印几份，多复印几份，虽然学校并未做要求），银行卡（缴学费）,少量现金。");
-        addSecAdmission("洗护用品 ：", "护肤品，剃须刀，日常洗漱需要的物品（诸如牙膏牙刷，毛巾，沐浴露，洗衣液等）");
+        addSecAdmission("洗护用品：", "护肤品，剃须刀，日常洗漱需要的物品（诸如牙膏牙刷，毛巾，沐浴露，洗衣液等）");
         addSecAdmission("生活用品：", "四季的衣物（重庆本地的同学或经常回家的同学携带当季衣服即可），各种晾晒衣物的工具" +
                 "，蚊帐，一些基本的床上用品，凉席，遮光帘（要是对灯光比较敏感，建议准备），一些常用药品，台灯，还有各类寝室神器。");
         addSecAdmission("个人物品：",  "电脑（笔记本最宜，其他的数码产品根据自己的情况进行添置），以及一些学习物品" +
                 "（签字笔，笔记本等等），台灯，水杯等等。");
         addFirstAdmission("新生清单");
 
-        addSecAdmission("防止上当受骗: ", "一些不法分子利用刚入学的新生不熟悉情况，以老师，" +
+        //安全守则
+        addSecAdmission("防止上当受骗：", "一些不法分子利用刚入学的新生不熟悉情况，以老师，" +
                 "学长或者老乡的身份骗取新生信任，然后以代费、减免学费等多种方式进行诈骗。");
-        addSecAdmission("不携带过多现金: ", "数额较大的现金应该及时存入银行，存折、银行卡、" +
+        addSecAdmission("不携带过多现金：", "数额较大的现金应该及时存入银行，存折、银行卡、" +
                 "身份证尽量分开放；使用银行卡要谨慎以防密码泄露。");
-        addSecAdmission("拒绝上门推销: ", "许多不法分子以到寝室推销为名进行诈骗或盗窃，如若发现上门推销人员，" +
+        addSecAdmission("拒绝上门推销：", "许多不法分子以到寝室推销为名进行诈骗或盗窃，如若发现上门推销人员，" +
                 "应该及时报告宿管人员或者保卫处。");
         addFirstAdmission("安全守则");
 
-        addSecAdmission("方案一: ", "迎新接站：报道期间，我校将在重庆火车北站南、北广场设新生接待站，有同学负责引导新生到指定地点乘车");
-        addSecAdmission("方案二: ", "重庆江北机场（距离学校约40公里）：可乘机场大巴至上清寺后转乘108路公交车至南坪，" +
+        //乘车路线
+        addSecAdmission("方案一：", "迎新接站：报道期间，我校将在重庆火车北站南、北广场设新生接待站，有同学负责引导新生到指定地点乘车");
+        addSecAdmission("方案二：", "重庆江北机场（距离学校约40公里）：可乘机场大巴至上清寺后转乘108路公交车至南坪，" +
                 "再转乘346或347路公交车到学校；或乘轻轨三号线到南坪，再转乘346或347路公交车到学校；直接打车到校费用约为70元");
         addFirstAdmission("乘车路线");
 
     }
 
-    public void initView()
-    {
-
-
-    }
 
     public void addFirstAdmission(String title) {
         firBean = new GuidelinesAdmissionFirBean();
@@ -87,15 +85,15 @@ public class AdmissionNoticeFragment extends Fragment{
         firBeenList.add(firBean);
         secBeanList = new ArrayList<>();
         for (int i = 0; i < 2; i ++) {
-            Log.d(TAG, "addFirstAdmission: " + firBean.getGuidelinesAdmissionSecBeanList().get(i).getSecondTitle());
+//            Log.d(TAG, "addFirstAdmission: " + firBean.getGuidelinesAdmissionSecBeanList().get(i).getSecondTitle());
         }
 
     }
 
     public void addSecAdmission(String secTitle, String secText) {
         GuidelinesAdmissionFirBean.GuidelinesAdmissionSecBean bean = new GuidelinesAdmissionFirBean.GuidelinesAdmissionSecBean();
-        bean.setSecondTitle(secTitle);
-        bean.setSecondText(secText);
+        String text = "<font color='#65B2FF'>" + secTitle + "</font>" + secText;
+        bean.setText(text);
         secBeanList.add(bean);
 //        Log.d(TAG, "addSecAdmission: " + bean.getSecondTitle()+ secBeanList.get(1).getSecondTitle()
 //        );
