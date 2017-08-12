@@ -61,7 +61,7 @@
                 android:layout_marginTop="8dp">
                 <ImageView
                     android:layout_width="14dp"
-                    android:layout_height="16dp"
+                    android:layout_height="18dp"
                     android:src="@drawable/special_2017_location"
                     android:scaleType="centerCrop"/>
 

@@ -56,7 +56,6 @@ public class FirstAdmissionRecyclerAdapter extends
     @Override
     public void onBindViewHolder(FirstAdmissionRecyclerAdapter.ViewHolder holder, int position) {
         GuidelinesAdmissionFirBean bean = guidelinesAdmissionFirBeanList.get(position);
-
         holder.firstTitle.setText(bean.getFirstTitle());
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
         holder.recyclerView.setAdapter(new SecondAdmissionRecyclerAdapter(
