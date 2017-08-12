@@ -28,23 +28,15 @@ public class GuidelinesAdmissionFirBean {
     private List<GuidelinesAdmissionSecBean> guidelinesAdmissionSecBeanList;
 
     public static class GuidelinesAdmissionSecBean {
-        private String SecondTitle;
-        private String secondText;
+        private String text;
 
-        public String getSecondTitle() {
-            return SecondTitle;
+
+        public String getText() {
+            return text;
         }
 
-        public void setSecondTitle(String secondTitle) {
-            SecondTitle = secondTitle;
-        }
-
-        public String getSecondText() {
-            return secondText;
-        }
-
-        public void setSecondText(String secondText) {
-            this.secondText = secondText;
+        public void setText(String text) {
+            this.text = text;
         }
     }
 }
