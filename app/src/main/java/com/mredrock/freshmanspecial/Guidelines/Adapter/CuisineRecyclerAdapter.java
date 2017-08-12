@@ -55,10 +55,10 @@ public class CuisineRecyclerAdapter extends RecyclerView.Adapter<CuisineRecycler
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CuisineBean.CuisineDataBean cuisine = list.get(position);
-        holder.address.setText(shopBean.getLocation());
-        holder.shopName.setText(shopBean.getName());
-        holder.commit.setText(shopBean.getResume());
-        Glide.with(context).load(shopBean.getUrl().get(0)).into(holder.mainImage);
+        holder.address.setText(cuisine.getLocation());
+        holder.shopName.setText(cuisine.getName());
+        holder.commit.setText(cuisine.getResume());
+        Glide.with(context).load(cuisine.getUrl().get(0)).into(holder.mainImage);
     }
 
 
