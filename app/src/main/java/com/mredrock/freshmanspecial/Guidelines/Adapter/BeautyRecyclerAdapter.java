@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mredrock.freshmanspecial.Beans.GuidelinesHorizontalBean;
 import com.mredrock.freshmanspecial.Beans.SurroundingBeautyBean;
 import com.mredrock.freshmanspecial.R;
@@ -61,7 +62,9 @@ public class BeautyRecyclerAdapter extends RecyclerView.Adapter<BeautyRecyclerAd
         holder.address.setText(beauty.getLocation());
         holder.shopName.setText(beauty.getName());
         holder.commit.setText(beauty.getResume());
-        Glide.with(context).load(beauty.getUrl().get(0)).into(holder.mainImage);
+        Glide.with(context).load(beauty.getUrl().get(0))
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .into(holder.mainImage);
     }
 
 

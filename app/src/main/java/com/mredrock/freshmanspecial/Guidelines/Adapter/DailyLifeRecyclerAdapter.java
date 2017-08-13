@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mredrock.freshmanspecial.Beans.DailyLifeBean;
 import com.mredrock.freshmanspecial.Beans.SurroundingBeautyBean;
 import com.mredrock.freshmanspecial.R;
@@ -59,7 +60,9 @@ public class DailyLifeRecyclerAdapter extends RecyclerView.Adapter<DailyLifeRecy
         holder.address.setText(dailyLife.getLocation());
         holder.shopName.setText(dailyLife.getName());
         holder.commit.setText(dailyLife.getResume());
-        Glide.with(context).load(dailyLife.getUrl().get(0)).into(holder.mainImage);
+        Glide.with(context).load(dailyLife.getUrl().get(0))
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .into(holder.mainImage);
     }
 
 

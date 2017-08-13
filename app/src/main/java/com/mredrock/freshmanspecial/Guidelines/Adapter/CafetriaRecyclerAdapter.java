@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bignerdranch.android.imageloadingwan.HttpMethod;
 import com.bignerdranch.android.imageloadingwan.ImageLoad;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mredrock.freshmanspecial.Beans.CafeteriaBean;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.R;
@@ -70,7 +71,9 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
         holder.text.setText(cafeteria.getResume());
         holder.dormitoryNumber.setText(cafeteria.getDormitoryNumber());
         holder.pictureNumber.setText(cafeteria.getUrl().size() + "");
-        Glide.with(context).load(cafeteria.getUrl().get(0)).thumbnail(0).into(holder.mainImage);
+        Glide.with(context).load(cafeteria.getUrl().get(0)).thumbnail(0)
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .into(holder.mainImage);
         holder.linearLayout.getBackground().setAlpha(170);
 //        ImageLoad.getImage(activity, admissionBean.getUrl().get(0), holder.mainImage);
     }

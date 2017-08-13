@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.Beans.DormitoryBean;
 import com.mredrock.freshmanspecial.R;
@@ -90,7 +91,9 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
         });
         holder.dormitoryNumber.setText(getDormitoryNumber(dormitoy.getName()));
         holder.pictureNumber.setText(dormitoy.getUrl().size() + "");
-        Glide.with(context).load(dormitoy.getUrl().get(0)).into(holder.mainImage);
+        Glide.with(context).load(dormitoy.getUrl().get(0))
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .into(holder.mainImage);
         holder.linearLayout.getBackground().setAlpha(170);
     }
 

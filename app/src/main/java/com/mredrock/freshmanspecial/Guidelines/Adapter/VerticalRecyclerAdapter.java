@@ -1,7 +1,6 @@
 package com.mredrock.freshmanspecial.Guidelines.Adapter;
 
 import android.content.Context;
-
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +8,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
-import com.mredrock.freshmanspecial.Beans.GuidelinesVerticalBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
 
 import java.util.List;
-
-import static com.mredrock.freshmanspecial.R.id.imageView;
 
 /**
  * Created by glossimar on 2017/8/4.
@@ -61,7 +58,9 @@ public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecycl
         holder.title.setText(admissionBean.getTitle());
         holder.text.setText(admissionBean.getContent());
         holder.dormitoryNumber.setText(admissionBean.getDormitoryNumber());
-        Glide.with(context).load(admissionBean.getUrl().get(0)).into(holder.mainImage);
+        Glide.with(context).load(admissionBean.getUrl().get(0))
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .into(holder.mainImage);
     }
 
     @Override

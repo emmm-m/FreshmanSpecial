@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.Beans.MienBeans.BeautyBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.GroupBean;
@@ -97,14 +98,18 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         switch (holder.viewType){
             case BEAUTY:
                 BeautyBean.DataBean beauty = (BeautyBean.DataBean) data.get(position);
-                Glide.with(context).load(beauty.getUrl()).into(holder.img_beauty);
+                Glide.with(context).load(beauty.getUrl())
+                        .transition(new DrawableTransitionOptions().crossFade(200))
+                        .into(holder.img_beauty);
                 holder.content_beauty.setText(beauty.getContent());
                 holder.title_beauty.setText(beauty.getTitle());
                 break;
             case STUDENT:
                 final StudentsBean.DataBean student = (StudentsBean.DataBean) data.get(position);
                 holder.name_student.setText(student.getName());
-                Glide.with(context).load(student.getUrl()).into(holder.img_student);
+                Glide.with(context).load(student.getUrl())
+                        .transition(new DrawableTransitionOptions().crossFade(200))
+                        .into(holder.img_student);
                 holder.content_student.setText("颁奖词：" + student.getMotto());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -116,7 +121,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             case TEACHER:
                 final TeacherBean.DataBean teacher = (TeacherBean.DataBean) data.get(position);
                 holder.name_teacher.setText(teacher.getName());
-                Glide.with(context).load(teacher.getUrl()).into(holder.img_teacher);
+                Glide.with(context).load(teacher.getUrl())
+                        .transition(new DrawableTransitionOptions().crossFade(200))
+                        .into(holder.img_teacher);
                 break;
             case ORIGINAL:
                 final OriginalBean.DataBean originalBean = (OriginalBean.DataBean) data.get(position);
@@ -128,7 +135,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 RequestOptions picOptions = new RequestOptions()
                         .fitCenter()
                         .override(width, width*9/16);
-                Glide.with(context).load(originalBean.getCover()).apply(picOptions).into(holder.img_original);
+                Glide.with(context).load(originalBean.getCover()).apply(picOptions)
+                        .transition(new DrawableTransitionOptions().crossFade(200))
+                        .into(holder.img_original);
                 holder.time_original.setText(originalBean.getTime());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

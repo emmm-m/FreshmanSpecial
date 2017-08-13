@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mredrock.freshmanspecial.Beans.CuisineBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
@@ -58,7 +59,9 @@ public class CuisineRecyclerAdapter extends RecyclerView.Adapter<CuisineRecycler
         holder.address.setText(cuisine.getLocation());
         holder.shopName.setText(cuisine.getName());
         holder.commit.setText(cuisine.getResume());
-        Glide.with(context).load(cuisine.getUrl().get(0)).into(holder.mainImage);
+        Glide.with(context).load(cuisine.getUrl().get(0))
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .into(holder.mainImage);
     }
 
 
