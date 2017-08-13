@@ -16,7 +16,8 @@
     <RelativeLayout
         android:id="@+id/slide_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
         <TextView
             android:id="@+id/slide_progress"
             android:layout_width="match_parent"
@@ -27,6 +28,8 @@
             android:textColor="@color/colorWhite"
             android:gravity="center"/>
         <TextView
+            android:alpha="0.7"
+            android:background="#000000"
             android:id="@+id/slide_title"
             android:layout_width="match_parent"
             android:paddingTop="10dp"
