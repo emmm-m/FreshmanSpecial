@@ -52,6 +52,7 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
             pictureNumber = (TextView) itemView.findViewById(R.id.picwod_vertical_picture_number);
             dormitoryNumber = (TextView) itemView.findViewById(R.id.picwod_vertical_dormitory_number);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.picwod_vertical_picture_linear);
+            linearLayout.setVisibility(View.VISIBLE);
         }
     }
 

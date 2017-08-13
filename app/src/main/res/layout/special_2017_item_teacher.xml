@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:background="#b7b7b7"
             android:adjustViewBounds="true"
-            android:src="@mipmap/special_2017_chongyoufengcai"
             />
 
 

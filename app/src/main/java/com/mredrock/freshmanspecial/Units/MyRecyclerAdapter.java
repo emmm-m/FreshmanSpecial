@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.Beans.MienBeans.BeautyBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.GroupBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.OriginalBean;
@@ -118,9 +119,16 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 Glide.with(context).load(teacher.getUrl()).into(holder.img_teacher);
                 break;
             case ORIGINAL:
-                final OriginalBean originalBean = (OriginalBean) data.get(position);
-                holder.title_orignial.setText(originalBean.getTitle());
-                holder.img_original.setImageDrawable(originalBean.getImg());
+                final OriginalBean.DataBean originalBean = (OriginalBean.DataBean) data.get(position);
+                holder.title_orignial.setText(originalBean.getName());
+                ViewGroup.LayoutParams params = holder.img_original.getLayoutParams();
+                int width = ScreenUnit.bulid(context).getPxWide()/2;
+//                params.width = width;
+                params.height = width*3/5;
+                RequestOptions picOptions = new RequestOptions()
+                        .fitCenter()
+                        .override(width, width*9/16);
+                Glide.with(context).load(originalBean.getCover()).apply(picOptions).into(holder.img_original);
                 holder.time_original.setText(originalBean.getTime());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

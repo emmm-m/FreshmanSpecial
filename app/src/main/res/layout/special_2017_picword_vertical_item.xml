@@ -1,56 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--专题 ： 邮子攻略；界面 ： recycler 排版纵向，学校寝室、食堂、环境 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#fff"
+              android:orientation="vertical">
 
-   <FrameLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-   <com.mredrock.freshmanspecial.Units.MyImageView
-       android:background="#d6d6d6"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/picword_vertical_item_image"
-       android:scaleType="fitCenter"
-       android:transitionName="share"
-       android:adjustViewBounds="true"
-       android:layout_marginLeft="18dp"
-       android:layout_marginRight="18dp"
-       android:layout_marginTop="19dp"/>
+        <com.mredrock.freshmanspecial.Units.MyImageView
+            android:id="@+id/picword_vertical_item_image"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="19dp"
+            android:adjustViewBounds="true"
+            android:background="#d6d6d6"
+            android:scaleType="centerCrop"
+            android:transitionName="share"/>
+
         <LinearLayout
+            android:id="@+id/picwod_vertical_picture_linear"
             android:layout_width="53dp"
             android:layout_height="19dp"
-            android:id="@+id/picwod_vertical_picture_linear"
-            android:orientation="horizontal"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="277dp"
-            android:background="@color/colorBlack">
+            android:visibility="gone"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="38dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/special_2017_shape_num"
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:src="@drawable/special_2017_picture_number"
-                android:layout_marginLeft="9dp"
-                android:layout_marginTop="4dp"/>
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:layout_marginLeft="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/special_2017_picture_number"/>
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/picwod_vertical_picture_number"
-                android:textSize="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:textColor="#FFFFFF"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="2dp"/>
+                android:textSize="12dp"/>
+
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textSize="12dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="2dp"
                 android:text="张"
-                android:layout_marginTop="2dp"/>
-            </LinearLayout>
+                android:textColor="#FFFFFF"
+                android:textSize="12dp"/>
+        </LinearLayout>
     </FrameLayout>
 
 
@@ -60,36 +68,36 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/picword_vertical_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/picword_vertical_item_title"
-            android:textColor="@color/colorDeepGray"
-            android:textSize="15dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="13dp"/>
+            android:layout_marginTop="13dp"
+            android:textColor="@color/colorDeepGray"
+            android:textSize="15dp"/>
 
         <TextView
+            android:id="@+id/picwod_vertical_dormitory_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/picwod_vertical_dormitory_number"
-            android:text=""
-            android:textSize="13dp"
-            android:textColor="@color/tabTextColor"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="14dp" />
+            android:layout_marginTop="14dp"
+            android:text=""
+            android:textColor="@color/tabTextColor"
+            android:textSize="13dp"/>
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/picword_vertical_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/picword_vertical_item_text"
-        android:textColor="@color/tabTextColor"
-        android:textSize="13dp"
+        android:layout_marginBottom="18dp"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="18dp"/>
+        android:textColor="@color/tabTextColor"
+        android:textSize="13dp"/>
 
     <TextView
         android:layout_width="match_parent"

@@ -4,6 +4,7 @@ package com.mredrock.freshmanspecial.model;
 import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunpicBeans;
 import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunvideoBeans;
 import com.mredrock.freshmanspecial.Beans.MienBeans.BeautyBean;
+import com.mredrock.freshmanspecial.Beans.MienBeans.OriginalBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.StudentsBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.TeacherBean;
 import com.mredrock.freshmanspecial.Beans.ShujuBeans.FailBean;
@@ -211,6 +212,25 @@ public class HttpModel {
                 .build();
         service = retrofit.create(Services.class);
         service.getBeauties("beautyInCQUPT")
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取原创重邮
+     * @param subscriber
+     */
+    public void getBOriginal(Subscriber<OriginalBean> subscriber) {
+        retrofit = new Retrofit.Builder()
+                .client(httpClientBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(URL)
+                .build();
+        service = retrofit.create(Services.class);
+        service.getOriginal("natureCQUPT")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

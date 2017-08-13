@@ -8,17 +8,17 @@
               android:orientation="vertical">
 
     <FrameLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp">
 
         <com.mredrock.freshmanspecial.Units.MyImageView
             android:id="@+id/img_original"
-            android:layout_width="wrap_content"
-            android:layout_height="160dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="#b7b7b7"
+            android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            android:src="@mipmap/special_2017_chongyoufengcai"
             />
 
         <ImageView
@@ -44,8 +44,8 @@
         android:id="@+id/title_original"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="7dp"
         android:text="《重邮》"
         android:textSize="13dp"/>
 
