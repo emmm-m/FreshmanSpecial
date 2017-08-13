@@ -98,6 +98,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         switch (holder.viewType){
             case BEAUTY:
                 BeautyBean.DataBean beauty = (BeautyBean.DataBean) data.get(position);
+                int width = ScreenUnit.bulid(context).getPxWide();
+//                params.width = width;
+                RequestOptions picOptions = new RequestOptions()
+                        .fitCenter()
+                        .override(width, width/2);
                 Glide.with(context).load(beauty.getUrl())
                         .transition(new DrawableTransitionOptions().crossFade(200))
                         .into(holder.img_beauty);
@@ -107,7 +112,12 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             case STUDENT:
                 final StudentsBean.DataBean student = (StudentsBean.DataBean) data.get(position);
                 holder.name_student.setText(student.getName());
-                Glide.with(context).load(student.getUrl())
+                int width_student = ScreenUnit.bulid(context).getPxWide()/5;
+//                params.width = width;
+                RequestOptions picOptions_student = new RequestOptions()
+                        .fitCenter()
+                        .override(width_student, width_student);
+                Glide.with(context).load(student.getUrl()).apply(picOptions_student)
                         .transition(new DrawableTransitionOptions().crossFade(200))
                         .into(holder.img_student);
                 holder.content_student.setText("颁奖词：" + student.getMotto());
@@ -121,21 +131,28 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             case TEACHER:
                 final TeacherBean.DataBean teacher = (TeacherBean.DataBean) data.get(position);
                 holder.name_teacher.setText(teacher.getName());
-                Glide.with(context).load(teacher.getUrl())
+                ViewGroup.LayoutParams params = holder.img_teacher.getLayoutParams();
+                int width_teacher = ScreenUnit.bulid(context).getPxWide()/2;
+//                params.width = width;
+                params.height = width_teacher*3/5;
+                RequestOptions picOptions_teacher = new RequestOptions()
+                        .fitCenter()
+                        .override(width_teacher, width_teacher*9/16);
+                Glide.with(context).load(teacher.getUrl()).apply(picOptions_teacher)
                         .transition(new DrawableTransitionOptions().crossFade(200))
                         .into(holder.img_teacher);
                 break;
             case ORIGINAL:
                 final OriginalBean.DataBean originalBean = (OriginalBean.DataBean) data.get(position);
                 holder.title_orignial.setText(originalBean.getName());
-                ViewGroup.LayoutParams params = holder.img_original.getLayoutParams();
-                int width = ScreenUnit.bulid(context).getPxWide()/2;
+                ViewGroup.LayoutParams params_original = holder.img_original.getLayoutParams();
+                int width_original = ScreenUnit.bulid(context).getPxWide()/2;
 //                params.width = width;
-                params.height = width*3/5;
-                RequestOptions picOptions = new RequestOptions()
+                params_original.height = width_original*3/5;
+                RequestOptions picOptions_original = new RequestOptions()
                         .fitCenter()
-                        .override(width, width*9/16);
-                Glide.with(context).load(originalBean.getCover()).apply(picOptions)
+                        .override(width_original, width_original*9/16);
+                Glide.with(context).load(originalBean.getCover()).apply(picOptions_original)
                         .transition(new DrawableTransitionOptions().crossFade(200)).into(holder.img_original);
                 holder.time_original.setText(originalBean.getTime());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
