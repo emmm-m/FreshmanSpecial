@@ -41,7 +41,13 @@
         <TextView
             android:id="@+id/junxunshiping_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:textSize="12dp"
+            android:maxLines="1"
+            android:ellipsize="middle"
             android:textColor="#474747" />
     </LinearLayout>
 

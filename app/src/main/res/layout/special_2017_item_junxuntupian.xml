@@ -24,6 +24,7 @@
         android:id="@+id/junxuntupian_text"
         android:textColor="#474747"
         android:layout_width="match_parent"
-        android:gravity="center_horizontal"
-        android:layout_height="wrap_content" />
+        android:gravity="center"
+        android:layout_height="20dp"
+        android:textSize="12dp"/>
 </LinearLayout>
