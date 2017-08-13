@@ -113,7 +113,7 @@ public class DataModel {
         final int girlCircleStrokeColor = Color.parseColor("#EEDC79");
         final int girlBackColor = Color.parseColor("#FFFFFB");
         final int girlBackStrokeColor = Color.parseColor("#FDF9E7");
-        final int girlTextColor = Color.parseColor("#FBF3CA");
+        final int girlTextColor = Color.parseColor("#ECD76C");
         final int boyCircleColor = Color.parseColor("#9DFCEE");
         final int boyCircleStrokeColor = Color.parseColor("#6CEAD5");
         final int boyBackColor = Color.parseColor("#F8FFFE");
