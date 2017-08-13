@@ -37,19 +37,21 @@ public class SlideActivity extends AppCompatActivity implements ISlideActivity {
     private boolean isLayoutShow = true;
     private boolean isTowPointClick = false;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+            Transition animation = TransitionInflater.from(this).inflateTransition(R.transition.animation);
+            //退出时使用
+            getWindow().setExitTransition(animation);
+            //第一次进入时使用
+            getWindow().setEnterTransition(animation);
+            //再次进入时使用
+            getWindow().setReenterTransition(animation);
+        }
         setContentView(getContentViewId());
-        Transition animation = TransitionInflater.from(this).inflateTransition(R.transition.animation);
-        //退出时使用
-        getWindow().setExitTransition(animation);
-        //第一次进入时使用
-        getWindow().setEnterTransition(animation);
-        //再次进入时使用
-        getWindow().setReenterTransition(animation);
+
         initData();
         initState();
     }
