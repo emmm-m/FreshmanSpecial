@@ -106,7 +106,7 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
                         intent.putStringArrayListExtra("titleList",(ArrayList)picTitleList);
                         intent.putExtra("position",position);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.junxuntupian_image, "share").toBundle());
+                            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context).toBundle());
                         } else {
                             context.startActivity(intent);
                         }

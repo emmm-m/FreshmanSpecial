@@ -1,8 +1,17 @@
 package com.mredrock.freshmanspecial.view;
 
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
@@ -19,7 +28,7 @@ import java.util.List;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class SlideActivity extends BaseActivity implements ISlideActivity {
+public class SlideActivity extends AppCompatActivity implements ISlideActivity {
 
     private MyViewPager viewPager;
     private TextView progressView, titleView;
@@ -28,7 +37,23 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
     private boolean isLayoutShow = true;
     private boolean isTowPointClick = false;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        setContentView(getContentViewId());
+        Transition animation = TransitionInflater.from(this).inflateTransition(R.transition.animation);
+        //退出时使用
+        getWindow().setExitTransition(animation);
+        //第一次进入时使用
+        getWindow().setEnterTransition(animation);
+        //再次进入时使用
+        getWindow().setReenterTransition(animation);
+        initData();
+        initState();
+    }
+
     protected void initData() {
         viewPager = $(R.id.slide_viewpager);
         progressView = $(R.id.slide_progress);
@@ -111,7 +136,6 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
         });
     }
 
-    @Override
     protected int getContentViewId() {
         return R.layout.special_2017_activity_slide;
     }
@@ -144,6 +168,19 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
     @Override
     public int getPosition() {
         return getIntent().getIntExtra("position", 0);
+    }
+
+    //View快捷绑定id的方法
+    public <T extends View> T $(int id) {
+        return (T) findViewById(id);
+    }
+
+    public void initState() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+
     }
 
 }

@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,9 +69,8 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final DormitoryBean.DormitoryDataBean dormitoy = list.get(position);
-        holder.title.setText(dormitoy.getName());
+        holder.title.setText(getDormitoryName(dormitoy.getName()));
         holder.text.setText(dormitoy.getResume());
-        holder.dormitoryNumber.setText(dormitoy.getDormitoryNumber());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,9 +82,10 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
                 intent.putStringArrayListExtra("imageUrlList", (ArrayList) dormitoy.getUrl());
                 intent.putStringArrayListExtra("titleList", (ArrayList) picTitleList);
                 intent.putExtra("position", 0);
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.mainImage, "share").toBundle());
-                }else {
+                    context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context).toBundle());
+                } else {
                     context.startActivity(intent);
                 }
             }
