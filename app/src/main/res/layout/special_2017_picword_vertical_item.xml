@@ -19,7 +19,6 @@
             android:layout_marginRight="18dp"
             android:layout_marginTop="19dp"
             android:adjustViewBounds="true"
-            android:background="#d6d6d6"
             android:scaleType="centerCrop"
             android:transitionName="share"/>
 
