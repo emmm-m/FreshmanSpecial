@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--专题 ： 邮子攻略；界面 ： recycler 排版纵向，学校寝室、食堂、环境 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="#fff"
-              android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff"
+    android:orientation="vertical"
     android:layout_marginTop="6dp">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.mredrock.freshmanspecial.Units.MyImageView
-            android:id="@+id/picword_vertical_item_image"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
             android:layout_marginTop="19dp"
             android:adjustViewBounds="true"
-            android:background="#d6d6d6"
+            app:cardCornerRadius="8dp"
+            android:elevation="0dp"
             android:scaleType="centerCrop"
-            android:transitionName="share"/>
+            android:transitionName="share">
+            <ImageView
+                android:id="@+id/picword_vertical_item_image"
+                android:background="#d6d6d6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v7.widget.CardView>
 
         <LinearLayout
             android:id="@+id/picwod_vertical_picture_linear"

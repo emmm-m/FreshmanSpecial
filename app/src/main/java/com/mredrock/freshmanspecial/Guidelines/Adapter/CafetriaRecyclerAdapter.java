@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,7 +42,7 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        MyImageView mainImage; // 主图
+        ImageView mainImage; // 主图
         TextView title; // 建筑名称
         TextView text;  // 建筑介绍
         TextView pictureNumber;
@@ -49,7 +50,7 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
         LinearLayout linearLayout;
         public ViewHolder(View itemView) {
             super(itemView);
-            mainImage = (MyImageView) itemView.findViewById(R.id.picword_vertical_item_image);
+            mainImage =  itemView.findViewById(R.id.picword_vertical_item_image);
             title = (TextView) itemView.findViewById(R.id.picword_vertical_item_title);
             text = (TextView) itemView.findViewById(R.id.picword_vertical_item_text);
             dormitoryNumber = (TextView) itemView.findViewById(R.id.picwod_vertical_dormitory_number);
