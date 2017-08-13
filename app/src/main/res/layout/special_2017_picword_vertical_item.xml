@@ -4,7 +4,8 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="#fff"
-              android:orientation="vertical">
+              android:orientation="vertical"
+    android:layout_marginTop="6dp">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -98,10 +99,5 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/tabTextColor"
         android:textSize="13dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="6dp"
-        android:background="@color/underTabColor"/>
 
 </LinearLayout>

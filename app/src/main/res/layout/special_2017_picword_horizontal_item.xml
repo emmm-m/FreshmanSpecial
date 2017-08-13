@@ -2,7 +2,8 @@
 <!--专题 ： 邮子攻略；界面 ： recycler 排版横向，周边美景，周边美食-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
-             android:layout_height="120dp">
+             android:layout_height="120dp"
+    android:background="#ffffff">
 
     <LinearLayout
         android:layout_width="match_parent"
