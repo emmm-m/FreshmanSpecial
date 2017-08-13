@@ -10,9 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 
 import java.util.List;
 
@@ -63,7 +65,11 @@ public class CampusRecyclerAdapter extends RecyclerView.Adapter<CampusRecyclerAd
         holder.dormitoryNumber.setText(campus.getDormitoryNumber());
         holder.pictureNumber.setText("1"+ "");
         holder.linearLayout.getBackground().setAlpha(170);
-        Glide.with(context).load(campus.getUrl().get(0)).into(holder.mainImage);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .override(ScreenUnit.bulid(context).getPxWide(),ScreenUnit.bulid(context).getPxWide()/16*9);
+        Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/16*9);
+        Glide.with(context).load(campus.getUrl().get(0)).apply(options).into(holder.mainImage);
     }
 
     @Override

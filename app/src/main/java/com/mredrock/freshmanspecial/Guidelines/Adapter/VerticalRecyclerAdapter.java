@@ -3,16 +3,19 @@ package com.mredrock.freshmanspecial.Guidelines.Adapter;
 import android.content.Context;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.Beans.GuidelinesVerticalBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 
 import java.util.List;
 
@@ -61,7 +64,11 @@ public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecycl
         holder.title.setText(admissionBean.getTitle());
         holder.text.setText(admissionBean.getContent());
         holder.dormitoryNumber.setText(admissionBean.getDormitoryNumber());
-        Glide.with(context).load(admissionBean.getUrl().get(0)).into(holder.mainImage);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .override(ScreenUnit.bulid(context).getPxWide(),ScreenUnit.bulid(context).getPxWide()/16*9);
+        Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/16*9);
+        Glide.with(context).load(admissionBean.getUrl().get(0)).apply(options).into(holder.mainImage);
     }
 
     @Override

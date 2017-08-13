@@ -2,15 +2,19 @@ package com.mredrock.freshmanspecial.Guidelines.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.Beans.CuisineBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 
 import java.util.List;
 
@@ -32,14 +36,14 @@ public class CuisineRecyclerAdapter extends RecyclerView.Adapter<CuisineRecycler
         TextView shopName; //  名称
         TextView commit;  //  具体描述
         TextView address;   //  所在地点
-        MyImageView mainImage;    //  图片
+        ImageView mainImage;    //  图片
 
         public ViewHolder(View itemView) {
             super(itemView);
             shopName = (TextView) itemView.findViewById(R.id.picword_horizontal_item_title);
             commit = (TextView) itemView.findViewById(R.id.picword_horizontal_item_text);
             address = (TextView) itemView.findViewById(R.id.picword_horizontal_item_address);
-            mainImage = (MyImageView) itemView.findViewById(R.id.picword_horizontal_item_image);
+            mainImage = itemView.findViewById(R.id.picword_horizontal_item_image);
 
         }
     }
@@ -58,7 +62,11 @@ public class CuisineRecyclerAdapter extends RecyclerView.Adapter<CuisineRecycler
         holder.address.setText(cuisine.getLocation());
         holder.shopName.setText(cuisine.getName());
         holder.commit.setText(cuisine.getResume());
-        Glide.with(context).load(cuisine.getUrl().get(0)).into(holder.mainImage);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .override(ScreenUnit.bulid(context).getPxWide()/3,ScreenUnit.bulid(context).getPxWide()/48*9);
+        Log.d("123","width:  "+200);
+        Glide.with(context).load(cuisine.getUrl().get(0)).apply(options).into(holder.mainImage);
     }
 
 

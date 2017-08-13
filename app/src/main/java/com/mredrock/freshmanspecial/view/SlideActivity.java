@@ -42,6 +42,8 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
 
         SlidePagerAdapter adapter = new SlidePagerAdapter(getSupportFragmentManager(), this, getTitleList(), getImageUrlList());
         viewPager.setAdapter(adapter);
+
+        viewPager.setOffscreenPageLimit(1);
         //设置当前位置
         viewPager.setCurrentItem(getPosition());
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

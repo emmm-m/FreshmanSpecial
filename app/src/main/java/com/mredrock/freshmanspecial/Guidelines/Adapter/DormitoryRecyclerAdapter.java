@@ -10,14 +10,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.Beans.DormitoryBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 import com.mredrock.freshmanspecial.view.SlideActivity;
 
 import java.util.ArrayList;
@@ -37,7 +40,7 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        MyImageView mainImage; // 主图
+        ImageView mainImage; // 主图
         TextView title; // 建筑名称
         TextView text;  // 建筑介绍
         TextView pictureNumber;
@@ -46,7 +49,7 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mainImage = (MyImageView) itemView.findViewById(R.id.picword_vertical_item_image);
+            mainImage =  itemView.findViewById(R.id.picword_vertical_item_image);
             title = (TextView) itemView.findViewById(R.id.picword_vertical_item_title);
             text = (TextView) itemView.findViewById(R.id.picword_vertical_item_text);
             pictureNumber = (TextView) itemView.findViewById(R.id.picwod_vertical_picture_number);
@@ -90,7 +93,11 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
         });
         holder.dormitoryNumber.setText(getDormitoryNumber(dormitoy.getName()));
         holder.pictureNumber.setText(dormitoy.getUrl().size() + "");
-        Glide.with(context).load(dormitoy.getUrl().get(0)).into(holder.mainImage);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .override(ScreenUnit.bulid(context).getPxWide(),ScreenUnit.bulid(context).getPxWide()/16*9);
+        Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/16*9);
+        Glide.with(context).load(dormitoy.getUrl().get(0)).apply(options).into(holder.mainImage);
         holder.linearLayout.getBackground().setAlpha(170);
     }
 

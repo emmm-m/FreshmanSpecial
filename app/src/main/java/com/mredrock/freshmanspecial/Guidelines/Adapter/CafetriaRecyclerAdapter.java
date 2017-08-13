@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,12 @@ import android.widget.TextView;
 import com.bignerdranch.android.imageloadingwan.HttpMethod;
 import com.bignerdranch.android.imageloadingwan.ImageLoad;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.Beans.CafeteriaBean;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 
 import java.util.List;
 
@@ -70,7 +73,11 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
         holder.text.setText(cafeteria.getResume());
         holder.dormitoryNumber.setText(cafeteria.getDormitoryNumber());
         holder.pictureNumber.setText(cafeteria.getUrl().size() + "");
-        Glide.with(context).load(cafeteria.getUrl().get(0)).thumbnail(0).into(holder.mainImage);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .override(ScreenUnit.bulid(context).getPxWide(),ScreenUnit.bulid(context).getPxWide()/16*9);
+        Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/16*9);
+        Glide.with(context).load(cafeteria.getUrl().get(0)).apply(options).into(holder.mainImage);
         holder.linearLayout.getBackground().setAlpha(170);
 //        ImageLoad.getImage(activity, admissionBean.getUrl().get(0), holder.mainImage);
     }
