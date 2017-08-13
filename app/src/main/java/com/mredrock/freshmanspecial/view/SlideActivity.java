@@ -1,21 +1,13 @@
 package com.mredrock.freshmanspecial.view;
 
-import android.app.Activity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyViewPager;
 import com.mredrock.freshmanspecial.Units.SlidePagerAdapter;
@@ -33,7 +25,8 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
     private TextView progressView,titleView;
     private RelativeLayout layout;
     private Animation alpha_in,alpha_out;
-    private boolean isImgClick = true;
+    private boolean isLayoutShow = true;
+    private boolean isTowPointClick = false;
 
     @Override
     protected void initData() {
@@ -54,21 +47,19 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                /*layout.setVisibility(View.INVISIBLE);*/
+
             }
 
             @Override
             public void onPageSelected(int position) {
+                if(!isTowPointClick){
+                    layout.startAnimation(alpha_in);
+                    layout.setVisibility(View.VISIBLE);
+                    isLayoutShow = true;
+                }
                 //设置上面的进度文字和下面的描述文字，图片加载在SlideFragment里面，不在这里处理
                 progressView.setText((position+1)+"/"+getImageUrlList().size());
                 titleView.setText(getTitleList().get(position));
-                /*layout.setVisibility(View.VISIBLE);
-                Animation animation = AnimationUtils.loadAnimation(SlideActivity.this,R.anim.fade_out);
-                layout.setAnimation(animation);*/
-                if (isImgClick == false){
-                    titleView.startAnimation(alpha_in);
-                    isImgClick = true;
-                }
             }
 
             @Override
@@ -76,20 +67,42 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
 
             }
         });
-        viewPager.setOnTouchListener(new View.OnTouchListener() {
+        viewPager.setOnMyClick(new MyViewPager.OnMyClick() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                Log.d("000", "onPointClick: "+motionEvent.getPointerCount());
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    if (isImgClick) {
-                        titleView.startAnimation(alpha_out);
-                        isImgClick = false;
-                    } else {
-                        titleView.startAnimation(alpha_in);
-                        isImgClick = true;
+            public void onActionDown(MotionEvent event) {
+                if(isLayoutShow){
+                    if(!isTowPointClick){
+                        layout.startAnimation(alpha_out);
+                        layout.setVisibility(View.INVISIBLE);
+                        isLayoutShow = false;
                     }
                 }
-                return false;
+                else{
+                    if(!isTowPointClick){
+                        layout.startAnimation(alpha_in);
+                        layout.setVisibility(View.VISIBLE);
+                        isLayoutShow = true;
+                    }
+                }
+            }
+
+            @Override
+            public void onTwoPointClick(MotionEvent event) {
+                if(!isTowPointClick){
+                    isTowPointClick = true;
+                    layout.startAnimation(alpha_out);
+                    layout.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onOnePointClick(MotionEvent event) {
+                isTowPointClick = false;
+            }
+
+            @Override
+            public void onActionUp(MotionEvent event) {
+
             }
         });
     }
@@ -126,8 +139,4 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
         return getIntent().getIntExtra("position",0);
     }
 
-    public void alphaOut() {
-        progressView.setAnimation(alpha_out);
-        titleView.setAnimation(alpha_out);
-    }
 }

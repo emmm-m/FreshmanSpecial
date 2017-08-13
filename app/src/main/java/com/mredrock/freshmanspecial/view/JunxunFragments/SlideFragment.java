@@ -37,8 +37,6 @@ public class SlideFragment extends Fragment {
             screenWidth = ScreenUnit.bulid(getContext()).getPxWide();
         }
         imageView = view.findViewById(R.id.slide_image);
-        //textView = view.findViewById(R.id.slide_title);
-        //textView.setText(title);
         Glide.with(getActivity()).load(url).into(imageView);
     }
 
