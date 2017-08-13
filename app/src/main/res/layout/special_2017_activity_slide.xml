@@ -29,7 +29,6 @@
             android:gravity="center"/>
         <TextView
             android:alpha="0.7"
-            android:background="#000000"
             android:id="@+id/slide_title"
             android:layout_width="match_parent"
             android:paddingTop="10dp"

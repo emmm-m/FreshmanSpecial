@@ -22,9 +22,9 @@ import java.util.List;
 public class SlideActivity extends BaseActivity implements ISlideActivity {
 
     private MyViewPager viewPager;
-    private TextView progressView,titleView;
+    private TextView progressView, titleView;
     private RelativeLayout layout;
-    private Animation alpha_in,alpha_out;
+    private Animation alpha_in, alpha_out;
     private boolean isLayoutShow = true;
     private boolean isTowPointClick = false;
 
@@ -34,13 +34,13 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
         progressView = $(R.id.slide_progress);
         titleView = $(R.id.slide_title);
         layout = $(R.id.slide_layout);
-        alpha_in = AnimationUtils.loadAnimation(this,R.anim.fade_in);
-        alpha_out = AnimationUtils.loadAnimation(this,R.anim.fade_out);
+        alpha_in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        alpha_out = AnimationUtils.loadAnimation(this, R.anim.fade_out);
         //第一次进入界面加载文字
-        progressView.setText((getPosition()+1)+"/"+getImageUrlList().size());
+        progressView.setText((getPosition() + 1) + "/" + getImageUrlList().size());
         titleView.setText(getTitleList().get(getPosition()));
 
-        SlidePagerAdapter adapter = new SlidePagerAdapter(getSupportFragmentManager(),this,getTitleList(),getImageUrlList());
+        SlidePagerAdapter adapter = new SlidePagerAdapter(getSupportFragmentManager(), this, getTitleList(), getImageUrlList());
         viewPager.setAdapter(adapter);
         //设置当前位置
         viewPager.setCurrentItem(getPosition());
@@ -52,13 +52,13 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if(!isTowPointClick){
+                if (!isTowPointClick) {
                     layout.startAnimation(alpha_in);
                     layout.setVisibility(View.VISIBLE);
                     isLayoutShow = true;
                 }
                 //设置上面的进度文字和下面的描述文字，图片加载在SlideFragment里面，不在这里处理
-                progressView.setText((position+1)+"/"+getImageUrlList().size());
+                progressView.setText((position + 1) + "/" + getImageUrlList().size());
                 titleView.setText(getTitleList().get(position));
             }
 
@@ -67,42 +67,46 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
 
             }
         });
+        final long[] time = new long[1];
         viewPager.setOnMyClick(new MyViewPager.OnMyClick() {
             @Override
             public void onActionDown(MotionEvent event) {
-                if(isLayoutShow){
-                    if(!isTowPointClick){
-                        layout.startAnimation(alpha_out);
-                        layout.setVisibility(View.INVISIBLE);
-                        isLayoutShow = false;
-                    }
+                time[0] = System.currentTimeMillis();
+            }
+
+            @Override
+            public void onTwoPointClick(MotionEvent event) {
+
+                if (isLayoutShow) {
+//                    isTowPointClick = true;
+                    layout.startAnimation(alpha_out);
+                    layout.setVisibility(View.INVISIBLE);
+                    isLayoutShow = false;
                 }
-                else{
-                    if(!isTowPointClick){
+
+            }
+
+            @Override
+            public void onOnePointClick(MotionEvent event) {
+//                isTowPointClick = false;
+            }
+
+            @Override
+            public void onActionUp(MotionEvent event) {
+                long time_up = System.currentTimeMillis();
+                boolean isClick = ((time_up - time[0]) < 200);
+                if (isClick && isLayoutShow) {
+                    layout.startAnimation(alpha_out);
+                    layout.setVisibility(View.INVISIBLE);
+                    isLayoutShow = false;
+                } else {
+                    if (isClick && !isLayoutShow) {
                         layout.startAnimation(alpha_in);
                         layout.setVisibility(View.VISIBLE);
                         isLayoutShow = true;
                     }
                 }
-            }
-
-            @Override
-            public void onTwoPointClick(MotionEvent event) {
-                if(!isTowPointClick){
-                    isTowPointClick = true;
-                    layout.startAnimation(alpha_out);
-                    layout.setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void onOnePointClick(MotionEvent event) {
-                isTowPointClick = false;
-            }
-
-            @Override
-            public void onActionUp(MotionEvent event) {
-
+//                isTowPointClick = false;
             }
         });
     }
@@ -114,6 +118,7 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
 
     /**
      * 获取描述文字集合
+     *
      * @return
      */
     @Override
@@ -123,6 +128,7 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
 
     /**
      * 获取相片url集合
+     *
      * @return
      */
     @Override
@@ -132,11 +138,12 @@ public class SlideActivity extends BaseActivity implements ISlideActivity {
 
     /**
      * 获取浏览位置
+     *
      * @return
      */
     @Override
     public int getPosition() {
-        return getIntent().getIntExtra("position",0);
+        return getIntent().getIntExtra("position", 0);
     }
 
 }
