@@ -16,7 +16,6 @@
             android:id="@+id/img_original"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#b7b7b7"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             />

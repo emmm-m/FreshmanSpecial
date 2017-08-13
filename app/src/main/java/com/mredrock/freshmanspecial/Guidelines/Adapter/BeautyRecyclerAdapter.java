@@ -2,20 +2,16 @@ package com.mredrock.freshmanspecial.Guidelines.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.Beans.GuidelinesHorizontalBean;
 import com.mredrock.freshmanspecial.Beans.SurroundingBeautyBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
-import com.mredrock.freshmanspecial.Units.ScreenUnit;
 
 import java.util.List;
 
@@ -69,7 +65,10 @@ public class BeautyRecyclerAdapter extends RecyclerView.Adapter<BeautyRecyclerAd
                 .centerCrop()
                 .override(ScreenUnit.bulid(context).getPxWide()/3,ScreenUnit.bulid(context).getPxWide()/48*9);
         Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/48*9);
-        Glide.with(context).load(beauty.getUrl().get(0)).apply(options).into(holder.mainImage);
+        Glide.with(context).load(beauty.getUrl().get(0))
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .apply(options)
+                .into(holder.mainImage);
     }
 
 

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.ViewGroup.LayoutParams;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.ScreenUnit;
@@ -105,7 +106,7 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
                         intent.putStringArrayListExtra("titleList",(ArrayList)picTitleList);
                         intent.putExtra("position",position);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.junxuntupian_image, "share").toBundle());
+                            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context).toBundle());
                         } else {
                             context.startActivity(intent);
                         }
@@ -115,7 +116,9 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
                 RequestOptions picOptions = new RequestOptions()
                         .fitCenter()
                         .override(width, width/16*10);
-                Glide.with(context).load(picImageList.get(position)).apply(picOptions).into(holder.junxuntupian_image);
+                Glide.with(context).load(picImageList.get(position)).apply(picOptions)
+                        .transition(new DrawableTransitionOptions().crossFade(200))
+                        .into(holder.junxuntupian_image);
                 break;
             case 1://视频
                 LayoutParams para = holder.junxunshiping_image.getLayoutParams();

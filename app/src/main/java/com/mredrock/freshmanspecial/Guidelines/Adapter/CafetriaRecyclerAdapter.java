@@ -16,6 +16,7 @@ import com.bignerdranch.android.imageloadingwan.HttpMethod;
 import com.bignerdranch.android.imageloadingwan.ImageLoad;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mredrock.freshmanspecial.Beans.CafeteriaBean;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.R;
@@ -78,7 +79,11 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
                 .centerCrop()
                 .override(ScreenUnit.bulid(context).getPxWide(),ScreenUnit.bulid(context).getPxWide()/16*9);
         Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/16*9);
-        Glide.with(context).load(cafeteria.getUrl().get(0)).apply(options).into(holder.mainImage);
+        Glide.with(context)
+                .load(cafeteria.getUrl().get(0))
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .apply(options)
+                .into(holder.mainImage);
         holder.linearLayout.getBackground().setAlpha(170);
 //        ImageLoad.getImage(activity, admissionBean.getUrl().get(0), holder.mainImage);
     }

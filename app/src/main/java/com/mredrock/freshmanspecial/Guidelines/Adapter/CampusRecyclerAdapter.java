@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
@@ -70,7 +71,10 @@ public class CampusRecyclerAdapter extends RecyclerView.Adapter<CampusRecyclerAd
                 .centerCrop()
                 .override(ScreenUnit.bulid(context).getPxWide(),ScreenUnit.bulid(context).getPxWide()/16*9);
         Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/16*9);
-        Glide.with(context).load(campus.getUrl().get(0)).apply(options).into(holder.mainImage);
+        Glide.with(context)
+                .load(campus.getUrl().get(0))
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .apply(options).into(holder.mainImage);
     }
 
     @Override

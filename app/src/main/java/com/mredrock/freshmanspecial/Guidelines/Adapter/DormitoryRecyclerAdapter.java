@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.Beans.DormitoryBean;
 import com.mredrock.freshmanspecial.R;
@@ -70,9 +72,8 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final DormitoryBean.DormitoryDataBean dormitoy = list.get(position);
-        holder.title.setText(dormitoy.getName());
+        holder.title.setText(getDormitoryName(dormitoy.getName()));
         holder.text.setText(dormitoy.getResume());
-        holder.dormitoryNumber.setText(dormitoy.getDormitoryNumber());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,9 +85,10 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
                 intent.putStringArrayListExtra("imageUrlList", (ArrayList) dormitoy.getUrl());
                 intent.putStringArrayListExtra("titleList", (ArrayList) picTitleList);
                 intent.putExtra("position", 0);
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.mainImage, "share").toBundle());
-                }else {
+                    context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context).toBundle());
+                } else {
                     context.startActivity(intent);
                 }
             }
@@ -97,7 +99,11 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
                 .centerCrop()
                 .override(ScreenUnit.bulid(context).getPxWide(),ScreenUnit.bulid(context).getPxWide()/16*9);
         Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/16*9);
-        Glide.with(context).load(dormitoy.getUrl().get(0)).apply(options).into(holder.mainImage);
+        Glide.with(context)
+                .load(dormitoy.getUrl().get(0))
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .apply(options)
+                .into(holder.mainImage);
         holder.linearLayout.getBackground().setAlpha(170);
     }
 
