@@ -136,8 +136,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                         .fitCenter()
                         .override(width, width*9/16);
                 Glide.with(context).load(originalBean.getCover()).apply(picOptions)
-                        .transition(new DrawableTransitionOptions().crossFade(200))
-                        .into(holder.img_original);
+                        .transition(new DrawableTransitionOptions().crossFade(200)).into(holder.img_original);
                 holder.time_original.setText(originalBean.getTime());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

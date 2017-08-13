@@ -21,24 +21,21 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="0dp"
+            <View
+                android:layout_width="3dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="9dp"
-                android:src="@drawable/special_2017_dec"/>
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/special_2017_gradient_background"/>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
                 android:gravity="center_vertical"
                 android:text="饮食篇"/>
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="8"/>
         </LinearLayout>
 
         <LinearLayout
@@ -151,24 +148,21 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="0dp"
+            <View
+                android:layout_width="3dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:src="@drawable/special_2017_dec"/>
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/special_2017_gradient_background"/>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
                 android:gravity="center_vertical"
                 android:text="防晒篇"/>
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="8"/>
         </LinearLayout>
 
         <LinearLayout
@@ -306,24 +300,21 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="0dp"
+            <View
+                android:layout_width="3dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:src="@drawable/special_2017_dec"/>
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/special_2017_gradient_background"/>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
                 android:gravity="center_vertical"
                 android:text="药品篇"/>
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="8"/>
         </LinearLayout>
 
         <LinearLayout
@@ -462,24 +453,21 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="0dp"
+            <View
+                android:layout_width="3dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:src="@drawable/special_2017_dec"/>
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/special_2017_gradient_background"/>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
                 android:gravity="center_vertical"
-                android:text="其他"/>
+                android:text="其它"/>
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="8"/>
         </LinearLayout>
 
         <LinearLayout

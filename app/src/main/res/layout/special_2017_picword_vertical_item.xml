@@ -1,53 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--专题 ： 邮子攻略；界面 ： recycler 排版纵向，学校寝室、食堂、环境 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#fff"
-    android:orientation="vertical"
-    android:layout_marginTop="6dp">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="6dp"
+              android:background="#fff"
+              android:orientation="vertical">
 
-    <FrameLayout
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="180dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="19dp"
+        android:adjustViewBounds="true"
+        android:elevation="0dp"
+        android:scaleType="centerCrop"
+        android:transitionName="share"
+        app:cardCornerRadius="8dp">
 
-        <android.support.v7.widget.CardView
+        <ImageView
+            android:id="@+id/picword_vertical_item_image"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginTop="19dp"
-            android:adjustViewBounds="true"
-            app:cardCornerRadius="8dp"
-            android:elevation="0dp"
-            android:scaleType="centerCrop"
-            android:transitionName="share">
-            <ImageView
-                android:id="@+id/picword_vertical_item_image"
-                android:background="#d6d6d6"
-                android:scaleType="centerCrop"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </android.support.v7.widget.CardView>
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
 
         <LinearLayout
             android:id="@+id/picwod_vertical_picture_linear"
             android:layout_width="53dp"
             android:layout_height="19dp"
-            android:visibility="gone"
             android:layout_gravity="bottom|right"
-            android:layout_marginRight="38dp"
             android:layout_marginBottom="10dp"
+            android:layout_marginRight="38dp"
+            android:visibility="gone"
             android:background="@drawable/special_2017_shape_num"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="19dp"
                 android:layout_height="19dp"
+                android:layout_marginLeft="4dp"
                 android:adjustViewBounds="true"
                 android:padding="5dp"
-                android:layout_marginLeft="4dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/special_2017_picture_number"/>
 
@@ -56,25 +52,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:textColor="#FFFFFF"
+                android:textColor="#fff"
                 android:textSize="12dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
                 android:layout_marginLeft="2dp"
+                android:gravity="center_vertical"
                 android:text="张"
                 android:textColor="#FFFFFF"
                 android:textSize="12dp"/>
         </LinearLayout>
-    </FrameLayout>
+    </android.support.v7.widget.CardView>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="13dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -90,8 +87,8 @@
             android:id="@+id/picwod_vertical_dormitory_number"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="bottom"
             android:layout_marginLeft="8dp"
+            android:gravity="bottom"
             android:textColor="@color/tabTextColor"
             android:textSize="13dp"/>
 

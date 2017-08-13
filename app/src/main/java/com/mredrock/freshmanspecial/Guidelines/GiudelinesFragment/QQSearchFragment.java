@@ -121,7 +121,7 @@ public class QQSearchFragment extends BaseFragment {
     }
 
     private void setSearch() {
-        /*editText.setOnKeyListener(new View.OnKeyListener() {//输入完后按键盘上的搜索键【回车键改为了搜索键】
+        editText.setOnKeyListener(new View.OnKeyListener() {//输入完后按键盘上的搜索键【回车键改为了搜索键】
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
@@ -129,24 +129,11 @@ public class QQSearchFragment extends BaseFragment {
                     ((InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE))
                             .hideSoftInputFromWindow(getActivity().getCurrentFocus()
                                     .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    String obj = editText.getText().toString();
-                    if (obj.equals("")) {
-                        Toast.makeText(getActivity(),"你要搜什么呀",Toast.LENGTH_SHORT).show();
-                    } else {
-                        dataList = bean.getData();
-                        result.clear();
-                        for (QQGroupsBean.DataBean b : dataList) {
-                            if (b.getGroupName().contains(obj) || b.getNumber().contains(obj)) {
-                                result.add(b);
-                            }
-                        }
-                        setList();
-                    }
                     return true;
                 }
                 return false;
             }
-        });*/
+        });
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
