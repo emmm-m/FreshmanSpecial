@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -58,10 +60,9 @@ public class QQSearchFragment extends BaseFragment {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() //保证界面的数据加载完成再跳出键盘
                        {
-                           public void run()
-                           {
+                           public void run() {
                                InputMethodManager inputManager =
-                                       (InputMethodManager)editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                       (InputMethodManager) editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                inputManager.showSoftInput(editText, 0);
                            }
                        },
@@ -120,7 +121,7 @@ public class QQSearchFragment extends BaseFragment {
     }
 
     private void setSearch() {
-        editText.setOnKeyListener(new View.OnKeyListener() {//输入完后按键盘上的搜索键【回车键改为了搜索键】
+        /*editText.setOnKeyListener(new View.OnKeyListener() {//输入完后按键盘上的搜索键【回车键改为了搜索键】
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
@@ -144,6 +145,31 @@ public class QQSearchFragment extends BaseFragment {
                     return true;
                 }
                 return false;
+            }
+        });*/
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String obj = editText.getText().toString();
+                dataList = bean.getData();
+                result.clear();
+                for (QQGroupsBean.DataBean b : dataList) {
+                    if (b.getGroupName().contains(obj) || b.getNumber().contains(obj)) {
+                        result.add(b);
+                    }
+                }
+                setList();
+
             }
         });
     }
