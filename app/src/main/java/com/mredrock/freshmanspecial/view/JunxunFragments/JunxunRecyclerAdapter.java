@@ -94,7 +94,7 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
                 LayoutParams params = holder.junxuntupian_image.getLayoutParams();
                 int width = ScreenUnit.bulid(context).getPxWide()/4;
                 params.width = width;
-                params.height = width/16*10;
+                params.height = width/16*13;
                 holder.junxuntupian_image.setLayoutParams(params);
                 holder.junxuntupian_text.setText((String) picTitleList.get(position));
                 //设置图片点击跳转幻灯片

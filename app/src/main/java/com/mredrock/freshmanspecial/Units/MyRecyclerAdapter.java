@@ -13,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -145,10 +147,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             case ORIGINAL:
                 final OriginalBean.DataBean originalBean = (OriginalBean.DataBean) data.get(position);
                 holder.title_orignial.setText(originalBean.getName());
-                ViewGroup.LayoutParams params_original = holder.img_original.getLayoutParams();
-                int width_original = ScreenUnit.bulid(context).getPxWide()/3;
-//                params.width = width;
-//                params_original.height = width_original*3/5;
+                ViewGroup.LayoutParams params_original = holder.layout_orginal.getLayoutParams();
+                int width_original = ScreenUnit.bulid(context).getPxWide()/7*3;
+                params_original.width = width_original;
+                params_original.height = width_original*4/5;
                 RequestOptions picOptions_original = new RequestOptions()
                         .fitCenter()
                         .override(width_original, width_original*9/16);
@@ -191,14 +193,13 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             case QQGROUP:
                 final QQGroupsBean.DataBean QQdataBean = (QQGroupsBean.DataBean) data.get(position);
                 holder.tx_qq_searh.setText(QQdataBean.getGroupName() + "：" + QQdataBean.getNumber());
-                holder.tx_qq_searh.setOnLongClickListener(new View.OnLongClickListener() {
+                holder.tx_qq_searh.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public boolean onLongClick(View view) {
+                    public void onClick(View view) {
                         ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
                         // 将文本内容放到系统剪贴板里。
                         cm.setText(QQdataBean.getNumber());
                         Toast.makeText(context,QQdataBean.getGroupName()+"已复制到剪贴板",Toast.LENGTH_SHORT).show();
-                        return true;
                     }
                 });
                 break;
@@ -224,12 +225,12 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         content = popupView.findViewById(R.id.tx_pop);
         img = popupView.findViewById(R.id.img_pop);
         name.setText(bean.getName());
-        content.setText(bean.getResume()+"\n\n"+bean.getMotto());
+        content.setText(bean.getMotto()+"。"+bean.getResume());
         content.setMovementMethod(ScrollingMovementMethod.getInstance());
         Glide.with(context).load(bean.getUrl()).into(img);
         int wide = ScreenUnit.bulid(context).getPxWide();
         int height = ScreenUnit.bulid(context).getPxHiget();
-        popupWindow = new PopupWindow(popupView,wide*3/4, height*2/3, true);
+        popupWindow = new PopupWindow(popupView,wide*3/4, LinearLayout.LayoutParams.WRAP_CONTENT, true);
         // =======  两者结合才能让popup点击外部消失
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
@@ -273,6 +274,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         ImageView img_beauty;
         TextView title_beauty,name_student,content_beauty,content_student,title_orignial,time_original,name_teacher
                 ,title_tab,title_group,content_group,tx_qq_searh;
+        FrameLayout layout_orginal;
         int viewType;
         public MyViewHolder(View itemView, int viewType) {
             super(itemView);
@@ -296,6 +298,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                     img_original = (MyImageView) itemView.findViewById(R.id.img_original);
                     title_orignial = (TextView) itemView.findViewById(R.id.title_original);
                     time_original = (TextView) itemView.findViewById(R.id.time_original);
+                    layout_orginal = (FrameLayout) itemView.findViewById(R.id.original_layout);
                     break;
                 case TABS:
                     title_tab = (TextView) itemView.findViewById(R.id.tab_groups_title);

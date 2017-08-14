@@ -10,7 +10,7 @@
             android:id="@+id/junxuntupian_image"
             android:src="@mipmap/special_2017_chongyoufengcai"
             android:layout_width="100dp"
-            android:layout_height="80dp"
+            android:layout_height="90dp"
             android:transitionName="share"
             app:roundWidth="5dp"
             app:roundHeight="5dp"

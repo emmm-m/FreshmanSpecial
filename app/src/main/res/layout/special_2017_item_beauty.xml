@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:background="#fff"
               android:orientation="vertical">
 
@@ -18,6 +19,8 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="10dp"
+        app:roundHeight="3dp"
+        app:roundWidth="3dp"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
         />
@@ -29,7 +32,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:text="title"
-        android:textColor="#262626"
+        android:textColor="#666"
         android:textSize="15dp"/>
 
     <TextView
@@ -39,8 +42,8 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
+        android:lineSpacingMultiplier="1.2"
         android:text="content"
-        android:textColor="#737373"
+        android:textColor="#999"
         android:textSize="12dp"/>
 </LinearLayout>

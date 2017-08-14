@@ -14,6 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
+            app:roundWidth="5dp"
+            app:roundHeight="5dp"
             android:adjustViewBounds="true"
             />
 
@@ -23,9 +25,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:textColor="#000"
+        android:textColor="#666"
         android:gravity="center"
         android:text="name"
-        android:textSize="13dp"/>
+        android:textSize="12dp"/>
 
 </LinearLayout>

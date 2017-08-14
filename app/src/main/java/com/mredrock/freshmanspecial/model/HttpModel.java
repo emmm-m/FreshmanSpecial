@@ -7,11 +7,12 @@ import com.mredrock.freshmanspecial.Beans.MienBeans.BeautyBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.OriginalBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.StudentsBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.TeacherBean;
-import com.mredrock.freshmanspecial.Beans.ShujuBeans.FailBean;
 import com.mredrock.freshmanspecial.Beans.QQGroupsBean;
+import com.mredrock.freshmanspecial.Beans.ShujuBeans.FailBean;
 import com.mredrock.freshmanspecial.Beans.ShujuBeans.SexBean;
 import com.mredrock.freshmanspecial.Beans.ShujuBeans.WorkBean;
 
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -31,7 +32,6 @@ public class HttpModel {
     public static final String URL = "http://www.yangruixin.com/";
     private static final int DEFAULT_TIMEOUT = 5;
     private static Retrofit retrofit;
-    private static OkHttpClient.Builder httpClientBuilder = new OkHttpClient().newBuilder();
     private static Services service;
     //private Context context;
 
@@ -41,15 +41,29 @@ public class HttpModel {
      *
      * @return
      */
-    public static HttpModel bulid() {
+    private HttpModel() {
+        //手动创建一个OkHttpClient并设置超时时间
+        OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
+        httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+
         retrofit = new Retrofit.Builder()
                 .client(httpClientBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(URL)
                 .build();
+
         service = retrofit.create(Services.class);
-        return new HttpModel();
+    }
+
+    //在访问HttpMethods时创建单例
+    private static class SingletonHolder{
+        private static final HttpModel INSTANCE = new HttpModel();
+    }
+
+    //获取单例
+    public static HttpModel bulid(){
+        return SingletonHolder.INSTANCE;
     }
 
 
