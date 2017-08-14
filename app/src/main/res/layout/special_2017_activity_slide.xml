@@ -14,18 +14,24 @@
     <RelativeLayout
         android:id="@+id/slide_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:transitionName="share"
+        >
         <TextView
             android:id="@+id/slide_progress"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:textSize="25dp"
             android:text="1/6"
+            android:background="#8b000000"
             android:textColor="@color/colorWhite"
             android:gravity="center"/>
         <TextView
+            android:alpha="0.7"
             android:id="@+id/slide_title"
             android:layout_width="match_parent"
+            android:paddingTop="10dp"
+            android:background="#8b000000"
             android:layout_height="150dp"
             android:textColor="@color/colorWhite"
             android:gravity="top|center"

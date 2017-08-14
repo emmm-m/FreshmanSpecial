@@ -3,6 +3,7 @@ package com.mredrock.freshmanspecial.model;
 import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunpicBeans;
 import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunvideoBeans;
 import com.mredrock.freshmanspecial.Beans.MienBeans.BeautyBean;
+import com.mredrock.freshmanspecial.Beans.MienBeans.OriginalBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.StudentsBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.TeacherBean;
 import com.mredrock.freshmanspecial.Beans.ShujuBeans.FailBean;
@@ -54,4 +55,7 @@ public interface Services {
 
     @GET("test/apiForText.php")
     Observable<BeautyBean> getBeauties(@Query("RequestType") String requestType);
+
+    @GET("test/apiForText.php")
+    Observable<OriginalBean> getOriginal(@Query("RequestType") String requestType);
 }

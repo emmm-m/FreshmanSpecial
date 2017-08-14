@@ -2,16 +2,21 @@ package com.mredrock.freshmanspecial.Guidelines.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mredrock.freshmanspecial.Beans.DailyLifeBean;
 import com.mredrock.freshmanspecial.Beans.SurroundingBeautyBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 
 import java.util.List;
 
@@ -33,14 +38,14 @@ public class DailyLifeRecyclerAdapter extends RecyclerView.Adapter<DailyLifeRecy
         TextView shopName; //  名称
         TextView commit;  //  具体描述
         TextView address;   //  所在地点
-        MyImageView mainImage;    //  图片
+        ImageView mainImage;    //  图片
 
         public ViewHolder(View itemView) {
             super(itemView);
             shopName = (TextView) itemView.findViewById(R.id.picword_horizontal_item_title);
             commit = (TextView) itemView.findViewById(R.id.picword_horizontal_item_text);
             address = (TextView) itemView.findViewById(R.id.picword_horizontal_item_address);
-            mainImage = (MyImageView) itemView.findViewById(R.id.picword_horizontal_item_image);
+            mainImage = itemView.findViewById(R.id.picword_horizontal_item_image);
 
         }
     }
@@ -59,7 +64,15 @@ public class DailyLifeRecyclerAdapter extends RecyclerView.Adapter<DailyLifeRecy
         holder.address.setText(dailyLife.getLocation());
         holder.shopName.setText(dailyLife.getName());
         holder.commit.setText(dailyLife.getResume());
-        Glide.with(context).load(dailyLife.getUrl().get(0)).into(holder.mainImage);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .override(ScreenUnit.bulid(context).getPxWide()/6,ScreenUnit.bulid(context).getPxWide()/8);
+        Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/48*9);
+        Glide.with(context)
+                .load(dailyLife.getUrl().get(0))
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .apply(options)
+                .into(holder.mainImage);
     }
 
 

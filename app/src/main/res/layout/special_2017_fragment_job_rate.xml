@@ -49,11 +49,11 @@
 
         <com.mredrock.freshmanspecial.Units.SmallCircle
             android:id="@+id/jobRate_circle"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"/>
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
 
     </LinearLayout>
 </ScrollView>

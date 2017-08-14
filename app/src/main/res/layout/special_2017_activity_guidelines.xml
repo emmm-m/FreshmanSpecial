@@ -5,6 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
+              android:background="@color/underTabColor"
               tools:context="com.mredrock.freshmanspecial.Guidelines.Guidelines">
 
     <include layout="@layout/special_2017_title_bar"/>
@@ -43,12 +44,8 @@
             android:background="@drawable/special_2017_tab_right"/>
     </FrameLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="6dp"
-        android:background="@color/underTabColor"/>
-
     <android.support.v4.view.ViewPager
+        android:background="@color/colorWhite"
         android:id="@+id/guidelines_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

@@ -3,6 +3,7 @@ package com.mredrock.freshmanspecial.presenter;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
@@ -101,12 +102,19 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
                 .setLayoutRes(R.layout.special_2017_options_picker_view, new CustomListener() {
                     @Override
                     public void customLayout(View v) {
-
+                        TextView textView = v.findViewById(R.id.tv_finish);
+                        textView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                optionsPickerView.returnData();
+                                disMissPickerView();
+                            }
+                        });
                     }
                 })
                 .setTextColorCenter(Color.parseColor("#FFFFFF"))
-                .setBgColor(Color.parseColor("#F3F8FA"))
-                .setTitleBgColor(Color.parseColor("#F3F8FA"))
+                .setBgColor(Color.parseColor("#FFFFFF"))
+                .setTitleBgColor(Color.parseColor("#FFFFFF"))
                 .setSubmitColor(Color.parseColor("#81C0FE"))
                 .build();
         optionsPickerView.setPicker(collegeList);

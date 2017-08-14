@@ -131,7 +131,6 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
     @Override
     public void dismiss() {
         super.dismiss();
-        returnData();
     }
 
     //建造器

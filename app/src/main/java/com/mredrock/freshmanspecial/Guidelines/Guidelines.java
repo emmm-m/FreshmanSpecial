@@ -99,6 +99,7 @@ public class Guidelines extends BaseActivity {
     }
 
     private void setTabLayout() {
+        viewPager.setOffscreenPageLimit(1);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

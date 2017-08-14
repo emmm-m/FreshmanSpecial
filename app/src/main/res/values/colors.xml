@@ -7,8 +7,8 @@
     <color name="colorDeepGray">#FF383535</color>
     <color name="tabTextColor">#949494</color>
     <color name="tabSelectedTextColor">#65B2FF</color>
-    <color name="underTabColor">#EBF0F2</color>
-    <color name="addressColor">#65B2FF</color>
+    <color name="underTabColor">#F5F5F5</color>
+    <color name="addressColor">#9CCBFF</color>
     <color name="colorBlack">#000000</color>
 
     <color name="black_overlay">#66000000</color>

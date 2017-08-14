@@ -6,13 +6,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 
 import java.util.List;
 
@@ -30,7 +34,7 @@ public class CampusRecyclerAdapter extends RecyclerView.Adapter<CampusRecyclerAd
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        MyImageView mainImage; // 主图
+        ImageView mainImage; // 主图
         TextView title; // 建筑名称
         TextView text;  // 建筑介绍
         TextView pictureNumber;
@@ -38,7 +42,7 @@ public class CampusRecyclerAdapter extends RecyclerView.Adapter<CampusRecyclerAd
         LinearLayout linearLayout;
         public ViewHolder(View itemView) {
             super(itemView);
-            mainImage = (MyImageView) itemView.findViewById(R.id.picword_vertical_item_image);
+            mainImage =  itemView.findViewById(R.id.picword_vertical_item_image);
             title = (TextView) itemView.findViewById(R.id.picword_vertical_item_title);
             text = (TextView) itemView.findViewById(R.id.picword_vertical_item_text);
             dormitoryNumber = (TextView) itemView.findViewById(R.id.picwod_vertical_dormitory_number);
@@ -63,7 +67,14 @@ public class CampusRecyclerAdapter extends RecyclerView.Adapter<CampusRecyclerAd
         holder.dormitoryNumber.setText(campus.getDormitoryNumber());
         holder.pictureNumber.setText("1"+ "");
         holder.linearLayout.getBackground().setAlpha(170);
-        Glide.with(context).load(campus.getUrl().get(0)).into(holder.mainImage);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .override(ScreenUnit.bulid(context).getPxWide()/2,ScreenUnit.bulid(context).getPxWide()/32*9);
+        Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/16*9);
+        Glide.with(context)
+                .load(campus.getUrl().get(0))
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .apply(options).into(holder.mainImage);
     }
 
     @Override

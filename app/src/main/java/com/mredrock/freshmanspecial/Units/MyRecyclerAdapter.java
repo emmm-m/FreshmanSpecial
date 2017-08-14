@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.Beans.MienBeans.BeautyBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.GroupBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.OriginalBean;
@@ -96,14 +98,28 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         switch (holder.viewType){
             case BEAUTY:
                 BeautyBean.DataBean beauty = (BeautyBean.DataBean) data.get(position);
-                Glide.with(context).load(beauty.getUrl()).into(holder.img_beauty);
+                int width = ScreenUnit.bulid(context).getPxWide()/2;
+//                params.width = width;
+                RequestOptions picOptions = new RequestOptions()
+                        .fitCenter()
+                        .override(width, width/2);
+                Glide.with(context).load(beauty.getUrl())
+                        .transition(new DrawableTransitionOptions().crossFade(200))
+                        .into(holder.img_beauty);
                 holder.content_beauty.setText(beauty.getContent());
                 holder.title_beauty.setText(beauty.getTitle());
                 break;
             case STUDENT:
                 final StudentsBean.DataBean student = (StudentsBean.DataBean) data.get(position);
                 holder.name_student.setText(student.getName());
-                Glide.with(context).load(student.getUrl()).into(holder.img_student);
+                int width_student = ScreenUnit.bulid(context).getPxWide()/8;
+//                params.width = width;
+                RequestOptions picOptions_student = new RequestOptions()
+                        .fitCenter()
+                        .override(width_student, width_student);
+                Glide.with(context).load(student.getUrl()).apply(picOptions_student)
+                        .transition(new DrawableTransitionOptions().crossFade(200))
+                        .into(holder.img_student);
                 holder.content_student.setText("颁奖词：" + student.getMotto());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -115,12 +131,29 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             case TEACHER:
                 final TeacherBean.DataBean teacher = (TeacherBean.DataBean) data.get(position);
                 holder.name_teacher.setText(teacher.getName());
-                Glide.with(context).load(teacher.getUrl()).into(holder.img_teacher);
+                ViewGroup.LayoutParams params = holder.img_teacher.getLayoutParams();
+                int width_teacher = ScreenUnit.bulid(context).getPxWide()/4;
+//                params.width = width;
+//                params.height = width_teacher*3/5;
+                RequestOptions picOptions_teacher = new RequestOptions()
+                        .fitCenter()
+                        .override(width_teacher, width_teacher*9/16);
+                Glide.with(context).load(teacher.getUrl()).apply(picOptions_teacher)
+                        .transition(new DrawableTransitionOptions().crossFade(200))
+                        .into(holder.img_teacher);
                 break;
             case ORIGINAL:
-                final OriginalBean originalBean = (OriginalBean) data.get(position);
-                holder.title_orignial.setText(originalBean.getTitle());
-                holder.img_original.setImageDrawable(originalBean.getImg());
+                final OriginalBean.DataBean originalBean = (OriginalBean.DataBean) data.get(position);
+                holder.title_orignial.setText(originalBean.getName());
+                ViewGroup.LayoutParams params_original = holder.img_original.getLayoutParams();
+                int width_original = ScreenUnit.bulid(context).getPxWide()/3;
+//                params.width = width;
+//                params_original.height = width_original*3/5;
+                RequestOptions picOptions_original = new RequestOptions()
+                        .fitCenter()
+                        .override(width_original, width_original*9/16);
+                Glide.with(context).load(originalBean.getCover()).apply(picOptions_original)
+                        .transition(new DrawableTransitionOptions().crossFade(200)).into(holder.img_original);
                 holder.time_original.setText(originalBean.getTime());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

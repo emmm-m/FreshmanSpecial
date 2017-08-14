@@ -4,19 +4,24 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bignerdranch.android.imageloadingwan.HttpMethod;
 import com.bignerdranch.android.imageloadingwan.ImageLoad;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mredrock.freshmanspecial.Beans.CafeteriaBean;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 
 import java.util.List;
 
@@ -38,7 +43,7 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        MyImageView mainImage; // 主图
+        ImageView mainImage; // 主图
         TextView title; // 建筑名称
         TextView text;  // 建筑介绍
         TextView pictureNumber;
@@ -46,7 +51,7 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
         LinearLayout linearLayout;
         public ViewHolder(View itemView) {
             super(itemView);
-            mainImage = (MyImageView) itemView.findViewById(R.id.picword_vertical_item_image);
+            mainImage =  itemView.findViewById(R.id.picword_vertical_item_image);
             title = (TextView) itemView.findViewById(R.id.picword_vertical_item_title);
             text = (TextView) itemView.findViewById(R.id.picword_vertical_item_text);
             dormitoryNumber = (TextView) itemView.findViewById(R.id.picwod_vertical_dormitory_number);
@@ -70,7 +75,15 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
         holder.text.setText(cafeteria.getResume());
         holder.dormitoryNumber.setText(cafeteria.getDormitoryNumber());
         holder.pictureNumber.setText(cafeteria.getUrl().size() + "");
-        Glide.with(context).load(cafeteria.getUrl().get(0)).thumbnail(0).into(holder.mainImage);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .override(ScreenUnit.bulid(context).getPxWide()/2,ScreenUnit.bulid(context).getPxWide()/32*9);
+        Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/32*9);
+        Glide.with(context)
+                .load(cafeteria.getUrl().get(0))
+                .transition(new DrawableTransitionOptions().crossFade(200))
+                .apply(options)
+                .into(holder.mainImage);
         holder.linearLayout.getBackground().setAlpha(170);
 //        ImageLoad.getImage(activity, admissionBean.getUrl().get(0), holder.mainImage);
     }
