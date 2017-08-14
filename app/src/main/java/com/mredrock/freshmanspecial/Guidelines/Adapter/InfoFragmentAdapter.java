@@ -64,7 +64,7 @@ public class InfoFragmentAdapter extends FragmentPagerAdapter {
         float density = ScreenUnit.bulid(activity).getDensity();
         TextView textView = (TextView) view.findViewById(R.id.tab_item_tabname);
         LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams) textView.getLayoutParams(); //取控件textView当前的布局参数 linearParams.height = 20;// 控件的高强制设成20
-        linearParams.width = (int)(wide-85*density)*2/7;// 控件的宽强制设置
+        linearParams.width = (int)(wide-85*density)*3/12;// 控件的宽强制设置
         textView.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
         textView.setText(titles.get(position));
         if (position == 0) {

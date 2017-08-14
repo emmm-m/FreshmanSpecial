@@ -71,7 +71,7 @@ public class CampusRecyclerAdapter extends RecyclerView.Adapter<CampusRecyclerAd
         holder.title.setText(campus.getTitle());
         holder.text.setText(campus.getContent());
         holder.dormitoryNumber.setText(campus.getDormitoryNumber());
-        holder.pictureNumber.setText("1"+ "");
+        holder.pictureNumber.setText("");
         holder.linearLayout.getBackground().setAlpha(170);
         RequestOptions options = new RequestOptions()
                 .centerCrop()
