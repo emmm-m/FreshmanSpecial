@@ -1,6 +1,10 @@
 package com.mredrock.freshmanspecial.Guidelines.Adapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +21,9 @@ import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
 import com.mredrock.freshmanspecial.Units.ScreenUnit;
+import com.mredrock.freshmanspecial.view.SlideActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,7 +67,7 @@ public class CampusRecyclerAdapter extends RecyclerView.Adapter<CampusRecyclerAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CampusBean.CampusDataBean campus = list.get(position);
+        final CampusBean.CampusDataBean campus = list.get(position);
         holder.title.setText(campus.getTitle());
         holder.text.setText(campus.getContent());
         holder.dormitoryNumber.setText(campus.getDormitoryNumber());
