@@ -37,19 +37,22 @@ public class MostDifficultFragment extends BaseFragment implements IDataFragment
         presenter = new DataFragmentPresenter(this);
         button = $(R.id.mostDifficult_button);
         majorButton = $(R.id.mostDifficult_button_major);
+        circleChart = $(R.id.mostDifficult_chart);
+        smallCircle = $(R.id.mostDifficult_circle);
+        presenter.setEmptyFailData();
+        presenter.runChart(dataList);
+        initSmallCircle();
+        //获取所有学院信息，加载到第一个按钮上
+        presenter.setFailCollegeList();
         majorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "请先选择学院", Toast.LENGTH_SHORT).show();
             }
         });
-        circleChart = $(R.id.mostDifficult_chart);
-        smallCircle = $(R.id.mostDifficult_circle);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //获取所有学院信息，加载到第一个按钮上
-                presenter.setFailCollegeList();
                 //将获取到的信息以PickerView呈现出来
                 presenter.showPickerView(collegeList, new DataFragmentPresenter.OnPickerViewChoosed() {
                     @Override
@@ -98,6 +101,7 @@ public class MostDifficultFragment extends BaseFragment implements IDataFragment
     }
 
     private void initSmallCircle(){
+        if(dataList.size() == 0) return;
         List<String> texts = new ArrayList<String>();
         List<Integer> colors = new ArrayList<Integer>();
         List<Integer> shadows = new ArrayList<Integer>();

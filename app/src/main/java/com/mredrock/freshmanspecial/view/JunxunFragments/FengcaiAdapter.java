@@ -1,6 +1,8 @@
 package com.mredrock.freshmanspecial.view.JunxunFragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +10,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunpicBeans;
 import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunvideoBeans;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.Units.ScreenUnit;
 import com.mredrock.freshmanspecial.model.HttpModel;
 
 import java.util.ArrayList;
@@ -100,9 +106,6 @@ public class FengcaiAdapter extends RecyclerView.Adapter<FengcaiAdapter.MyViewHo
                 holder.textView.setText("军训视频");
                 break;
             case 3://视频
-                final JunxunRecyclerAdapter videoAdapter = new JunxunRecyclerAdapter(context,JunxunRecyclerAdapter.SHIPING);
-                holder.junxunvideoRecycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
-                holder.junxunvideoRecycler.setAdapter(videoAdapter);
                 HttpModel.bulid().getJunxunvideo()
                         .flatMap(new Func1<JunxunvideoBeans, Observable<JunxunvideoBeans.DataBean>>() {
                             @Override
@@ -116,7 +119,31 @@ public class FengcaiAdapter extends RecyclerView.Adapter<FengcaiAdapter.MyViewHo
                             List<String> titleList = new ArrayList<String>();
                             @Override
                             public void onCompleted() {
-                                videoAdapter.setVideoList(titleList,picList,urlList);
+                                int w = ScreenUnit.bulid(context).getPxWide()/2-5;
+                                RequestOptions options = new RequestOptions();
+                                options.override(w,w/16*10);
+                                holder.shiping_text_left.setText(titleList.get(0));
+                                holder.shiping_text_right.setText(titleList.get(1));
+                                Log.d("fengcai",urlList.get(0));
+                                Log.d("fengcai",urlList.get(1));
+                                Glide.with(context).load(urlList.get(0)).apply(options).into(holder.shiping_left);
+                                Glide.with(context).load(urlList.get(1)).apply(options).into(holder.shiping_right);
+                                holder.shiping_left.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Uri uri = Uri.parse(urlList.get(0));
+                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                        context.startActivity(intent);
+                                    }
+                                });
+                                holder.shiping_right.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Uri uri = Uri.parse(urlList.get(1));
+                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                        context.startActivity(intent);
+                                    }
+                                });
                             }
 
                             @Override
@@ -180,8 +207,9 @@ public class FengcaiAdapter extends RecyclerView.Adapter<FengcaiAdapter.MyViewHo
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        RecyclerView junxunvideoRecycler,junxunpicRecycler,junxunrecommendRecycler;
-        TextView textView;
+        RecyclerView junxunpicRecycler,junxunrecommendRecycler;
+        TextView textView,shiping_text_left,shiping_text_right;
+        ImageView shiping_left,shiping_right;
 
         public MyViewHolder(View itemView, int viewType) {
             super(itemView);
@@ -190,7 +218,10 @@ public class FengcaiAdapter extends RecyclerView.Adapter<FengcaiAdapter.MyViewHo
                     junxunpicRecycler = itemView.findViewById(R.id.junxunpic_recycler);
                     break;
                 case JUNXUN_SHIPING:
-                    junxunvideoRecycler = itemView.findViewById(R.id.junxunvideo_recycler);
+                    shiping_left = itemView.findViewById(R.id.video_left);
+                    shiping_right = itemView.findViewById(R.id.video_right);
+                    shiping_text_left = itemView.findViewById(R.id.shiping_text_left);
+                    shiping_text_right = itemView.findViewById(R.id.shiping_text_right);
                     break;
                 case JUNXUN_TUIJIAN:
                     junxunrecommendRecycler = itemView.findViewById(R.id.junxunrecommend_recycler);

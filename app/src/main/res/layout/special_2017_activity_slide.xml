@@ -17,15 +17,34 @@
         android:layout_height="match_parent"
         android:transitionName="share"
         >
-        <TextView
-            android:id="@+id/slide_progress"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:textSize="25dp"
-            android:text="1/6"
-            android:background="#8b000000"
-            android:textColor="@color/colorWhite"
-            android:gravity="center"/>
+            android:orientation="horizontal"
+            android:background="#8b000000">
+
+            <ImageView
+                android:id="@+id/slide_back"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:src="@drawable/special_2017_back"/>"
+
+            <TextView
+                android:id="@+id/slide_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginTop="5dp"
+                android:textSize="25dp"
+                android:text="1/6"
+                android:textColor="@color/colorWhite"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_horizontal"/>
+
+        </FrameLayout>
+
         <TextView
             android:alpha="0.7"
             android:id="@+id/slide_title"
@@ -36,6 +55,7 @@
             android:textColor="@color/colorWhite"
             android:gravity="top|center"
             android:layout_alignParentBottom="true"
+            android:visibility="gone"
             />
     </RelativeLayout>
 

@@ -86,6 +86,7 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
                 intent.putStringArrayListExtra("titleList", (ArrayList) picTitleList);
                 intent.putExtra("position", 0);
 
+                SlideActivity.setTitleViewShow(false);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context).toBundle());
                 } else {
@@ -113,7 +114,9 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
     }
 
     private String getDormitoryNumber(String dormitory) {
-        String dormitoryNumber = dormitory.substring(3);
+        String dormitoryNumber = dormitory.substring(3, 4) + "原"
+                + dormitory.substring(4, dormitory.length() - 2)
+                + "栋" + dormitory.substring(dormitory.length() - 1);
         Log.d("Adapter", "getDormitoryNumber:......................................................... " + dormitoryNumber);
         return dormitoryNumber;
     }
