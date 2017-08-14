@@ -19,7 +19,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/special_2017_button_background"
             android:gravity="center_vertical"
             android:paddingLeft="18dp"
@@ -46,7 +46,7 @@
             android:layout_height="230dp"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="10dp"/>
 
         <com.mredrock.freshmanspecial.Units.SmallCircle
             android:id="@+id/mostDifficult_circle"

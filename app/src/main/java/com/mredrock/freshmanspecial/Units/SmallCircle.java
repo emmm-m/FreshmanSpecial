@@ -47,7 +47,7 @@ public class SmallCircle extends android.support.v7.widget.AppCompatTextView {
         textPaint.setDither(true);//防抖动
         textPaint.setColor(Color.parseColor("#343434"));
         textPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        textPaint.setTextSize(ScreenUnit.dip2px(getContext(),16));
+        textPaint.setTextSize(ScreenUnit.dip2px(getContext(),15));
         textPaint.setColor(Color.parseColor("#737373"));
     }
 

@@ -115,16 +115,16 @@ public class DataModel {
      */
     public List<ChartData> getMostDifficultDataList(final List<FailBean.DataBean> beans){
         final int girlCircleColor = Color.parseColor("#FBFEB9");
-        final int girlCircleStrokeColor = Color.parseColor("#EEDC79");
+        final int girlCircleStrokeColor = Color.parseColor("#ecd76e");
         final int girlBackColor = Color.parseColor("#FFFFFB");
         final int girlBackStrokeColor = Color.parseColor("#FDF9E7");
-        final int girlTextColor = Color.parseColor("#ECD76C");
-        final int boyCircleColor = Color.parseColor("#9DFCEE");
-        final int boyCircleStrokeColor = Color.parseColor("#6CEAD5");
+        final int girlTextColor = Color.parseColor("#fae17d");
+        final int boyCircleColor = Color.parseColor("#9efcee");
+        final int boyCircleStrokeColor = Color.parseColor("#6debd5");
         final int boyBackColor = Color.parseColor("#F8FFFE");
         final int boyBackStrokeColor = Color.parseColor("#D9FFF9");
-        final int boyTextColor = Color.parseColor("#77EFDB");
-        final int renyaoCircleColor = Color.parseColor("#B8E5FE");
+        final int boyTextColor = Color.parseColor("#5beed4");
+        final int renyaoCircleColor = Color.parseColor("#b9e5fe");
         final int renyaoCircleStrokeColor = Color.parseColor("#7AC8EF");
         final int renyaoBackColor = Color.parseColor("#F8FCFF");
         final int renyaoBackStrokeColor = Color.parseColor("#E1F8FF");
