@@ -55,10 +55,11 @@ public class DataModel {
         //-----------------------------------------------//
         List<ChartData> list = new ArrayList<>();
         float girlRate = Float.valueOf(bean.getWomenRatio());
+        float boyRate = Float.valueOf(bean.getMenRatio());
         girl.setText("女生");
         girl.setPercentage((int)(girlRate*100));
         boy.setText("男生");
-        boy.setPercentage(100-(int)(girlRate*100));
+        boy.setPercentage((int)(boyRate*100));
         list.add(girl);
         list.add(boy);
         return list;
@@ -99,6 +100,10 @@ public class DataModel {
         girl.setPercentage((int)(girlRate*100.00f));
         boy.setText("未就业");
         boy.setPercentage(100-(int)(girlRate*100.00f));
+        if(Float.valueOf(bean.getRatio()) == 0){
+            girl.setPercentage(0);
+            boy.setPercentage(0);
+        }
         list.add(boy);
         list.add(girl);
         return list;
@@ -167,6 +172,19 @@ public class DataModel {
                 renyao.setText(beans.get(2).getCourse());
                 renyao.setPercentage((int)(Float.valueOf(beans.get(2).getRatio())*100));
                 renyao.setText(beans.get(2).getCourse());
+            }
+            if(beans.get(0) != null && beans.get(0).getRatio().equals("0")){
+                girl.setText(" ");
+                girl.setPercentage(0);
+                girl.setText(" ");
+                boy.setText(" ");
+                boy.setPercentage(0);
+                boy.setText(" ");
+                renyao.setText(" ");
+                renyao.setPercentage(0);
+                renyao.setText(" ");
+                Log.d("DataModel","boyText:"+boy.getText());
+                Log.d("DataModel","girlPercentage:"+girl.getPercentage());
             }
         }catch (Exception e){
             e.printStackTrace();

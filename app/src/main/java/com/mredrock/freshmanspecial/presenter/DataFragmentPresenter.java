@@ -137,6 +137,36 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
         fragment.getChart().run();
     }
 
+    @Override
+    public void setEmptySexRateDate() {
+        fragment.getDataList().clear();
+        SexBean.DataBean bean = new SexBean.DataBean();
+        bean.setMenRatio("0");
+        bean.setWomenRatio("0");
+        fragment.getDataList().addAll(model.getSexRateDataList(bean));
+    }
+
+    @Override
+    public void setEmptyFailData() {
+        fragment.getDataList().clear();
+        FailBean.DataBean bean = new FailBean.DataBean();
+        bean.setCourse("");
+        bean.setRatio("0");
+        bean.setMajor("");
+        bean.setCollege("");
+        List<FailBean.DataBean> list = new ArrayList<>();
+        list.add(bean);list.add(bean);list.add(bean);
+        fragment.getDataList().addAll(model.getMostDifficultDataList(list));
+    }
+
+    @Override
+    public void setEmptyWorkRate() {
+        fragment.getDataList().clear();
+        WorkBean.DataBean bean = new WorkBean.DataBean();
+        bean.setRatio("0");
+        fragment.getDataList().addAll(model.getJobRateDataList(bean));
+    }
+
     /**
      * 回调
      */
@@ -161,7 +191,8 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        fragment.toast("获取信息失败！");
+                        e.printStackTrace();
+                        fragment.toast("请检查网络！");
                     }
 
                     @Override

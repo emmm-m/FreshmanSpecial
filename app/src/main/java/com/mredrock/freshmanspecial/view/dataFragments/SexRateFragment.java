@@ -36,7 +36,9 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
         button = $(R.id.sexRate_button);
         circleChart = $(R.id.sexRate_chart);
         smallCircle = $(R.id.sexRate_circle);
-
+        presenter.setEmptySexRateDate();
+        presenter.runChart(dataList);
+        initSmallCircle();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +83,7 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
     }
 
     private void initSmallCircle(){
+        if(dataList.size() == 0) return;
         List<String> texts = new ArrayList<String>();
         List<Integer> colors = new ArrayList<Integer>();
         List<Integer> shadows = new ArrayList<Integer>();

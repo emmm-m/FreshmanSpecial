@@ -23,7 +23,7 @@ public class SmallCircle extends android.support.v7.widget.AppCompatTextView {
     private List<String> texts = new ArrayList<>();
     private List<Integer> colors = new ArrayList<>();
     private List<Integer> shadows = new ArrayList<>();
-    private int strokeWidth = ScreenUnit.dip2px(getContext(),12);
+    private int strokeWidth = ScreenUnit.dip2px(getContext(),10);
     boolean isShort = false;
 
     public SmallCircle(Context context) {
