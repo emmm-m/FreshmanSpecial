@@ -7,12 +7,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,14 +28,16 @@ import java.util.List;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class SlideActivity extends AppCompatActivity implements ISlideActivity {
+public class SlideActivity extends AppCompatActivity implements ISlideActivity, View.OnClickListener{
 
     private MyViewPager viewPager;
     private TextView progressView, titleView;
+    private ImageView backInToolbar;
     private RelativeLayout layout;
     private Animation alpha_in, alpha_out;
     private boolean isLayoutShow = true;
     private boolean isTowPointClick = false;
+    private static boolean isTitleViewShow = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class SlideActivity extends AppCompatActivity implements ISlideActivity {
     }
 
     protected void initData() {
+        backInToolbar = $(R.id.slide_back);
         viewPager = $(R.id.slide_viewpager);
         progressView = $(R.id.slide_progress);
         titleView = $(R.id.slide_title);
@@ -63,8 +68,12 @@ public class SlideActivity extends AppCompatActivity implements ISlideActivity {
         alpha_out = AnimationUtils.loadAnimation(this, R.anim.special_2017_fade_out);
         //第一次进入界面加载文字
         progressView.setText((getPosition() + 1) + "/" + getImageUrlList().size());
-        titleView.setText(getTitleList().get(getPosition()));
-
+        backInToolbar.setOnClickListener(this);
+        Log.d("SlideActivity", "onPageSelected: " + isTitleViewShow);
+        if (isTitleViewShow) {
+            titleView.setText(getTitleList().get(getPosition()));
+            titleView.setVisibility(View.VISIBLE);
+        }
         SlidePagerAdapter adapter = new SlidePagerAdapter(getSupportFragmentManager(), this, getTitleList(), getImageUrlList());
         viewPager.setAdapter(adapter);
 
@@ -86,7 +95,9 @@ public class SlideActivity extends AppCompatActivity implements ISlideActivity {
                 }
                 //设置上面的进度文字和下面的描述文字，图片加载在SlideFragment里面，不在这里处理
                 progressView.setText((position + 1) + "/" + getImageUrlList().size());
-                titleView.setText(getTitleList().get(position));
+                if (isTitleViewShow) {
+                    titleView.setText(getTitleList().get(position));
+                }
             }
 
             @Override
@@ -185,4 +196,19 @@ public class SlideActivity extends AppCompatActivity implements ISlideActivity {
 
     }
 
+    public boolean isTitleViewShow() {
+        return isTitleViewShow;
+    }
+
+    public static void setTitleViewShow(boolean titleViewShow) {
+        isTitleViewShow = titleViewShow;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.slide_back:
+                finish();
+        }
+    }
 }

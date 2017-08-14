@@ -101,6 +101,7 @@ public class JunxunRecyclerAdapter extends RecyclerView.Adapter<JunxunRecyclerAd
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        SlideActivity.setTitleViewShow(true);
                         Intent intent = new Intent(context, SlideActivity.class);
                         intent.putStringArrayListExtra("imageUrlList",(ArrayList)picImageList);
                         intent.putStringArrayListExtra("titleList",(ArrayList)picTitleList);

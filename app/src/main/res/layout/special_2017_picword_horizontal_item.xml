@@ -48,10 +48,10 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_width="11dp"
+                    android:layout_height="13dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="8dp"
                     android:layout_gravity="center_vertical"
                     android:adjustViewBounds="true"
                     android:scaleType="centerInside"
@@ -74,19 +74,18 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="11dp"
-                    android:layout_height="11dp"
+                    android:layout_width="12dp"
+                    android:layout_height="15dp"
                     android:scaleType="centerInside"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="9dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="4.5dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="7dp"
                     android:src="@drawable/special_2017_location" />
 
                 <TextView
                     android:id="@+id/picword_horizontal_item_address"
-                    android:layout_width="match_parent"
+                    android:layout_width="167dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
                     android:text="123123123"
                     android:textColor="@color/addressColor"
                     android:textSize="12dp" />
