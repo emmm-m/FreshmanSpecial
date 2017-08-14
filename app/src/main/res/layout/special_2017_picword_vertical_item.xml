@@ -27,9 +27,8 @@
             android:id="@+id/picwod_vertical_picture_linear"
             android:layout_width="53dp"
             android:layout_height="19dp"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="38dp"
+            android:layout_marginTop="153dp"
+            android:layout_marginLeft="262dp"
             android:visibility="gone"
             android:background="@drawable/special_2017_shape_num"
             android:orientation="horizontal">
@@ -97,7 +96,6 @@
         android:layout_marginBottom="18dp"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
-        android:layout_marginTop="10dp"
         android:textColor="@color/tabTextColor"
         android:textSize="13dp"/>
 
