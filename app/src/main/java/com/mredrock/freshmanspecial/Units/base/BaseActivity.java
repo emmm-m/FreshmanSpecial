@@ -23,6 +23,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(getApplicationContext());
         initData();
         initState();
 //        setTranslateToolbar();
