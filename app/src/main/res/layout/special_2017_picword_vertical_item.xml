@@ -70,6 +70,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="13dp"
+        android:layout_marginBottom="5dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -77,16 +78,16 @@
             android:id="@+id/picword_vertical_item_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/colorDeepGray"
+            android:textColor="#666"
             android:textSize="15dp"/>
 
         <TextView
             android:id="@+id/picwod_vertical_dormitory_number"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="3dp"
             android:gravity="bottom"
-            android:textColor="@color/tabTextColor"
+            android:textColor="#999"
             android:textSize="13dp"/>
 
     </LinearLayout>
@@ -98,7 +99,8 @@
         android:layout_marginBottom="18dp"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
-        android:textColor="@color/tabTextColor"
+        android:lineSpacingMultiplier="1.1"
+        android:textColor="#999"
         android:textSize="13dp"/>
 
 </LinearLayout>
