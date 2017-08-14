@@ -137,6 +137,21 @@ public class DataFragmentPresenter implements IDataFragmentPresenter {
         fragment.getChart().run();
     }
 
+    @Override
+    public void setEmptySexRateDate() {
+        
+    }
+
+    @Override
+    public void setEmptyFailData() {
+
+    }
+
+    @Override
+    public void setEmptyWorkRate() {
+
+    }
+
     /**
      * 回调
      */

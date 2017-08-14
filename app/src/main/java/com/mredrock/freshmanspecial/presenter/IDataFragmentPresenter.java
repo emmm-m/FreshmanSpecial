@@ -23,4 +23,6 @@ public interface IDataFragmentPresenter {
     void loadFailData(String major, DataFragmentPresenter.OnDataLoaded onDataLoaded);//本地筛选挂科信息
     void runChart(List<ChartData> dataList);//开启动画图表
     void setEmptySexRateDate();
+    void setEmptyFailData();
+    void setEmptyWorkRate();
 }
