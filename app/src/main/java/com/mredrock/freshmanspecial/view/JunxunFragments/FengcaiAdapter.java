@@ -126,8 +126,8 @@ public class FengcaiAdapter extends RecyclerView.Adapter<FengcaiAdapter.MyViewHo
                                 holder.shiping_text_right.setText(titleList.get(1));
                                 Log.d("fengcai",urlList.get(0));
                                 Log.d("fengcai",urlList.get(1));
-                                Glide.with(context).load(urlList.get(0)).apply(options).into(holder.shiping_left);
-                                Glide.with(context).load(urlList.get(1)).apply(options).into(holder.shiping_right);
+                                Glide.with(context).load(picList.get(0)).apply(options).into(holder.shiping_left);
+                                Glide.with(context).load(picList.get(1)).apply(options).into(holder.shiping_right);
                                 holder.shiping_left.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
