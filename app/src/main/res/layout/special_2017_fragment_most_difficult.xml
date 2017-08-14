@@ -53,8 +53,8 @@
             android:layout_height="120dp"
             android:gravity="center"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
 
     </LinearLayout>
 </ScrollView>

@@ -24,6 +24,7 @@ public class SmallCircle extends android.support.v7.widget.AppCompatTextView {
     private List<Integer> colors = new ArrayList<>();
     private List<Integer> shadows = new ArrayList<>();
     private int strokeWidth = ScreenUnit.dip2px(getContext(),12);
+    boolean isShort = false;
 
     public SmallCircle(Context context) {
         super(context);
@@ -60,15 +61,25 @@ public class SmallCircle extends android.support.v7.widget.AppCompatTextView {
 
             circlePaint.setStrokeWidth(strokeWidth-3);
             circlePaint.setShadowLayer(30,-2,1, Color.WHITE);
-
-            //画阴影
-            circlePaint.setColor(shadows.get(i));
-            canvas.drawCircle(width/3f,strokeWidth+space*j,strokeWidth,circlePaint);
-            //画圆
-            circlePaint.setColor(colors.get(i));
-            canvas.drawCircle(width/3f,strokeWidth+space*j,strokeWidth-6,circlePaint);
-            //画字
-            canvas.drawText(texts.get(i),width/3f+strokeWidth*2f,strokeWidth+space*j+strokeWidth/3,textPaint);
+            if(isShort){
+                //画阴影
+                circlePaint.setColor(shadows.get(i));
+                canvas.drawCircle(width/2.4f,strokeWidth+space*j,strokeWidth,circlePaint);
+                //画圆
+                circlePaint.setColor(colors.get(i));
+                canvas.drawCircle(width/2.4f,strokeWidth+space*j,strokeWidth-6,circlePaint);
+                //画字
+                canvas.drawText(texts.get(i),width/2.4f+strokeWidth*2f,strokeWidth+space*j+strokeWidth/3,textPaint);
+            }else{
+                //画阴影
+                circlePaint.setColor(shadows.get(i));
+                canvas.drawCircle(width/3f,strokeWidth+space*j,strokeWidth,circlePaint);
+                //画圆
+                circlePaint.setColor(colors.get(i));
+                canvas.drawCircle(width/3f,strokeWidth+space*j,strokeWidth-6,circlePaint);
+                //画字
+                canvas.drawText(texts.get(i),width/3f+strokeWidth*2f,strokeWidth+space*j+strokeWidth/3,textPaint);
+            }
         }
     }
 
@@ -86,5 +97,9 @@ public class SmallCircle extends android.support.v7.widget.AppCompatTextView {
 
     public void setShadows(List<Integer> shadows){
         this.shadows = shadows;
+    }
+
+    public void setType(boolean isShort){
+        this.isShort = isShort;
     }
 }

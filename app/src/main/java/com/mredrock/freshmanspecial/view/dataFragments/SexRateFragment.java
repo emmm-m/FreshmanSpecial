@@ -92,6 +92,7 @@ public class SexRateFragment extends BaseFragment implements IDataFragment {
         smallCircle.setTexts(texts);
         smallCircle.setColors(colors);
         smallCircle.setShadows(shadows);
+        smallCircle.setType(true);
         smallCircle.draw();
     }
 
