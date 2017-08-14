@@ -3,7 +3,6 @@ package com.mredrock.freshmanspecial.view;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Transition;
@@ -20,7 +19,6 @@ import android.widget.TextView;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyViewPager;
 import com.mredrock.freshmanspecial.Units.SlidePagerAdapter;
-import com.mredrock.freshmanspecial.Units.base.BaseActivity;
 
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class SlideActivity extends AppCompatActivity implements ISlideActivity {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-            Transition animation = TransitionInflater.from(this).inflateTransition(R.transition.animation);
+            Transition animation = TransitionInflater.from(this).inflateTransition(R.transition.special_2017_animation);
             //退出时使用
             getWindow().setExitTransition(animation);
             //第一次进入时使用
@@ -61,8 +59,8 @@ public class SlideActivity extends AppCompatActivity implements ISlideActivity {
         progressView = $(R.id.slide_progress);
         titleView = $(R.id.slide_title);
         layout = $(R.id.slide_layout);
-        alpha_in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-        alpha_out = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        alpha_in = AnimationUtils.loadAnimation(this, R.anim.special_2017_fade_in);
+        alpha_out = AnimationUtils.loadAnimation(this, R.anim.special_2017_fade_out);
         //第一次进入界面加载文字
         progressView.setText((getPosition() + 1) + "/" + getImageUrlList().size());
         titleView.setText(getTitleList().get(getPosition()));
