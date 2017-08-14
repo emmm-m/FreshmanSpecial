@@ -8,17 +8,27 @@
               android:orientation="vertical">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/original_layout"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp">
 
         <com.mredrock.freshmanspecial.Units.MyImageView
             android:id="@+id/img_original"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            app:roundHeight="5dp"
+            app:roundWidth="5dp"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             />
+        <com.mredrock.freshmanspecial.Units.MyImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:roundHeight="5dp"
+            app:roundWidth="5dp"
+            android:background="#56000000"/>
 
         <ImageView
             android:layout_width="30dp"
@@ -31,7 +41,7 @@
             android:layout_width="50dp"
             android:layout_height="20dp"
             android:layout_gravity="right|bottom"
-            android:layout_marginRight="12dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:textColor="@color/colorWhite"
             android:text="00:00"
@@ -43,6 +53,7 @@
         android:id="@+id/title_original"
         android:layout_width="match_parent"
         android:layout_height="35dp"
+        android:gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="7dp"
         android:text="《重邮》"

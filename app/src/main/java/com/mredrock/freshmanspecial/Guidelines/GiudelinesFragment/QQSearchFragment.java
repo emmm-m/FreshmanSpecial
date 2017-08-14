@@ -1,6 +1,7 @@
 package com.mredrock.freshmanspecial.Guidelines.GiudelinesFragment;
 
 import android.content.Context;
+import android.os.IBinder;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -157,6 +158,17 @@ public class QQSearchFragment extends BaseFragment {
                 }
                 setList();
 
+            }
+        });
+
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    InputMethodManager imm = (InputMethodManager) view.getContext()
+                            .getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
             }
         });
     }
