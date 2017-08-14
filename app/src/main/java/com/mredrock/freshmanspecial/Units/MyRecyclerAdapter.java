@@ -98,7 +98,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         switch (holder.viewType){
             case BEAUTY:
                 BeautyBean.DataBean beauty = (BeautyBean.DataBean) data.get(position);
-                int width = ScreenUnit.bulid(context).getPxWide();
+                int width = ScreenUnit.bulid(context).getPxWide()/2;
 //                params.width = width;
                 RequestOptions picOptions = new RequestOptions()
                         .fitCenter()
@@ -112,7 +112,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             case STUDENT:
                 final StudentsBean.DataBean student = (StudentsBean.DataBean) data.get(position);
                 holder.name_student.setText(student.getName());
-                int width_student = ScreenUnit.bulid(context).getPxWide()/5;
+                int width_student = ScreenUnit.bulid(context).getPxWide()/8;
 //                params.width = width;
                 RequestOptions picOptions_student = new RequestOptions()
                         .fitCenter()
@@ -132,9 +132,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 final TeacherBean.DataBean teacher = (TeacherBean.DataBean) data.get(position);
                 holder.name_teacher.setText(teacher.getName());
                 ViewGroup.LayoutParams params = holder.img_teacher.getLayoutParams();
-                int width_teacher = ScreenUnit.bulid(context).getPxWide()/2;
+                int width_teacher = ScreenUnit.bulid(context).getPxWide()/4;
 //                params.width = width;
-                params.height = width_teacher*3/5;
+//                params.height = width_teacher*3/5;
                 RequestOptions picOptions_teacher = new RequestOptions()
                         .fitCenter()
                         .override(width_teacher, width_teacher*9/16);
@@ -146,9 +146,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 final OriginalBean.DataBean originalBean = (OriginalBean.DataBean) data.get(position);
                 holder.title_orignial.setText(originalBean.getName());
                 ViewGroup.LayoutParams params_original = holder.img_original.getLayoutParams();
-                int width_original = ScreenUnit.bulid(context).getPxWide()/2;
+                int width_original = ScreenUnit.bulid(context).getPxWide()/3;
 //                params.width = width;
-                params_original.height = width_original*3/5;
+//                params_original.height = width_original*3/5;
                 RequestOptions picOptions_original = new RequestOptions()
                         .fitCenter()
                         .override(width_original, width_original*9/16);

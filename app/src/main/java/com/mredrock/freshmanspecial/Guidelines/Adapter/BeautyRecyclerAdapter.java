@@ -68,7 +68,7 @@ public class BeautyRecyclerAdapter extends RecyclerView.Adapter<BeautyRecyclerAd
         holder.commit.setText(beauty.getResume());
         RequestOptions options = new RequestOptions()
                 .centerCrop()
-                .override(ScreenUnit.bulid(context).getPxWide()/3,ScreenUnit.bulid(context).getPxWide()/48*9);
+                .override(ScreenUnit.bulid(context).getPxWide()/6,ScreenUnit.bulid(context).getPxWide()/8);
         Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/48*9);
         Glide.with(context).load(beauty.getUrl().get(0))
                 .transition(new DrawableTransitionOptions().crossFade(200))

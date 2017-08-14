@@ -65,7 +65,7 @@ public class CuisineRecyclerAdapter extends RecyclerView.Adapter<CuisineRecycler
         holder.commit.setText(cuisine.getResume());
         RequestOptions options = new RequestOptions()
                 .centerCrop()
-                .override(ScreenUnit.bulid(context).getPxWide()/3,ScreenUnit.bulid(context).getPxWide()/48*9);
+                .override(ScreenUnit.bulid(context).getPxWide()/6,ScreenUnit.bulid(context).getPxWide()/8);
         Log.d("123","width:  "+200);
         Glide.with(context)
                 .load(cuisine.getUrl().get(0))

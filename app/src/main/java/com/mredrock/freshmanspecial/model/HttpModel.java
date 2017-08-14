@@ -30,9 +30,9 @@ public class HttpModel {
 
     public static final String URL = "http://www.yangruixin.com/";
     private static final int DEFAULT_TIMEOUT = 5;
-    private OkHttpClient.Builder httpClientBuilder = new OkHttpClient().newBuilder();
-    private Retrofit retrofit;
-    private Services service;
+    private static Retrofit retrofit;
+    private static OkHttpClient.Builder httpClientBuilder = new OkHttpClient().newBuilder();
+    private static Services service;
     //private Context context;
 
 
@@ -42,6 +42,13 @@ public class HttpModel {
      * @return
      */
     public static HttpModel bulid() {
+        retrofit = new Retrofit.Builder()
+                .client(httpClientBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(URL)
+                .build();
+        service = retrofit.create(Services.class);
         return new HttpModel();
     }
 
@@ -52,13 +59,6 @@ public class HttpModel {
      * @param subscriber
      */
     public void getSex(Subscriber<SexBean> subscriber) {
-        retrofit = new Retrofit.Builder()
-                .client(httpClientBuilder.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(URL)
-                .build();
-        service = retrofit.create(Services.class);
         service.getSex("SexRatio")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -70,13 +70,6 @@ public class HttpModel {
      * 获取就业率
      */
     public Observable<WorkBean> getWork() {
-        retrofit = new Retrofit.Builder()
-                .client(httpClientBuilder.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(URL)
-                .build();
-        service = retrofit.create(Services.class);
         return service.getWork("WorkRatio").
                 subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -87,13 +80,6 @@ public class HttpModel {
      * 获取挂科率
      */
     public Observable<FailBean> getFail() {
-        retrofit = new Retrofit.Builder()
-                .client(httpClientBuilder.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(URL)
-                .build();
-        service = retrofit.create(Services.class);
         return service.getFail("FailRatio")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -106,13 +92,6 @@ public class HttpModel {
      * @return video
      */
     public Observable<JunxunvideoBeans> getJunxunvideo() {
-        retrofit = new Retrofit.Builder()
-                .client(httpClientBuilder.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(URL)
-                .build();
-        service = retrofit.create(Services.class);
         return service.getJunxunvideo("MilitaryTrainingVideo")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -125,13 +104,6 @@ public class HttpModel {
      * @return pic
      */
     public Observable<JunxunpicBeans> getJunxunpic() {
-        retrofit = new Retrofit.Builder()
-                .client(httpClientBuilder.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(URL)
-                .build();
-        service = retrofit.create(Services.class);
         return service.getJunxunpic("MilitaryTrainingPhoto")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -144,13 +116,6 @@ public class HttpModel {
      * @param subscriber
      */
     public void getQQGroups(Subscriber<QQGroupsBean> subscriber) {
-        retrofit = new Retrofit.Builder()
-                .client(httpClientBuilder.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(URL)
-                .build();
-        service = retrofit.create(Services.class);
         service.getQQGroups("QQGroup")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -164,13 +129,6 @@ public class HttpModel {
      * @param subscriber
      */
     public void getTeachers(Subscriber<TeacherBean> subscriber) {
-        retrofit = new Retrofit.Builder()
-                .client(httpClientBuilder.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(URL)
-                .build();
-        service = retrofit.create(Services.class);
         service.getTeachers("excellentTech")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -184,13 +142,6 @@ public class HttpModel {
      * @param subscriber
      */
     public void getStudents(Subscriber<StudentsBean> subscriber) {
-        retrofit = new Retrofit.Builder()
-                .client(httpClientBuilder.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(URL)
-                .build();
-        service = retrofit.create(Services.class);
         service.getStudents("excellentStu")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -204,13 +155,6 @@ public class HttpModel {
      * @param subscriber
      */
     public void getBeauties(Subscriber<BeautyBean> subscriber) {
-        retrofit = new Retrofit.Builder()
-                .client(httpClientBuilder.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(URL)
-                .build();
-        service = retrofit.create(Services.class);
         service.getBeauties("beautyInCQUPT")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -223,13 +167,6 @@ public class HttpModel {
      * @param subscriber
      */
     public void getBOriginal(Subscriber<OriginalBean> subscriber) {
-        retrofit = new Retrofit.Builder()
-                .client(httpClientBuilder.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(URL)
-                .build();
-        service = retrofit.create(Services.class);
         service.getOriginal("natureCQUPT")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

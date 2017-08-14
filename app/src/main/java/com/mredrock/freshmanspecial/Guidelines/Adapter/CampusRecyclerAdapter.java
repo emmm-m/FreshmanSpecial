@@ -69,7 +69,7 @@ public class CampusRecyclerAdapter extends RecyclerView.Adapter<CampusRecyclerAd
         holder.linearLayout.getBackground().setAlpha(170);
         RequestOptions options = new RequestOptions()
                 .centerCrop()
-                .override(ScreenUnit.bulid(context).getPxWide(),ScreenUnit.bulid(context).getPxWide()/16*9);
+                .override(ScreenUnit.bulid(context).getPxWide()/2,ScreenUnit.bulid(context).getPxWide()/32*9);
         Log.d("123","height:  "+ScreenUnit.bulid(context).getPxWide()/16*9);
         Glide.with(context)
                 .load(campus.getUrl().get(0))

@@ -11,21 +11,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="5dp"
-            app:elevation="4dp">
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
+                <com.mredrock.freshmanspecial.Units.MyImageView
                     android:id="@+id/junxunshiping_image"
                     android:layout_width="160dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
+                    app:roundWidth="5dp"
+                    app:roundHeight="5dp"
                     android:scaleType="fitXY" />
 
                 <ImageView
@@ -35,15 +32,14 @@
                     android:src="@drawable/special_2017_play" />
             </FrameLayout>
 
-        </android.support.v7.widget.CardView>
 
 
         <TextView
             android:id="@+id/junxunshiping_text"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:gravity="center"
             android:textSize="12dp"
             android:maxLines="1"
