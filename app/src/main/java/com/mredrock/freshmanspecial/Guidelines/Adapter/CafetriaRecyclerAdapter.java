@@ -1,8 +1,11 @@
 package com.mredrock.freshmanspecial.Guidelines.Adapter;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +25,9 @@ import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyImageView;
 import com.mredrock.freshmanspecial.Units.ScreenUnit;
+import com.mredrock.freshmanspecial.view.SlideActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,9 +76,29 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CafeteriaBean.CafeteriaDataBean cafeteria = list.get(position);
+        final CafeteriaBean.CafeteriaDataBean cafeteria = list.get(position);
         holder.title.setText(cafeteria.getName());
         holder.text.setText(cafeteria.getResume());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<String> picTitleList = new ArrayList<String>();
+                for (int i = 0; i < cafeteria.getUrl().size(); i++) {
+                    picTitleList.add(cafeteria.getResume());
+                }
+                Intent intent = new Intent(context, SlideActivity.class);
+                intent.putStringArrayListExtra("imageUrlList", (ArrayList) cafeteria.getUrl());
+                intent.putStringArrayListExtra("titleList", (ArrayList) picTitleList);
+                intent.putExtra("position", 0);
+
+                SlideActivity.setTitleViewShow(false);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context).toBundle());
+                } else {
+                    context.startActivity(intent);
+                }
+            }
+        });
         holder.dormitoryNumber.setText(cafeteria.getDormitoryNumber());
         holder.pictureNumber.setText(cafeteria.getUrl().size() + "");
         RequestOptions options = new RequestOptions()
