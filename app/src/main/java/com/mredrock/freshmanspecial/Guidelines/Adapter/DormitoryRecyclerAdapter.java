@@ -95,7 +95,7 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
             }
         });
         holder.dormitoryNumber.setText(getDormitoryNumber(dormitoy.getName()));
-        holder.pictureNumber.setText(dormitoy.getUrl().size() + "");
+        holder.pictureNumber.setText(" " + dormitoy.getUrl().size() + "");
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .override(ScreenUnit.bulid(context).getPxWide()/2,ScreenUnit.bulid(context).getPxWide()/32*9);
@@ -115,7 +115,7 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
 
     private String getDormitoryNumber(String dormitory) {
         String dormitoryNumber = dormitory.substring(3, 4) + "原"
-                + dormitory.substring(4, dormitory.length() - 2)
+                + dormitory.substring(4, dormitory.length() - 1)
                 + "栋" + dormitory.substring(dormitory.length() - 1);
         Log.d("Adapter", "getDormitoryNumber:......................................................... " + dormitoryNumber);
         return dormitoryNumber;

@@ -100,7 +100,7 @@ public class CafetriaRecyclerAdapter extends RecyclerView.Adapter<CafetriaRecycl
             }
         });
         holder.dormitoryNumber.setText(cafeteria.getDormitoryNumber());
-        holder.pictureNumber.setText(cafeteria.getUrl().size() + "");
+        holder.pictureNumber.setText(" " + cafeteria.getUrl().size() + "");
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .override(ScreenUnit.bulid(context).getPxWide()/2,ScreenUnit.bulid(context).getPxWide()/32*9);
