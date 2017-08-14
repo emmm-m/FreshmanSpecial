@@ -24,7 +24,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
     private boolean isLog = false;
     private Paint paint;//画笔
     private Paint paint1;//圆圈的画笔
-    private int paintWidth = ScreenUnit.dip2px(getContext(),18);//线宽
+    private int paintWidth = ScreenUnit.dip2px(getContext(),17);//线宽
     private int speed = 1;//移动速度
     private int rotate = 0;//转动角度
     private int startAngle = -90;//起始角度，默认在最上方开始
@@ -85,7 +85,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
                         data.setSpeed(speed);
                     }
                 }
-                if (data.getPercentage() == 0) return;//防bug
+                //if (data.getPercentage() == 0) return;//防bug
                 //绘制底层装饰
                 drawBackground(canvas, data.getBackgroundColor(), data.getBackgroundStrokeColor(), data.getRadius());
                 if(data.getPercentage() != 0){
@@ -111,6 +111,7 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
      * @param s          速度
      */
     private void drawArc(Canvas canvas, float percentage, int color, int strokeColor, float radius, int s) {
+        if(percentage == 0) return;
         if (percentage > 90) {  //防止首尾相接
             percentage = 90;
         }
