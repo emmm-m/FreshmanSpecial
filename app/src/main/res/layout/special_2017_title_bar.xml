@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="64dp"
     android:orientation="vertical"
-    android:paddingTop="20dp"
+    android:paddingTop="24dp"
     android:background="@drawable/special_2017_title_bar_color">
 
     <ImageView
@@ -14,6 +14,7 @@
         android:layout_width="23dp"
         android:layout_height="23dp"
         android:src="@drawable/special_2017_back"/>
+
     <TextView
         android:id="@+id/title_text"
         android:layout_width="wrap_content"

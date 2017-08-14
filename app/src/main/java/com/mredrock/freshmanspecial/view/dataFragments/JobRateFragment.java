@@ -38,6 +38,7 @@ public class JobRateFragment extends BaseFragment implements IDataFragment {
         circleChart = $(R.id.jobRate_chart);
         smallCircle = $(R.id.jobRate_circle);
         presenter.setWorkRateCollegeList();
+        initSmallCircle();//画小圆
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +54,6 @@ public class JobRateFragment extends BaseFragment implements IDataFragment {
                             public void finish(String msg) {
                                 //启动数据图动画
                                 presenter.runChart(dataList);
-                                initSmallCircle();
                             }
                         });
                     }

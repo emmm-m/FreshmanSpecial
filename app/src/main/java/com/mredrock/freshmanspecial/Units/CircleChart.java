@@ -88,10 +88,12 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
                 if (data.getPercentage() == 0) return;//防bug
                 //绘制底层装饰
                 drawBackground(canvas, data.getBackgroundColor(), data.getBackgroundStrokeColor(), data.getRadius());
-                //绘制动画数据条
-                drawArc(canvas, data.getPercentage(), data.getColor(), data.getStrokeColor(), data.getRadius(), data.getSpeed());
-                //绘制文字，这里设置字体为线宽的一半
-                drawText(canvas, data.getPercentage()+"%", paint.measureText(data.getPercentage()+"%"), paintWidth / 3 * 2, data.getTextColor(), data.getRadius());
+                if(data.getPercentage() != 0){
+                    //绘制动画数据条
+                    drawArc(canvas, data.getPercentage(), data.getColor(), data.getStrokeColor(), data.getRadius(), data.getSpeed());
+                    //绘制文字，这里设置字体为线宽的一半
+                    drawText(canvas, data.getPercentage()+"%", paint.measureText(data.getPercentage()+"%"), paintWidth / 3 * 2, data.getTextColor(), data.getRadius());
+                }
             }
         } else {
             invalidate();
@@ -109,8 +111,8 @@ public class CircleChart extends android.support.v7.widget.AppCompatTextView {
      * @param s          速度
      */
     private void drawArc(Canvas canvas, float percentage, int color, int strokeColor, float radius, int s) {
-        if (percentage > 93) {  //防止首尾相接
-            percentage = 93;
+        if (percentage > 90) {  //防止首尾相接
+            percentage = 90;
         }
         if ((float) rotate / 360 * 100 < percentage) {//还没到达终点
             drawArc(canvas, radius, startAngle, rotate, paintWidth + 10, strokeColor,paint);//绘制底层阴影
