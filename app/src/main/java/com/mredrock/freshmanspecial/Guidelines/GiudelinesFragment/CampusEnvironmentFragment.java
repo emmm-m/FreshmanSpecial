@@ -52,31 +52,24 @@ public class CampusEnvironmentFragment extends Fragment{
     }
 
     public void initData(final View v) {
-        HttpMethod httpMethod = new HttpMethod();
-        httpMethod.httpRequest("http://www.yangruixin.com/test/apiForGuide.php?RequestType=SchoolBuildings",
-                new CallBackListener() {
-                    @Override
-                    public void onFinish(String response) {
-                        Gson gson = new Gson();
-                        final CampusBean bean = gson.fromJson(response, CampusBean.class);
-                        Log.d(TAG, "onFinish: " +response);
-                        Log.d(TAG, "onFinish: " + bean.getCampusDataBeanList().get(0).getTitle());
+        HttpModel.bulid().getCampus(new Subscriber<CampusBean>() {
+            @Override
+            public void onCompleted() {
 
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
-                                adapter = new CampusRecyclerAdapter(bean.getCampusDataBeanList(), v.getContext());
-                                recyclerView.setAdapter(adapter);
-                            }
-                        });
-                    }
+            }
 
-                    @Override
-                    public void onError(Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(getActivity(),"请求数据失败",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(CampusBean campusBean) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
+                adapter = new CampusRecyclerAdapter(campusBean.getCampusDataBeanList(), v.getContext());
+                recyclerView.setAdapter(adapter);
+            }
+        });
     }
 
     public void addCompusEnvironment(String title, String text) {
