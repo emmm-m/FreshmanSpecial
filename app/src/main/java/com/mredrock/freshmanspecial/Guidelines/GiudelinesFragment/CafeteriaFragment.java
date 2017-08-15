@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bignerdranch.android.imageloadingwan.CallBackListener;
-import com.bignerdranch.android.imageloadingwan.HttpMethod;
 import com.google.gson.Gson;
 import com.mredrock.freshmanspecial.Beans.CafeteriaBean;
 import com.mredrock.freshmanspecial.Beans.DormitoryBean;
@@ -38,38 +36,14 @@ public class CafeteriaFragment extends Fragment {
     private List<GuidelinesVerticalBean> admissionBeanList;
     private RecyclerView recyclerView;
     private CafetriaRecyclerAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.special_2017_fragment_cafeteria, container, false);
-        iniData(view);
+//        iniData(view);
         recyclerView = (RecyclerView) view.findViewById(R.id.cafeteria_recycler);
         return view;
     }
 
-    public void iniData(final View v) {
-
-        HttpMethod httpMethod = new HttpMethod();
-        httpMethod.httpRequest("http://www.yangruixin.com/test/apiForGuide.php?RequestType=Canteen",
-                new CallBackListener() {
-                    @Override
-                    public void onFinish(String response) {
-                        Gson gson = new Gson();
-                        final CafeteriaBean bean = gson.fromJson(response, CafeteriaBean.class);
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
-                                adapter = new CafetriaRecyclerAdapter(bean.getData(), v.getContext(), (Activity)v.getContext());
-                                recyclerView.setAdapter(adapter);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-    }
 }

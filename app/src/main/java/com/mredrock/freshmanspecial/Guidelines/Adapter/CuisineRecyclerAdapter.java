@@ -37,14 +37,14 @@ public class CuisineRecyclerAdapter extends RecyclerView.Adapter<CuisineRecycler
         TextView shopName; //  名称
         TextView commit;  //  具体描述
         TextView address;   //  所在地点
-        ImageView mainImage;    //  图片
+        MyImageView mainImage;    //  图片
 
         public ViewHolder(View itemView) {
             super(itemView);
             shopName = (TextView) itemView.findViewById(R.id.picword_horizontal_item_title);
             commit = (TextView) itemView.findViewById(R.id.picword_horizontal_item_text);
             address = (TextView) itemView.findViewById(R.id.picword_horizontal_item_address);
-            mainImage = itemView.findViewById(R.id.picword_horizontal_item_image);
+            mainImage = (MyImageView) itemView.findViewById(R.id.picword_horizontal_item_image);
 
         }
     }

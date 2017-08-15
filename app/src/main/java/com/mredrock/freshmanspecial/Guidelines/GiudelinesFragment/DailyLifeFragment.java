@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bignerdranch.android.imageloadingwan.CallBackListener;
-import com.bignerdranch.android.imageloadingwan.HttpMethod;
 import com.google.gson.Gson;
 import com.mredrock.freshmanspecial.Beans.DailyLifeBean;
 import com.mredrock.freshmanspecial.Beans.GuidelinesHorizontalBean;
@@ -41,38 +39,10 @@ public class DailyLifeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.special_2017_fragment_daliy_life, container, false);
-        initData(view);
+//        initData(view);
         recyclerView = (RecyclerView) view.findViewById(R.id.dailylife_recycler);
 
         return view;
-    }
-
-    public void initData(final View view) {
-        HttpMethod httpMethod = new HttpMethod();
-        httpMethod.httpRequest("http://www.yangruixin.com/test/apiForGuide.php?RequestType=LifeInNear",
-                new CallBackListener() {
-                    @Override
-                    public void onFinish(String response) {
-                        Gson gson = new Gson();
-                        final DailyLifeBean bean = gson.fromJson(response, DailyLifeBean.class);
-                        Log.d(TAG, "onFinish: " +response);
-                        Log.d(TAG, "onFinish: " + bean.getData().get(0).getName());
-
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                                adapter = new DailyLifeRecyclerAdapter(bean.getData(), view.getContext());
-                                recyclerView.setAdapter(adapter);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        e.printStackTrace();
-                    }
-                });
     }
 
 }

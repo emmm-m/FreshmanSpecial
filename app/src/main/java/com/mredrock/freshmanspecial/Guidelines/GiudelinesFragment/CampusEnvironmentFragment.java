@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bignerdranch.android.imageloadingwan.CallBackListener;
-import com.bignerdranch.android.imageloadingwan.HttpMethod;
 import com.google.gson.Gson;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.Beans.GuidelinesVerticalBean;
@@ -40,41 +38,13 @@ public class CampusEnvironmentFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.special_2017_fragment_environment, container, false);
-        initData(view);
+//        initData(view);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.environment_recycler);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 //        adapter = new VerticalRecyclerAdapter(admissionBeanList, view.getContext());
 //        recyclerView.setAdapter(adapter);
         return view;
-    }
-
-    public void initData(final View v) {
-        HttpMethod httpMethod = new HttpMethod();
-        httpMethod.httpRequest("http://www.yangruixin.com/test/apiForGuide.php?RequestType=SchoolBuildings",
-                new CallBackListener() {
-                    @Override
-                    public void onFinish(String response) {
-                        Gson gson = new Gson();
-                        final CampusBean bean = gson.fromJson(response, CampusBean.class);
-                        Log.d(TAG, "onFinish: " +response);
-                        Log.d(TAG, "onFinish: " + bean.getCampusDataBeanList().get(0).getTitle());
-
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
-                                adapter = new CampusRecyclerAdapter(bean.getCampusDataBeanList(), v.getContext());
-                                recyclerView.setAdapter(adapter);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        e.printStackTrace();
-                    }
-                });
     }
 
     public void addCompusEnvironment(String title, String text) {
