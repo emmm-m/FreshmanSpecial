@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/junxuntupian_text"
-        android:textColor="#474747"
+        android:textColor="#666"
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="20dp"
