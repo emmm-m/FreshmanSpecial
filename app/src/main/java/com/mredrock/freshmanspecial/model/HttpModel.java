@@ -1,6 +1,11 @@
 package com.mredrock.freshmanspecial.model;
 
 
+import com.mredrock.freshmanspecial.Beans.CafeteriaBean;
+import com.mredrock.freshmanspecial.Beans.CampusBean;
+import com.mredrock.freshmanspecial.Beans.CuisineBean;
+import com.mredrock.freshmanspecial.Beans.DailyLifeBean;
+import com.mredrock.freshmanspecial.Beans.DormitoryBean;
 import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunpicBeans;
 import com.mredrock.freshmanspecial.Beans.FengcaiBeans.JunxunvideoBeans;
 import com.mredrock.freshmanspecial.Beans.MienBeans.BeautyBean;
@@ -11,6 +16,7 @@ import com.mredrock.freshmanspecial.Beans.QQGroupsBean;
 import com.mredrock.freshmanspecial.Beans.ShujuBeans.FailBean;
 import com.mredrock.freshmanspecial.Beans.ShujuBeans.SexBean;
 import com.mredrock.freshmanspecial.Beans.ShujuBeans.WorkBean;
+import com.mredrock.freshmanspecial.Beans.SurroundingBeautyBean;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +35,7 @@ import rx.schedulers.Schedulers;
 
 public class HttpModel {
 
-    public static final String URL = "http://www.yangruixin.com/";
+    public static final String URL = "http://hongyan.cqupt.edu.cn/";
     private static final int DEFAULT_TIMEOUT = 5;
     private static Retrofit retrofit;
     private static Services service;
@@ -126,7 +132,6 @@ public class HttpModel {
 
     /**
      * 获取QQ群
-     *
      * @param subscriber
      */
     public void getQQGroups(Subscriber<QQGroupsBean> subscriber) {
@@ -182,6 +187,78 @@ public class HttpModel {
      */
     public void getBOriginal(Subscriber<OriginalBean> subscriber) {
         service.getOriginal("natureCQUPT")
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取校园环境
+     * @param subscriber
+     */
+    public void getCampus(Subscriber<CampusBean> subscriber) {
+        service.getCampus("SchoolBuildings")
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取寝室
+     * @param subscriber
+     */
+    public void getDormitory(Subscriber<DormitoryBean> subscriber) {
+        service.getDormitory("Dormitory")
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取食堂
+     * @param subscriber
+     */
+    public void getCafeteria(Subscriber<CafeteriaBean> subscriber) {
+        service.getCafeteria("Canteen")
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取日常生活
+     * @param subscriber
+     */
+    public void getDailyLife(Subscriber<DailyLifeBean> subscriber) {
+        service.getDailyLife("LifeInNear")
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取美食
+     * @param subscriber
+     */
+    public void getCuisine(Subscriber<CuisineBean> subscriber) {
+        service.getCuisine("Cate")
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取周围美景
+     * @param subscriber
+     */
+    public void getSurroundingBeauty(Subscriber<SurroundingBeautyBean> subscriber) {
+        service.getSurroundingBeauty("BeautyInNear")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

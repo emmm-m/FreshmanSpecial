@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.mredrock.freshmanspecial.Beans.CuisineBean;
@@ -17,9 +18,12 @@ import com.mredrock.freshmanspecial.Beans.SurroundingBeautyBean;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.BeautyRecyclerAdapter;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.CuisineRecyclerAdapter;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.model.HttpModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 import static android.content.ContentValues.TAG;
 
@@ -38,12 +42,33 @@ public class SurroundingBeautyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.special_2017_fragment_surrounding, container, false);
-//        initData(view);
+        initData(view);
         recyclerView = (RecyclerView) view.findViewById(R.id.surrounding_recycler);
 
         return view;
     }
 
+    public void initData(final View view) {
+        HttpModel.bulid().getSurroundingBeauty(new Subscriber<SurroundingBeautyBean>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(getActivity(),"请求数据失败",Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNext(SurroundingBeautyBean surroundingBeautyBean) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                adapter = new BeautyRecyclerAdapter(surroundingBeautyBean.getData(), view.getContext());
+                recyclerView.setAdapter(adapter);
+            }
+        });
+    }
 
 
 }

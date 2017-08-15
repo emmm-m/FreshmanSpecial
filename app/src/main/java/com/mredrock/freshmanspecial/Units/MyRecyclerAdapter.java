@@ -29,6 +29,7 @@ import com.mredrock.freshmanspecial.Beans.MienBeans.OriginalBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.StudentsBean;
 import com.mredrock.freshmanspecial.Beans.MienBeans.TeacherBean;
 import com.mredrock.freshmanspecial.Beans.QQGroupsBean;
+import com.mredrock.freshmanspecial.Beans.QQResultBean;
 import com.mredrock.freshmanspecial.R;
 
 import java.util.ArrayList;
@@ -191,7 +192,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 holder.title_group.setText(groupBean.getTitle());
                 break;
             case QQGROUP:
-                final QQGroupsBean.DataBean QQdataBean = (QQGroupsBean.DataBean) data.get(position);
+                final QQResultBean.DataBean QQdataBean = (QQResultBean.DataBean) data.get(position);
                 holder.tx_qq_searh.setText(QQdataBean.getGroupName() + "：" + QQdataBean.getNumber());
                 holder.tx_qq_searh.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -18,8 +18,11 @@ import com.mredrock.freshmanspecial.Guidelines.Adapter.BeautyRecyclerAdapter;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.CuisineRecyclerAdapter;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.VerticalRecyclerAdapter;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.model.HttpModel;
 
 import java.util.List;
+
+import rx.Subscriber;
 
 import static android.content.ContentValues.TAG;
 
@@ -37,13 +40,33 @@ public class PeripheralCuisineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.special_2017_fragment_cuisine, container, false);
-//        initData(view);
+        initData(view);
         recyclerView = (RecyclerView) view.findViewById(R.id.cuisine_recycler);
 
         return view;
     }
 
+    public void initData(final View view) {
+        HttpModel.bulid().getCuisine(new Subscriber<CuisineBean>() {
+            @Override
+            public void onCompleted() {
 
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+
+            }
+
+            @Override
+            public void onNext(CuisineBean cuisineBean) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                adapter = new CuisineRecyclerAdapter(cuisineBean.getData(), view.getContext());
+                recyclerView.setAdapter(adapter);
+            }
+        });
+    }
 
     public void addCuisine(String shopName, String address, String commit) {
         GuidelinesHorizontalBean shopBean = new GuidelinesHorizontalBean();
