@@ -18,8 +18,8 @@
     <TextView
         android:id="@+id/fengcai_text"
         android:text="军训图片"
-        android:textSize="18dp"
-        android:textColor="#1F1F1F"
+        android:textSize="14dp"
+        android:textColor="#333"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

@@ -112,9 +112,9 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
         this.font = builder.font;
 
 
-        this.option1 = builder.option1;
-        this.option2 = builder.option2;
-        this.option3 = builder.option3;
+        this.option1 = builder.option1+1;
+        this.option2 = builder.option2+1;
+        this.option3 = builder.option3+1;
         this.textColorCenter = builder.textColorCenter;
         this.textColorOut = builder.textColorOut;
         this.dividerColor = builder.dividerColor;

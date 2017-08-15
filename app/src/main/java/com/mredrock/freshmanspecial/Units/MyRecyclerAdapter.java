@@ -225,7 +225,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         content = popupView.findViewById(R.id.tx_pop);
         img = popupView.findViewById(R.id.img_pop);
         name.setText(bean.getName());
-        content.setText(bean.getMotto()+"。"+bean.getResume());
+        content.setText(bean.getMotto()+bean.getResume());
         content.setMovementMethod(ScrollingMovementMethod.getInstance());
         Glide.with(context).load(bean.getUrl()).into(img);
         int wide = ScreenUnit.bulid(context).getPxWide();
