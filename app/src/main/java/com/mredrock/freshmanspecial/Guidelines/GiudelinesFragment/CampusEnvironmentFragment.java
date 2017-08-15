@@ -52,24 +52,31 @@ public class CampusEnvironmentFragment extends Fragment{
     }
 
     public void initData(final View v) {
-        HttpModel.bulid().getCampus(new Subscriber<CampusBean>() {
-            @Override
-            public void onCompleted() {
+        HttpMethod httpMethod = new HttpMethod();
+        httpMethod.httpRequest("http://www.yangruixin.com/test/apiForGuide.php?RequestType=SchoolBuildings",
+                new CallBackListener() {
+                    @Override
+                    public void onFinish(String response) {
+                        Gson gson = new Gson();
+                        final CampusBean bean = gson.fromJson(response, CampusBean.class);
+                        Log.d(TAG, "onFinish: " +response);
+                        Log.d(TAG, "onFinish: " + bean.getCampusDataBeanList().get(0).getTitle());
 
-            }
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
+                                adapter = new CampusRecyclerAdapter(bean.getCampusDataBeanList(), v.getContext());
+                                recyclerView.setAdapter(adapter);
+                            }
+                        });
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-                Toast.makeText(getActivity(),"请求数据失败",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNext(CampusBean campusBean) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
-                adapter = new CampusRecyclerAdapter(campusBean.getCampusDataBeanList(), v.getContext());
-                recyclerView.setAdapter(adapter);
-            }
-        });
+                    @Override
+                    public void onError(Exception e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     public void addCompusEnvironment(String title, String text) {

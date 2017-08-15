@@ -51,23 +51,28 @@ public class CafeteriaFragment extends Fragment {
     }
 
     public void iniData(final View v) {
-        HttpModel.bulid().getCafeteria(new Subscriber<CafeteriaBean>() {
-            @Override
-            public void onCompleted() {
 
-            }
+        HttpMethod httpMethod = new HttpMethod();
+        httpMethod.httpRequest("http://www.yangruixin.com/test/apiForGuide.php?RequestType=Canteen",
+                new CallBackListener() {
+                    @Override
+                    public void onFinish(String response) {
+                        Gson gson = new Gson();
+                        final CafeteriaBean bean = gson.fromJson(response, CafeteriaBean.class);
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
+                                adapter = new CafetriaRecyclerAdapter(bean.getData(), v.getContext(), (Activity)v.getContext());
+                                recyclerView.setAdapter(adapter);
+                            }
+                        });
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-                Toast.makeText(getActivity(),"请求数据失败",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNext(CafeteriaBean cafeteriaBean) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
-                adapter = new CafetriaRecyclerAdapter(cafeteriaBean.getData(), v.getContext(), (Activity)v.getContext());
-                recyclerView.setAdapter(adapter);
-            }
-        });
+                    @Override
+                    public void onError(Exception e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 }
