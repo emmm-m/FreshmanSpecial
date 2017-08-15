@@ -42,7 +42,7 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView mainImage; // 主图
+        MyImageView mainImage; // 主图
         TextView title; // 建筑名称
         TextView text;  // 建筑介绍
         TextView pictureNumber;
@@ -51,7 +51,7 @@ public class DormitoryRecyclerAdapter extends RecyclerView.Adapter<DormitoryRecy
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mainImage =  itemView.findViewById(R.id.picword_vertical_item_image);
+            mainImage =  (MyImageView) itemView.findViewById(R.id.picword_vertical_item_image);
             title = (TextView) itemView.findViewById(R.id.picword_vertical_item_title);
             text = (TextView) itemView.findViewById(R.id.picword_vertical_item_text);
             pictureNumber = (TextView) itemView.findViewById(R.id.picwod_vertical_picture_number);

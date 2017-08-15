@@ -21,8 +21,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    app:roundWidth="5dp"
-                    app:roundHeight="5dp"
+                    app:roundWidth="2dp"
+                    app:roundHeight="2dp"
                     android:scaleType="fitXY" />
 
                 <ImageView

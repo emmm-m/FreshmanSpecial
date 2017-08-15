@@ -12,13 +12,13 @@
             android:layout_width="100dp"
             android:layout_height="90dp"
             android:transitionName="share"
-            app:roundWidth="5dp"
-            app:roundHeight="5dp"
-            android:scaleType="fitXY" />
+            app:roundWidth="3dp"
+            app:roundHeight="3dp"
+            android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/junxuntupian_text"
-        android:textColor="#474747"
+        android:textColor="#666"
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="20dp"
