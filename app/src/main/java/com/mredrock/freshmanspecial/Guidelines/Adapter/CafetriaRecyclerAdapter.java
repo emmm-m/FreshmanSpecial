@@ -15,8 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bignerdranch.android.imageloadingwan.HttpMethod;
-import com.bignerdranch.android.imageloadingwan.ImageLoad;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;

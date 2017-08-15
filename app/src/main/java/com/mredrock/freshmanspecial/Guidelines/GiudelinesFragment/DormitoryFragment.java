@@ -9,9 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.bignerdranch.android.imageloadingwan.CallBackListener;
-import com.bignerdranch.android.imageloadingwan.HttpMethod;
 import com.google.gson.Gson;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.Beans.DormitoryBean;
@@ -19,9 +18,12 @@ import com.mredrock.freshmanspecial.Beans.GuidelinesVerticalBean;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.DormitoryRecyclerAdapter;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.VerticalRecyclerAdapter;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.model.HttpModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 import static android.content.ContentValues.TAG;
 
@@ -46,31 +48,23 @@ public class DormitoryFragment extends Fragment {
     }
 
     public void initData(final View v) {
+        HttpModel.bulid().getDormitory(new Subscriber<DormitoryBean>() {
+            @Override
+            public void onCompleted() {
 
-        HttpMethod httpMethod = new HttpMethod();
-        httpMethod.httpRequest("http://www.yangruixin.com/test/apiForGuide.php?RequestType=Dormitory",
-                new CallBackListener() {
-                    @Override
-                    public void onFinish(String response) {
-                        Gson gson = new Gson();
-                        final DormitoryBean bean = gson.fromJson(response, DormitoryBean.class);
-                        Log.d(TAG, "onFinish: " +response);
-                        Log.d(TAG, "onFinish: " + bean.getData().get(0).getName());
+            }
 
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
-                                adapter = new DormitoryRecyclerAdapter(bean.getData(), v.getContext());
-                                recyclerView.setAdapter(adapter);
-                            }
-                        });
-                    }
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(getActivity(),"请求数据失败",Toast.LENGTH_SHORT).show();
+            }
 
-                    @Override
-                    public void onError(Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+            @Override
+            public void onNext(DormitoryBean dormitoryBean) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
+                adapter = new DormitoryRecyclerAdapter(dormitoryBean.getData(), v.getContext());
+                recyclerView.setAdapter(adapter);
+            }
+        });
     }
 }

@@ -9,9 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.bignerdranch.android.imageloadingwan.CallBackListener;
-import com.bignerdranch.android.imageloadingwan.HttpMethod;
 import com.google.gson.Gson;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.Beans.GuidelinesVerticalBean;
@@ -19,9 +18,12 @@ import com.mredrock.freshmanspecial.Guidelines.Adapter.CafetriaRecyclerAdapter;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.CampusRecyclerAdapter;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.VerticalRecyclerAdapter;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.model.HttpModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 import static android.content.ContentValues.TAG;
 
@@ -50,31 +52,24 @@ public class CampusEnvironmentFragment extends Fragment{
     }
 
     public void initData(final View v) {
-        HttpMethod httpMethod = new HttpMethod();
-        httpMethod.httpRequest("http://www.yangruixin.com/test/apiForGuide.php?RequestType=SchoolBuildings",
-                new CallBackListener() {
-                    @Override
-                    public void onFinish(String response) {
-                        Gson gson = new Gson();
-                        final CampusBean bean = gson.fromJson(response, CampusBean.class);
-                        Log.d(TAG, "onFinish: " +response);
-                        Log.d(TAG, "onFinish: " + bean.getCampusDataBeanList().get(0).getTitle());
+        HttpModel.bulid().getCampus(new Subscriber<CampusBean>() {
+            @Override
+            public void onCompleted() {
 
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
-                                adapter = new CampusRecyclerAdapter(bean.getCampusDataBeanList(), v.getContext());
-                                recyclerView.setAdapter(adapter);
-                            }
-                        });
-                    }
+            }
 
-                    @Override
-                    public void onError(Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(getActivity(),"请求数据失败",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(CampusBean campusBean) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
+                adapter = new CampusRecyclerAdapter(campusBean.getCampusDataBeanList(), v.getContext());
+                recyclerView.setAdapter(adapter);
+            }
+        });
     }
 
     public void addCompusEnvironment(String title, String text) {

@@ -9,9 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.bignerdranch.android.imageloadingwan.CallBackListener;
-import com.bignerdranch.android.imageloadingwan.HttpMethod;
 import com.google.gson.Gson;
 import com.mredrock.freshmanspecial.Beans.DailyLifeBean;
 import com.mredrock.freshmanspecial.Beans.GuidelinesHorizontalBean;
@@ -20,9 +19,12 @@ import com.mredrock.freshmanspecial.Guidelines.Adapter.BeautyRecyclerAdapter;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.DailyLifeRecyclerAdapter;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.DormitoryRecyclerAdapter;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.model.HttpModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 import static android.content.ContentValues.TAG;
 
@@ -48,31 +50,25 @@ public class DailyLifeFragment extends Fragment {
     }
 
     public void initData(final View view) {
-        HttpMethod httpMethod = new HttpMethod();
-        httpMethod.httpRequest("http://www.yangruixin.com/test/apiForGuide.php?RequestType=LifeInNear",
-                new CallBackListener() {
-                    @Override
-                    public void onFinish(String response) {
-                        Gson gson = new Gson();
-                        final DailyLifeBean bean = gson.fromJson(response, DailyLifeBean.class);
-                        Log.d(TAG, "onFinish: " +response);
-                        Log.d(TAG, "onFinish: " + bean.getData().get(0).getName());
+        HttpModel.bulid().getDailyLife(new Subscriber<DailyLifeBean>() {
+            @Override
+            public void onCompleted() {
 
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                                adapter = new DailyLifeRecyclerAdapter(bean.getData(), view.getContext());
-                                recyclerView.setAdapter(adapter);
-                            }
-                        });
-                    }
+            }
 
-                    @Override
-                    public void onError(Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(getActivity(),"请求数据失败",Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNext(DailyLifeBean dailyLifeBean) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                adapter = new DailyLifeRecyclerAdapter(dailyLifeBean.getData(), view.getContext());
+                recyclerView.setAdapter(adapter);
+            }
+        });
     }
 
 }

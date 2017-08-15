@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bignerdranch.android.imageloadingwan.CallBackListener;
-import com.bignerdranch.android.imageloadingwan.HttpMethod;
 import com.google.gson.Gson;
 import com.mredrock.freshmanspecial.Beans.CampusBean;
 import com.mredrock.freshmanspecial.Beans.CuisineBean;
@@ -20,8 +18,11 @@ import com.mredrock.freshmanspecial.Guidelines.Adapter.BeautyRecyclerAdapter;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.CuisineRecyclerAdapter;
 import com.mredrock.freshmanspecial.Guidelines.Adapter.VerticalRecyclerAdapter;
 import com.mredrock.freshmanspecial.R;
+import com.mredrock.freshmanspecial.model.HttpModel;
 
 import java.util.List;
+
+import rx.Subscriber;
 
 import static android.content.ContentValues.TAG;
 
@@ -46,31 +47,25 @@ public class PeripheralCuisineFragment extends Fragment {
     }
 
     public void initData(final View view) {
-        HttpMethod httpMethod = new HttpMethod();
-        httpMethod.httpRequest("http://www.yangruixin.com/test/apiForGuide.php?RequestType=Cate",
-                new CallBackListener() {
-                    @Override
-                    public void onFinish(String response) {
-                        Gson gson = new Gson();
-                        final CuisineBean bean = gson.fromJson(response, CuisineBean.class);
-                        Log.d(TAG, "onFinish: " +response);
-                        Log.d(TAG, "onFinish: " + bean.getData().get(0).getName());
+        HttpModel.bulid().getCuisine(new Subscriber<CuisineBean>() {
+            @Override
+            public void onCompleted() {
 
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                                adapter = new CuisineRecyclerAdapter(bean.getData(), view.getContext());
-                                recyclerView.setAdapter(adapter);
-                            }
-                        });
-                    }
+            }
 
-                    @Override
-                    public void onError(Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+            @Override
+            public void onError(Throwable e) {
+
+
+            }
+
+            @Override
+            public void onNext(CuisineBean cuisineBean) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                adapter = new CuisineRecyclerAdapter(cuisineBean.getData(), view.getContext());
+                recyclerView.setAdapter(adapter);
+            }
+        });
     }
 
     public void addCuisine(String shopName, String address, String commit) {

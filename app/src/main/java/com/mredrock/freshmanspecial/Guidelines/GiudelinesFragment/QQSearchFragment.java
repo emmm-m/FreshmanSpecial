@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mredrock.freshmanspecial.Beans.QQGroupsBean;
+import com.mredrock.freshmanspecial.Beans.QQResultBean;
 import com.mredrock.freshmanspecial.R;
 import com.mredrock.freshmanspecial.Units.MyRecyclerAdapter;
 import com.mredrock.freshmanspecial.Units.base.BaseFragment;
@@ -33,8 +35,8 @@ public class QQSearchFragment extends BaseFragment {
     private EditText editText;
     private ImageView clear;
     private QQGroupsBean bean;
-    private List<QQGroupsBean.DataBean> dataList;
-    private List<QQGroupsBean.DataBean> result;
+    private QQGroupsBean.DataBean data;
+    private List<QQResultBean.DataBean> result;
     private RecyclerView resultList;
     private TextView back;
 
@@ -44,7 +46,7 @@ public class QQSearchFragment extends BaseFragment {
         clear = $(R.id.edit_clear_qq);
         resultList = $(R.id.list_qq_result);
         back = $(R.id.cancel_search);
-        dataList = new ArrayList<>();
+        data = new QQGroupsBean.DataBean();
         result = new ArrayList<>();
         bean = new QQGroupsBean();
         setFocus();
@@ -84,6 +86,7 @@ public class QQSearchFragment extends BaseFragment {
 
             @Override
             public void onError(Throwable e) {
+                Log.d("ppp", "onError: "+e.toString());
                 Toast.makeText(getActivity(), "获取数据失败", Toast.LENGTH_SHORT).show();
             }
 
@@ -148,12 +151,25 @@ public class QQSearchFragment extends BaseFragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                data = bean.getData();
+                List<QQGroupsBean.DataBean.CollegeBean> colleges = data.getCollege();
+                List<QQGroupsBean.DataBean.HomelandBean> homelands = data.getHomeland();
                 String obj = editText.getText().toString();
-                dataList = bean.getData();
                 result.clear();
-                for (QQGroupsBean.DataBean b : dataList) {
+                for (QQGroupsBean.DataBean.CollegeBean b : colleges) {
                     if (b.getGroupName().contains(obj) || b.getNumber().contains(obj)) {
-                        result.add(b);
+                        QQResultBean.DataBean data = new QQResultBean.DataBean();
+                        data.setGroupName(b.getGroupName());
+                        data.setNumber(b.getNumber());
+                        result.add(data);
+                    }
+                }
+                for (QQGroupsBean.DataBean.HomelandBean b : homelands) {
+                    if (b.getGroupName().contains(obj) || b.getNumber().contains(obj)) {
+                        QQResultBean.DataBean data = new QQResultBean.DataBean();
+                        data.setGroupName(b.getGroupName());
+                        data.setNumber(b.getNumber());
+                        result.add(data);
                     }
                 }
                 setList();
