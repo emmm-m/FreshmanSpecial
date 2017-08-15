@@ -55,11 +55,13 @@ public class DataModel {
         //-----------------------------------------------//
         List<ChartData> list = new ArrayList<>();
         float girlRate = Float.valueOf(bean.getWomenRatio());
-        float boyRate = Float.valueOf(bean.getMenRatio());
         girl.setText("女生");
         girl.setPercentage((int)(girlRate*100));
         boy.setText("男生");
-        boy.setPercentage((int)(boyRate*100));
+        boy.setPercentage(100 - (int)(girlRate*100));
+        if(girl.getPercentage() == 0){
+            boy.setPercentage(0);
+        }
         list.add(girl);
         list.add(boy);
         return list;
